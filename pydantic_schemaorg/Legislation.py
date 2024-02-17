@@ -3,10 +3,10 @@ from typing import TYPE_CHECKING
 
 from typing import List, Optional, Union
 from datetime import date
-from pydantic import AnyUrl
+from pydantic.v1 import AnyUrl
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.CreativeWork import CreativeWork
 
 
@@ -28,7 +28,7 @@ class Legislation(CreativeWork):
      "when looking at the law on the 2016-04-07 (= dateVersion), I get the consolidation of"
      "2015-04-12 of the \"National Insurance Contributions Act 2015\")",
     )
-    legislationPassedBy: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    legislationPassedBy: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="The person or organization that originally passed or made the law: typically parliament"
      "(for primary legislation) or government (for secondary legislation). This indicates"
@@ -94,7 +94,7 @@ class Legislation(CreativeWork):
      "\"decree\", \"regulation\", \"statutory instrument\", \"loi organique\", \"règlement"
      "grand-ducal\", etc., depending on the country.",
     )
-    legislationResponsible: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    legislationResponsible: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="An individual or organization that has some kind of responsibility for the legislation."
      "Typically the ministry who is/was in charge of elaborating the legislation, or the adressee"
@@ -105,8 +105,8 @@ class Legislation(CreativeWork):
 if TYPE_CHECKING:
     from pydantic_schemaorg.LegalForceStatus import LegalForceStatus
     from pydantic_schemaorg.Date import Date
-    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.Organization import Organization
+    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.AdministrativeArea import AdministrativeArea
     from pydantic_schemaorg.URL import URL

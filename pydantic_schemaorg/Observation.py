@@ -2,11 +2,11 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from typing import List, Optional, Union
-from pydantic import AnyUrl
+from pydantic.v1 import AnyUrl
 from datetime import datetime
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.QuantitativeValue import QuantitativeValue
 from pydantic_schemaorg.Intangible import Intangible
 
@@ -33,12 +33,12 @@ class Observation(QuantitativeValue, Intangible):
         description="Provides additional qualification to an observation. For example, a GDP observation"
      "measures the Nominal value.",
     )
-    measurementMethod: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'MeasurementMethodEnum', 'DefinedTerm']], AnyUrl, 'URL', str, 'Text', 'MeasurementMethodEnum', 'DefinedTerm']] = Field(
+    measurementMethod: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'DefinedTerm', 'MeasurementMethodEnum']], AnyUrl, 'URL', str, 'Text', 'DefinedTerm', 'MeasurementMethodEnum']] = Field(
         default=None,
         description="A subproperty of [[measurementTechnique]] that can be used for specifying specific"
      "methods, in particular via [[MeasurementMethodEnum]].",
     )
-    observationAbout: Optional[Union[List[Union['Place', 'Thing', str]], 'Place', 'Thing', str]] = Field(
+    observationAbout: Optional[Union[List[Union['Thing', 'Place', str]], 'Thing', 'Place', str]] = Field(
         default=None,
         description="The [[observationAbout]] property identifies an entity, often a [[Place]], associated"
      "with an [[Observation]].",
@@ -48,7 +48,7 @@ class Observation(QuantitativeValue, Intangible):
         description="The length of time an Observation took place over. The format follows `P[0-9]*[Y|M|D|h|m|s]`."
      "For example, P1Y is Period 1 Year, P3M is Period 3 Months, P3h is Period 3 hours.",
     )
-    variableMeasured: Optional[Union[List[Union[str, 'Text', 'StatisticalVariable', 'Property', 'PropertyValue']], str, 'Text', 'StatisticalVariable', 'Property', 'PropertyValue']] = Field(
+    variableMeasured: Optional[Union[List[Union[str, 'Text', 'Property', 'PropertyValue', 'StatisticalVariable']], str, 'Text', 'Property', 'PropertyValue', 'StatisticalVariable']] = Field(
         default=None,
         description="The variableMeasured property can indicate (repeated as necessary) the variables"
      "that are measured in some dataset, either described as text or as pairs of identifier"
@@ -101,12 +101,12 @@ if TYPE_CHECKING:
     from pydantic_schemaorg.Enumeration import Enumeration
     from pydantic_schemaorg.URL import URL
     from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.MeasurementMethodEnum import MeasurementMethodEnum
     from pydantic_schemaorg.DefinedTerm import DefinedTerm
-    from pydantic_schemaorg.Place import Place
+    from pydantic_schemaorg.MeasurementMethodEnum import MeasurementMethodEnum
     from pydantic_schemaorg.Thing import Thing
-    from pydantic_schemaorg.StatisticalVariable import StatisticalVariable
+    from pydantic_schemaorg.Place import Place
     from pydantic_schemaorg.Property import Property
     from pydantic_schemaorg.PropertyValue import PropertyValue
+    from pydantic_schemaorg.StatisticalVariable import StatisticalVariable
     from pydantic_schemaorg.DateTime import DateTime
     from pydantic_schemaorg.QuantitativeValue import QuantitativeValue

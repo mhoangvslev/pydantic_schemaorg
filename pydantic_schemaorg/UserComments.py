@@ -3,10 +3,10 @@ from typing import TYPE_CHECKING
 
 from datetime import date, datetime
 from typing import List, Optional, Union
-from pydantic import AnyUrl
+from pydantic.v1 import AnyUrl
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.UserInteraction import UserInteraction
 
 
@@ -31,7 +31,7 @@ class UserComments(UserInteraction):
         default=None,
         description="The text of the UserComment.",
     )
-    creator: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    creator: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="The creator/author of this CreativeWork. This is the same as the Author property for"
      "CreativeWork.",
@@ -47,6 +47,6 @@ if TYPE_CHECKING:
     from pydantic_schemaorg.Date import Date
     from pydantic_schemaorg.URL import URL
     from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.Organization import Organization
+    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.CreativeWork import CreativeWork

@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from typing import List, Optional, Union
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.CreativeWork import CreativeWork
 
 
@@ -23,7 +23,7 @@ class MusicPlaylist(CreativeWork):
         default=None,
         description="A music recording (track)&#x2014;usually a single song.",
     )
-    track: Optional[Union[List[Union['ItemList', 'MusicRecording', str]], 'ItemList', 'MusicRecording', str]] = Field(
+    track: Optional[Union[List[Union['MusicRecording', 'ItemList', str]], 'MusicRecording', 'ItemList', str]] = Field(
         default=None,
         description="A music recording (track)&#x2014;usually a single song. If an ItemList is given, the"
      "list should contain items of type MusicRecording.",

@@ -1,12 +1,12 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
-from pydantic import AnyUrl
+from pydantic.v1 import AnyUrl
 from typing import List, Optional, Union
 from datetime import date, datetime
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.Intangible import Intangible
 
 
@@ -34,7 +34,7 @@ class ParcelDelivery(Intangible):
         default=None,
         description="Method used for delivery or shipping.",
     )
-    provider: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    provider: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="The service provider, service operator, or service performer; the goods producer."
      "Another party (a seller) may offer those services or goods on behalf of the provider."
@@ -75,8 +75,8 @@ if TYPE_CHECKING:
     from pydantic_schemaorg.DeliveryEvent import DeliveryEvent
     from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.DeliveryMethod import DeliveryMethod
-    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.Organization import Organization
+    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.PostalAddress import PostalAddress
     from pydantic_schemaorg.Product import Product
     from pydantic_schemaorg.DateTime import DateTime

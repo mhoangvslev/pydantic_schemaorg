@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from typing import List, Optional, Union
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.StructuredValue import StructuredValue
 
 
@@ -44,7 +44,7 @@ class ContactPoint(StructuredValue):
         default=None,
         description="The fax number.",
     )
-    serviceArea: Optional[Union[List[Union['Place', 'AdministrativeArea', 'GeoShape', str]], 'Place', 'AdministrativeArea', 'GeoShape', str]] = Field(
+    serviceArea: Optional[Union[List[Union['AdministrativeArea', 'GeoShape', 'Place', str]], 'AdministrativeArea', 'GeoShape', 'Place', str]] = Field(
         default=None,
         description="The geographic area where the service is provided.",
     )
@@ -58,7 +58,7 @@ class ContactPoint(StructuredValue):
         default=None,
         description="The hours during which this service or contact is available.",
     )
-    areaServed: Optional[Union[List[Union[str, 'Text', 'Place', 'AdministrativeArea', 'GeoShape']], str, 'Text', 'Place', 'AdministrativeArea', 'GeoShape']] = Field(
+    areaServed: Optional[Union[List[Union[str, 'Text', 'AdministrativeArea', 'GeoShape', 'Place']], str, 'Text', 'AdministrativeArea', 'GeoShape', 'Place']] = Field(
         default=None,
         description="The geographic area where a service or offered item is provided.",
     )
@@ -68,8 +68,8 @@ if TYPE_CHECKING:
     from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.ContactPointOption import ContactPointOption
     from pydantic_schemaorg.Product import Product
-    from pydantic_schemaorg.Place import Place
     from pydantic_schemaorg.AdministrativeArea import AdministrativeArea
     from pydantic_schemaorg.GeoShape import GeoShape
+    from pydantic_schemaorg.Place import Place
     from pydantic_schemaorg.Language import Language
     from pydantic_schemaorg.OpeningHoursSpecification import OpeningHoursSpecification

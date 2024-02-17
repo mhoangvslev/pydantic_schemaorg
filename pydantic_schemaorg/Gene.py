@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from typing import List, Optional, Union
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.BioChemEntity import BioChemEntity
 
 
@@ -31,7 +31,7 @@ class Gene(BioChemEntity):
         description="A symbolic representation of a BioChemEntity. For example, a nucleotide sequence of"
      "a Gene or an amino acid sequence of a Protein.",
     )
-    expressedIn: Optional[Union[List[Union['AnatomicalSystem', 'BioChemEntity', 'DefinedTerm', 'AnatomicalStructure', str]], 'AnatomicalSystem', 'BioChemEntity', 'DefinedTerm', 'AnatomicalStructure', str]] = Field(
+    expressedIn: Optional[Union[List[Union['BioChemEntity', 'DefinedTerm', 'AnatomicalStructure', 'AnatomicalSystem', str]], 'BioChemEntity', 'DefinedTerm', 'AnatomicalStructure', 'AnatomicalSystem', str]] = Field(
         default=None,
         description="Tissue, organ, biological sample, etc in which activity of this gene has been observed"
      "experimentally. For example brain, digestive system.",
@@ -41,6 +41,6 @@ class Gene(BioChemEntity):
 if TYPE_CHECKING:
     from pydantic_schemaorg.BioChemEntity import BioChemEntity
     from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.AnatomicalSystem import AnatomicalSystem
     from pydantic_schemaorg.DefinedTerm import DefinedTerm
     from pydantic_schemaorg.AnatomicalStructure import AnatomicalStructure
+    from pydantic_schemaorg.AnatomicalSystem import AnatomicalSystem

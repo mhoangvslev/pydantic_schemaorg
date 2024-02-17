@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from typing import List, Optional, Union
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.Trip import Trip
 
 
@@ -15,7 +15,7 @@ class BusTrip(Trip):
     Model depth: 4
     """
     type_: str = Field(default="BusTrip", alias='@type', const=True)
-    arrivalBusStop: Optional[Union[List[Union['BusStation', 'BusStop', str]], 'BusStation', 'BusStop', str]] = Field(
+    arrivalBusStop: Optional[Union[List[Union['BusStop', 'BusStation', str]], 'BusStop', 'BusStation', str]] = Field(
         default=None,
         description="The stop or station from which the bus arrives.",
     )
@@ -23,7 +23,7 @@ class BusTrip(Trip):
         default=None,
         description="The unique identifier for the bus.",
     )
-    departureBusStop: Optional[Union[List[Union['BusStation', 'BusStop', str]], 'BusStation', 'BusStop', str]] = Field(
+    departureBusStop: Optional[Union[List[Union['BusStop', 'BusStation', str]], 'BusStop', 'BusStation', str]] = Field(
         default=None,
         description="The stop or station from which the bus departs.",
     )
@@ -34,6 +34,6 @@ class BusTrip(Trip):
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.BusStation import BusStation
     from pydantic_schemaorg.BusStop import BusStop
+    from pydantic_schemaorg.BusStation import BusStation
     from pydantic_schemaorg.Text import Text

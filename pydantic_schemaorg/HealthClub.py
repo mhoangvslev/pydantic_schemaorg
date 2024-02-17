@@ -1,12 +1,12 @@
 from __future__ import annotations
 
 
-from pydantic import Field
-from pydantic_schemaorg.HealthAndBeautyBusiness import HealthAndBeautyBusiness
+from pydantic.v1 import Field
 from pydantic_schemaorg.SportsActivityLocation import SportsActivityLocation
+from pydantic_schemaorg.HealthAndBeautyBusiness import HealthAndBeautyBusiness
 
 
-class HealthClub(HealthAndBeautyBusiness, SportsActivityLocation):
+class HealthClub(SportsActivityLocation, HealthAndBeautyBusiness):
     """A health club.
 
     See: https://schema.org/HealthClub

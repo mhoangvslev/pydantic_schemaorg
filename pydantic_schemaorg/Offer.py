@@ -3,10 +3,10 @@ from typing import TYPE_CHECKING
 
 from typing import List, Optional, Union
 from datetime import date, datetime, time
-from pydantic import AnyUrl, StrictBool, StrictInt, StrictFloat
+from pydantic.v1 import AnyUrl, StrictBool, StrictInt, StrictFloat
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.Intangible import Intangible
 
 
@@ -33,7 +33,7 @@ class Offer(Intangible):
         default=None,
         description="The duration for which the given offer is valid.",
     )
-    eligibleRegion: Optional[Union[List[Union[str, 'Text', 'Place', 'GeoShape']], str, 'Text', 'Place', 'GeoShape']] = Field(
+    eligibleRegion: Optional[Union[List[Union[str, 'Text', 'GeoShape', 'Place']], str, 'Text', 'GeoShape', 'Place']] = Field(
         default=None,
         description="The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the GeoShape for"
      "the geo-political region(s) for which the offer or delivery charge specification is"
@@ -94,7 +94,7 @@ class Offer(Intangible):
      "for cryptocurrencies, e.g. \"BTC\"; well known names for [Local Exchange Trading Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system)"
      "(LETS) and other currency types, e.g. \"Ithaca HOUR\".",
     )
-    itemOffered: Optional[Union[List[Union['Service', 'CreativeWork', 'Event', 'AggregateOffer', 'Product', 'MenuItem', 'Trip', str]], 'Service', 'CreativeWork', 'Event', 'AggregateOffer', 'Product', 'MenuItem', 'Trip', str]] = Field(
+    itemOffered: Optional[Union[List[Union['Trip', 'Event', 'CreativeWork', 'Product', 'AggregateOffer', 'MenuItem', 'Service', str]], 'Trip', 'Event', 'CreativeWork', 'Product', 'AggregateOffer', 'MenuItem', 'Service', str]] = Field(
         default=None,
         description="An item being offered (or demanded). The transactional nature of the offer or demand"
      "is documented using [[businessFunction]], e.g. sell, lease etc. While several common"
@@ -118,7 +118,7 @@ class Offer(Intangible):
      "0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially"
      "similar Unicode symbols.",
     )
-    availabilityEnds: Optional[Union[List[Union[datetime, 'DateTime', time, 'Time', date, 'Date', str]], datetime, 'DateTime', time, 'Time', date, 'Date', str]] = Field(
+    availabilityEnds: Optional[Union[List[Union[datetime, 'DateTime', date, 'Date', time, 'Time', str]], datetime, 'DateTime', date, 'Date', time, 'Time', str]] = Field(
         default=None,
         description="The end of the availability of the product or service included in the offer.",
     )
@@ -131,7 +131,7 @@ class Offer(Intangible):
         default=None,
         description="Specifies a MerchantReturnPolicy that may be applicable.",
     )
-    category: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'PhysicalActivityCategory', 'Thing', 'CategoryCode']], AnyUrl, 'URL', str, 'Text', 'PhysicalActivityCategory', 'Thing', 'CategoryCode']] = Field(
+    category: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'CategoryCode', 'Thing', 'PhysicalActivityCategory']], AnyUrl, 'URL', str, 'Text', 'CategoryCode', 'Thing', 'PhysicalActivityCategory']] = Field(
         default=None,
         description="A category for the item. Greater signs or slashes can be used to informally indicate a"
      "category hierarchy.",
@@ -140,7 +140,7 @@ class Offer(Intangible):
         default=None,
         description="The Manufacturer Part Number (MPN) of the product, or the product to which the offer refers.",
     )
-    availabilityStarts: Optional[Union[List[Union[datetime, 'DateTime', time, 'Time', date, 'Date', str]], datetime, 'DateTime', time, 'Time', date, 'Date', str]] = Field(
+    availabilityStarts: Optional[Union[List[Union[datetime, 'DateTime', date, 'Date', time, 'Time', str]], datetime, 'DateTime', date, 'Date', time, 'Time', str]] = Field(
         default=None,
         description="The beginning of the availability of the product or service included in the offer.",
     )
@@ -163,7 +163,7 @@ class Offer(Intangible):
         description="The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a product or service,"
      "or the product to which the offer refers.",
     )
-    seller: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    seller: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="An entity which offers (sells / leases / lends / loans) the services / goods. A seller may"
      "also be a provider.",
@@ -192,7 +192,7 @@ class Offer(Intangible):
         default=None,
         description="The overall rating, based on a collection of reviews or ratings, of the item.",
     )
-    ineligibleRegion: Optional[Union[List[Union[str, 'Text', 'Place', 'GeoShape']], str, 'Text', 'Place', 'GeoShape']] = Field(
+    ineligibleRegion: Optional[Union[List[Union[str, 'Text', 'GeoShape', 'Place']], str, 'Text', 'GeoShape', 'Place']] = Field(
         default=None,
         description="The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the GeoShape for"
      "the geo-political region(s) for which the offer or delivery charge specification is"
@@ -259,7 +259,7 @@ class Offer(Intangible):
      "data, and not a definition of GTINs in general - see the GS1 documentation for authoritative"
      "details.",
     )
-    offeredBy: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    offeredBy: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="A pointer to the organization or person making the offer.",
     )
@@ -284,7 +284,7 @@ class Offer(Intangible):
         description="The business function (e.g. sell, lease, repair, dispose) of the offer or component"
      "of a bundle (TypeAndQuantityNode). The default is http://purl.org/goodrelations/v1#Sell.",
     )
-    areaServed: Optional[Union[List[Union[str, 'Text', 'Place', 'AdministrativeArea', 'GeoShape']], str, 'Text', 'Place', 'AdministrativeArea', 'GeoShape']] = Field(
+    areaServed: Optional[Union[List[Union[str, 'Text', 'AdministrativeArea', 'GeoShape', 'Place']], str, 'Text', 'AdministrativeArea', 'GeoShape', 'Place']] = Field(
         default=None,
         description="The geographic area where a service or offered item is provided.",
     )
@@ -326,30 +326,30 @@ if TYPE_CHECKING:
     from pydantic_schemaorg.BusinessEntityType import BusinessEntityType
     from pydantic_schemaorg.QuantitativeValue import QuantitativeValue
     from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.Place import Place
     from pydantic_schemaorg.GeoShape import GeoShape
+    from pydantic_schemaorg.Place import Place
     from pydantic_schemaorg.Duration import Duration
     from pydantic_schemaorg.PriceSpecification import PriceSpecification
     from pydantic_schemaorg.Review import Review
     from pydantic_schemaorg.DateTime import DateTime
     from pydantic_schemaorg.Date import Date
-    from pydantic_schemaorg.Service import Service
-    from pydantic_schemaorg.CreativeWork import CreativeWork
-    from pydantic_schemaorg.Event import Event
-    from pydantic_schemaorg.AggregateOffer import AggregateOffer
-    from pydantic_schemaorg.Product import Product
-    from pydantic_schemaorg.MenuItem import MenuItem
     from pydantic_schemaorg.Trip import Trip
+    from pydantic_schemaorg.Event import Event
+    from pydantic_schemaorg.CreativeWork import CreativeWork
+    from pydantic_schemaorg.Product import Product
+    from pydantic_schemaorg.AggregateOffer import AggregateOffer
+    from pydantic_schemaorg.MenuItem import MenuItem
+    from pydantic_schemaorg.Service import Service
     from pydantic_schemaorg.Number import Number
     from pydantic_schemaorg.Time import Time
     from pydantic_schemaorg.MerchantReturnPolicy import MerchantReturnPolicy
     from pydantic_schemaorg.URL import URL
-    from pydantic_schemaorg.PhysicalActivityCategory import PhysicalActivityCategory
-    from pydantic_schemaorg.Thing import Thing
     from pydantic_schemaorg.CategoryCode import CategoryCode
+    from pydantic_schemaorg.Thing import Thing
+    from pydantic_schemaorg.PhysicalActivityCategory import PhysicalActivityCategory
     from pydantic_schemaorg.Boolean import Boolean
-    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.Organization import Organization
+    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.AggregateRating import AggregateRating
     from pydantic_schemaorg.OfferItemCondition import OfferItemCondition
     from pydantic_schemaorg.OfferShippingDetails import OfferShippingDetails

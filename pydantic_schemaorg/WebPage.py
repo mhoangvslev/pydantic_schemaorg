@@ -2,11 +2,11 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from typing import List, Optional, Union
-from pydantic import AnyUrl
+from pydantic.v1 import AnyUrl
 from datetime import date
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.CreativeWork import CreativeWork
 
 
@@ -20,7 +20,7 @@ class WebPage(CreativeWork):
     Model depth: 3
     """
     type_: str = Field(default="WebPage", alias='@type', const=True)
-    reviewedBy: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    reviewedBy: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="People or organizations that have reviewed the content on this web page for accuracy"
      "and/or completeness.",
@@ -79,8 +79,8 @@ class WebPage(CreativeWork):
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.Organization import Organization
+    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.URL import URL
     from pydantic_schemaorg.SpeakableSpecification import SpeakableSpecification
     from pydantic_schemaorg.ImageObject import ImageObject

@@ -2,10 +2,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from typing import List, Optional, Union
-from pydantic import StrictInt, StrictFloat
+from pydantic.v1 import StrictInt, StrictFloat
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.Accommodation import Accommodation
 
 
@@ -20,7 +20,7 @@ class Suite(Accommodation):
     Model depth: 4
     """
     type_: str = Field(default="Suite", alias='@type', const=True)
-    bed: Optional[Union[List[Union[str, 'Text', 'BedType', 'BedDetails']], str, 'Text', 'BedType', 'BedDetails']] = Field(
+    bed: Optional[Union[List[Union[str, 'Text', 'BedDetails', 'BedType']], str, 'Text', 'BedDetails', 'BedType']] = Field(
         default=None,
         description="The type of bed or beds included in the accommodation. For the single case of just one bed"
      "of a certain type, you use bed directly with a text. If you want to indicate the quantity"
@@ -44,7 +44,7 @@ class Suite(Accommodation):
 
 if TYPE_CHECKING:
     from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.BedType import BedType
     from pydantic_schemaorg.BedDetails import BedDetails
+    from pydantic_schemaorg.BedType import BedType
     from pydantic_schemaorg.QuantitativeValue import QuantitativeValue
     from pydantic_schemaorg.Number import Number

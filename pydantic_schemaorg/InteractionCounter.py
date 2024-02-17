@@ -5,7 +5,7 @@ from typing import List, Optional, Union
 from datetime import datetime, time
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.StructuredValue import StructuredValue
 
 
@@ -34,7 +34,7 @@ class InteractionCounter(StructuredValue):
      "Event uses startDate/endDate instead of startTime/endTime, even when describing"
      "dates with times. This situation may be clarified in future revisions.",
     )
-    location: Optional[Union[List[Union[str, 'Text', 'PostalAddress', 'Place', 'VirtualLocation']], str, 'Text', 'PostalAddress', 'Place', 'VirtualLocation']] = Field(
+    location: Optional[Union[List[Union[str, 'Text', 'VirtualLocation', 'PostalAddress', 'Place']], str, 'Text', 'VirtualLocation', 'PostalAddress', 'Place']] = Field(
         default=None,
         description="The location of, for example, where an event is happening, where an organization is located,"
      "or where an action takes place.",
@@ -62,7 +62,7 @@ if TYPE_CHECKING:
     from pydantic_schemaorg.DateTime import DateTime
     from pydantic_schemaorg.Time import Time
     from pydantic_schemaorg.Text import Text
+    from pydantic_schemaorg.VirtualLocation import VirtualLocation
     from pydantic_schemaorg.PostalAddress import PostalAddress
     from pydantic_schemaorg.Place import Place
-    from pydantic_schemaorg.VirtualLocation import VirtualLocation
     from pydantic_schemaorg.Action import Action

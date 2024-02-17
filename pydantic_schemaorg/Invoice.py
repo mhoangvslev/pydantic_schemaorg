@@ -2,11 +2,11 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from typing import List, Optional, Union
-from pydantic import AnyUrl
+from pydantic.v1 import AnyUrl
 from datetime import date, datetime
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.Intangible import Intangible
 
 
@@ -25,7 +25,7 @@ class Invoice(Intangible):
         default=None,
         description="A number that confirms the given order or payment has been received.",
     )
-    category: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'PhysicalActivityCategory', 'Thing', 'CategoryCode']], AnyUrl, 'URL', str, 'Text', 'PhysicalActivityCategory', 'Thing', 'CategoryCode']] = Field(
+    category: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'CategoryCode', 'Thing', 'PhysicalActivityCategory']], AnyUrl, 'URL', str, 'Text', 'CategoryCode', 'Thing', 'PhysicalActivityCategory']] = Field(
         default=None,
         description="A category for the item. Greater signs or slashes can be used to informally indicate a"
      "category hierarchy.",
@@ -42,7 +42,7 @@ class Invoice(Intangible):
         default=None,
         description="The date that payment is due.",
     )
-    provider: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    provider: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="The service provider, service operator, or service performer; the goods producer."
      "Another party (a seller) may offer those services or goods on behalf of the provider."
@@ -52,7 +52,7 @@ class Invoice(Intangible):
         default=None,
         description="An identifier for the method of payment used (e.g. the last 4 digits of the credit card).",
     )
-    minimumPaymentDue: Optional[Union[List[Union['MonetaryAmount', 'PriceSpecification', str]], 'MonetaryAmount', 'PriceSpecification', str]] = Field(
+    minimumPaymentDue: Optional[Union[List[Union['PriceSpecification', 'MonetaryAmount', str]], 'PriceSpecification', 'MonetaryAmount', str]] = Field(
         default=None,
         description="The minimum payment required at this time.",
     )
@@ -69,7 +69,7 @@ class Invoice(Intangible):
         default=None,
         description="The name of the credit card or other method of payment for the order.",
     )
-    broker: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    broker: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="An entity that arranges for an exchange between a buyer and a seller. In most cases a broker"
      "never acquires or releases ownership of a product or service involved in an exchange."
@@ -80,7 +80,7 @@ class Invoice(Intangible):
         default=None,
         description="The date the invoice is scheduled to be paid.",
     )
-    customer: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    customer: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="Party placing the order or paying the invoice.",
     )
@@ -93,16 +93,16 @@ class Invoice(Intangible):
 if TYPE_CHECKING:
     from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.URL import URL
-    from pydantic_schemaorg.PhysicalActivityCategory import PhysicalActivityCategory
-    from pydantic_schemaorg.Thing import Thing
     from pydantic_schemaorg.CategoryCode import CategoryCode
+    from pydantic_schemaorg.Thing import Thing
+    from pydantic_schemaorg.PhysicalActivityCategory import PhysicalActivityCategory
     from pydantic_schemaorg.DateTime import DateTime
     from pydantic_schemaorg.Date import Date
     from pydantic_schemaorg.Duration import Duration
-    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.Organization import Organization
-    from pydantic_schemaorg.MonetaryAmount import MonetaryAmount
+    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.PriceSpecification import PriceSpecification
+    from pydantic_schemaorg.MonetaryAmount import MonetaryAmount
     from pydantic_schemaorg.Order import Order
     from pydantic_schemaorg.PaymentStatusType import PaymentStatusType
     from pydantic_schemaorg.PaymentMethod import PaymentMethod

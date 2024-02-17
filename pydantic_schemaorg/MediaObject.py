@@ -3,10 +3,10 @@ from typing import TYPE_CHECKING
 
 from datetime import date, datetime, time
 from typing import List, Optional, Union
-from pydantic import AnyUrl, StrictBool
+from pydantic.v1 import AnyUrl, StrictBool
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.CreativeWork import CreativeWork
 
 
@@ -50,7 +50,7 @@ class MediaObject(CreativeWork):
         default=None,
         description="The CreativeWork encoded by this media object.",
     )
-    width: Optional[Union[List[Union['Distance', 'QuantitativeValue', str]], 'Distance', 'QuantitativeValue', str]] = Field(
+    width: Optional[Union[List[Union['QuantitativeValue', 'Distance', str]], 'QuantitativeValue', 'Distance', str]] = Field(
         default=None,
         description="The width of the item.",
     )
@@ -72,7 +72,7 @@ class MediaObject(CreativeWork):
         default=None,
         description="The duration of the item (movie, audio recording, event, etc.) in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601).",
     )
-    ineligibleRegion: Optional[Union[List[Union[str, 'Text', 'Place', 'GeoShape']], str, 'Text', 'Place', 'GeoShape']] = Field(
+    ineligibleRegion: Optional[Union[List[Union[str, 'Text', 'GeoShape', 'Place']], str, 'Text', 'GeoShape', 'Place']] = Field(
         default=None,
         description="The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the GeoShape for"
      "the geo-political region(s) for which the offer or delivery charge specification is"
@@ -140,8 +140,8 @@ if TYPE_CHECKING:
     from pydantic_schemaorg.Boolean import Boolean
     from pydantic_schemaorg.MediaSubscription import MediaSubscription
     from pydantic_schemaorg.Duration import Duration
-    from pydantic_schemaorg.Place import Place
     from pydantic_schemaorg.GeoShape import GeoShape
+    from pydantic_schemaorg.Place import Place
     from pydantic_schemaorg.URL import URL
     from pydantic_schemaorg.Organization import Organization
     from pydantic_schemaorg.NewsArticle import NewsArticle

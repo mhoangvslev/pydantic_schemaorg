@@ -2,10 +2,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from typing import List, Optional, Union
-from pydantic import AnyUrl
+from pydantic.v1 import AnyUrl
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.Review import Review
 
 
@@ -29,7 +29,7 @@ class MediaReview(Review):
         description="Describes, in a [[MediaReview]] when dealing with [[DecontextualizedContent]],"
      "background information that can contribute to better interpretation of the [[MediaObject]].",
     )
-    originalMediaLink: Optional[Union[List[Union[AnyUrl, 'URL', 'MediaObject', 'WebPage', str]], AnyUrl, 'URL', 'MediaObject', 'WebPage', str]] = Field(
+    originalMediaLink: Optional[Union[List[Union[AnyUrl, 'URL', 'WebPage', 'MediaObject', str]], AnyUrl, 'URL', 'WebPage', 'MediaObject', str]] = Field(
         default=None,
         description="Link to the page containing an original version of the content, or directly to an online"
      "copy of the original [[MediaObject]] content, e.g. video file.",
@@ -44,6 +44,6 @@ class MediaReview(Review):
 if TYPE_CHECKING:
     from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.URL import URL
-    from pydantic_schemaorg.MediaObject import MediaObject
     from pydantic_schemaorg.WebPage import WebPage
+    from pydantic_schemaorg.MediaObject import MediaObject
     from pydantic_schemaorg.MediaManipulationRatingEnumeration import MediaManipulationRatingEnumeration

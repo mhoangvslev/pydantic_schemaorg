@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from typing import List, Optional, Union
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.TradeAction import TradeAction
 
 
@@ -16,11 +16,11 @@ class BuyAction(TradeAction):
     Model depth: 4
     """
     type_: str = Field(default="BuyAction", alias='@type', const=True)
-    vendor: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    vendor: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="'vendor' is an earlier term for 'seller'.",
     )
-    seller: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    seller: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="An entity which offers (sells / leases / lends / loans) the services / goods. A seller may"
      "also be a provider.",
@@ -32,6 +32,6 @@ class BuyAction(TradeAction):
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.Organization import Organization
+    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.WarrantyPromise import WarrantyPromise

@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from typing import List, Optional, Union
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.Intangible import Intangible
 
 
@@ -22,7 +22,7 @@ class ItemList(Intangible):
      "all items in a list (e.g., multi-page pagination); in such cases, the numberOfItems"
      "would be for the entire list.",
     )
-    itemListElement: Optional[Union[List[Union[str, 'Text', 'Thing', 'ListItem']], str, 'Text', 'Thing', 'ListItem']] = Field(
+    itemListElement: Optional[Union[List[Union[str, 'Text', 'ListItem', 'Thing']], str, 'Text', 'ListItem', 'Thing']] = Field(
         default=None,
         description="For itemListElement values, you can use simple strings (e.g. \"Peter\", \"Paul\","
      "\"Mary\"), existing entities, or use ListItem. Text values are best if the elements"
@@ -42,6 +42,6 @@ class ItemList(Intangible):
 if TYPE_CHECKING:
     from pydantic_schemaorg.Integer import Integer
     from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.Thing import Thing
     from pydantic_schemaorg.ListItem import ListItem
+    from pydantic_schemaorg.Thing import Thing
     from pydantic_schemaorg.ItemListOrderType import ItemListOrderType

@@ -2,10 +2,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from typing import List, Optional, Union
-from pydantic import AnyUrl, StrictBool, StrictInt, StrictFloat
+from pydantic.v1 import AnyUrl, StrictBool, StrictInt, StrictFloat
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.StructuredValue import StructuredValue
 
 
@@ -30,7 +30,7 @@ class PropertyValue(StructuredValue):
         description="The unit of measurement given using the UN/CEFACT Common Code (3 characters) or a URL."
      "Other codes than the UN/CEFACT Common Code may be used with a prefix followed by a colon.",
     )
-    measurementMethod: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'MeasurementMethodEnum', 'DefinedTerm']], AnyUrl, 'URL', str, 'Text', 'MeasurementMethodEnum', 'DefinedTerm']] = Field(
+    measurementMethod: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'DefinedTerm', 'MeasurementMethodEnum']], AnyUrl, 'URL', str, 'Text', 'DefinedTerm', 'MeasurementMethodEnum']] = Field(
         default=None,
         description="A subproperty of [[measurementTechnique]] that can be used for specifying specific"
      "methods, in particular via [[MeasurementMethodEnum]].",
@@ -67,7 +67,7 @@ class PropertyValue(StructuredValue):
      "'.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to indicate a decimal point. Avoid"
      "using these symbols as a readability separator.",
     )
-    valueReference: Optional[Union[List[Union[str, 'Text', 'DefinedTerm', 'MeasurementTypeEnumeration', 'StructuredValue', 'Enumeration', 'QualitativeValue', 'QuantitativeValue', 'PropertyValue']], str, 'Text', 'DefinedTerm', 'MeasurementTypeEnumeration', 'StructuredValue', 'Enumeration', 'QualitativeValue', 'QuantitativeValue', 'PropertyValue']] = Field(
+    valueReference: Optional[Union[List[Union[str, 'Text', 'QuantitativeValue', 'DefinedTerm', 'QualitativeValue', 'PropertyValue', 'StructuredValue', 'Enumeration', 'MeasurementTypeEnumeration']], str, 'Text', 'QuantitativeValue', 'DefinedTerm', 'QualitativeValue', 'PropertyValue', 'StructuredValue', 'Enumeration', 'MeasurementTypeEnumeration']] = Field(
         default=None,
         description="A secondary value that provides additional information on the original value, e.g."
      "a reference temperature or a type of measurement.",
@@ -96,12 +96,12 @@ class PropertyValue(StructuredValue):
 if TYPE_CHECKING:
     from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.URL import URL
-    from pydantic_schemaorg.MeasurementMethodEnum import MeasurementMethodEnum
     from pydantic_schemaorg.DefinedTerm import DefinedTerm
+    from pydantic_schemaorg.MeasurementMethodEnum import MeasurementMethodEnum
     from pydantic_schemaorg.Number import Number
     from pydantic_schemaorg.Boolean import Boolean
     from pydantic_schemaorg.StructuredValue import StructuredValue
-    from pydantic_schemaorg.MeasurementTypeEnumeration import MeasurementTypeEnumeration
-    from pydantic_schemaorg.Enumeration import Enumeration
-    from pydantic_schemaorg.QualitativeValue import QualitativeValue
     from pydantic_schemaorg.QuantitativeValue import QuantitativeValue
+    from pydantic_schemaorg.QualitativeValue import QualitativeValue
+    from pydantic_schemaorg.Enumeration import Enumeration
+    from pydantic_schemaorg.MeasurementTypeEnumeration import MeasurementTypeEnumeration

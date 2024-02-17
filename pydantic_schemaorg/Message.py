@@ -5,7 +5,7 @@ from datetime import date, datetime
 from typing import List, Optional, Union
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.CreativeWork import CreativeWork
 
 
@@ -24,15 +24,15 @@ class Message(CreativeWork):
         default=None,
         description="The date/time the message was received if a single recipient exists.",
     )
-    ccRecipient: Optional[Union[List[Union['Person', 'ContactPoint', 'Organization', str]], 'Person', 'ContactPoint', 'Organization', str]] = Field(
+    ccRecipient: Optional[Union[List[Union['Organization', 'ContactPoint', 'Person', str]], 'Organization', 'ContactPoint', 'Person', str]] = Field(
         default=None,
         description="A sub property of recipient. The recipient copied on a message.",
     )
-    toRecipient: Optional[Union[List[Union['Audience', 'Person', 'ContactPoint', 'Organization', str]], 'Audience', 'Person', 'ContactPoint', 'Organization', str]] = Field(
+    toRecipient: Optional[Union[List[Union['Organization', 'Audience', 'ContactPoint', 'Person', str]], 'Organization', 'Audience', 'ContactPoint', 'Person', str]] = Field(
         default=None,
         description="A sub property of recipient. The recipient who was directly sent the message.",
     )
-    sender: Optional[Union[List[Union['Audience', 'Person', 'Organization', str]], 'Audience', 'Person', 'Organization', str]] = Field(
+    sender: Optional[Union[List[Union['Audience', 'Organization', 'Person', str]], 'Audience', 'Organization', 'Person', str]] = Field(
         default=None,
         description="A sub property of participant. The participant who is at the sending end of the action.",
     )
@@ -45,11 +45,11 @@ class Message(CreativeWork):
         description="The date/time at which the message has been read by the recipient if a single recipient"
      "exists.",
     )
-    bccRecipient: Optional[Union[List[Union['Person', 'ContactPoint', 'Organization', str]], 'Person', 'ContactPoint', 'Organization', str]] = Field(
+    bccRecipient: Optional[Union[List[Union['Organization', 'ContactPoint', 'Person', str]], 'Organization', 'ContactPoint', 'Person', str]] = Field(
         default=None,
         description="A sub property of recipient. The recipient blind copied on a message.",
     )
-    recipient: Optional[Union[List[Union['Audience', 'Person', 'ContactPoint', 'Organization', str]], 'Audience', 'Person', 'ContactPoint', 'Organization', str]] = Field(
+    recipient: Optional[Union[List[Union['Organization', 'Audience', 'ContactPoint', 'Person', str]], 'Organization', 'Audience', 'ContactPoint', 'Person', str]] = Field(
         default=None,
         description="A sub property of participant. The participant who is at the receiving end of the action.",
     )
@@ -57,9 +57,9 @@ class Message(CreativeWork):
 
 if TYPE_CHECKING:
     from pydantic_schemaorg.DateTime import DateTime
-    from pydantic_schemaorg.Person import Person
-    from pydantic_schemaorg.ContactPoint import ContactPoint
     from pydantic_schemaorg.Organization import Organization
+    from pydantic_schemaorg.ContactPoint import ContactPoint
+    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.Audience import Audience
     from pydantic_schemaorg.CreativeWork import CreativeWork
     from pydantic_schemaorg.Date import Date

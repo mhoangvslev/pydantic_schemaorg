@@ -4,12 +4,12 @@ from typing import TYPE_CHECKING
 from typing import List, Optional, Union
 
 
-from pydantic import Field
-from pydantic_schemaorg.Legislation import Legislation
+from pydantic.v1 import Field
 from pydantic_schemaorg.MediaObject import MediaObject
+from pydantic_schemaorg.Legislation import Legislation
 
 
-class LegislationObject(Legislation, MediaObject):
+class LegislationObject(MediaObject, Legislation):
     """A specific object or file containing a Legislation. Note that the same Legislation can"
      "be published in multiple files. For example, a digitally signed PDF, a plain PDF and an"
      "HTML version.

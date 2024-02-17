@@ -1,12 +1,12 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
-from pydantic import AnyUrl
+from pydantic.v1 import AnyUrl
 from typing import List, Optional, Union
 from datetime import datetime
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.CreativeWork import CreativeWork
 
 
@@ -17,7 +17,7 @@ class Dataset(CreativeWork):
     Model depth: 3
     """
     type_: str = Field(default="Dataset", alias='@type', const=True)
-    measurementMethod: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'MeasurementMethodEnum', 'DefinedTerm']], AnyUrl, 'URL', str, 'Text', 'MeasurementMethodEnum', 'DefinedTerm']] = Field(
+    measurementMethod: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'DefinedTerm', 'MeasurementMethodEnum']], AnyUrl, 'URL', str, 'Text', 'DefinedTerm', 'MeasurementMethodEnum']] = Field(
         default=None,
         description="A subproperty of [[measurementTechnique]] that can be used for specifying specific"
      "methods, in particular via [[MeasurementMethodEnum]].",
@@ -61,7 +61,7 @@ class Dataset(CreativeWork):
      "You can repeat this property to identify different formats of, or the linking ISSN (ISSN-L)"
      "for, this serial publication.",
     )
-    variableMeasured: Optional[Union[List[Union[str, 'Text', 'StatisticalVariable', 'Property', 'PropertyValue']], str, 'Text', 'StatisticalVariable', 'Property', 'PropertyValue']] = Field(
+    variableMeasured: Optional[Union[List[Union[str, 'Text', 'Property', 'PropertyValue', 'StatisticalVariable']], str, 'Text', 'Property', 'PropertyValue', 'StatisticalVariable']] = Field(
         default=None,
         description="The variableMeasured property can indicate (repeated as necessary) the variables"
      "that are measured in some dataset, either described as text or as pairs of identifier"
@@ -94,11 +94,11 @@ class Dataset(CreativeWork):
 if TYPE_CHECKING:
     from pydantic_schemaorg.URL import URL
     from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.MeasurementMethodEnum import MeasurementMethodEnum
     from pydantic_schemaorg.DefinedTerm import DefinedTerm
+    from pydantic_schemaorg.MeasurementMethodEnum import MeasurementMethodEnum
     from pydantic_schemaorg.DataCatalog import DataCatalog
     from pydantic_schemaorg.PropertyValue import PropertyValue
     from pydantic_schemaorg.DataDownload import DataDownload
     from pydantic_schemaorg.DateTime import DateTime
-    from pydantic_schemaorg.StatisticalVariable import StatisticalVariable
     from pydantic_schemaorg.Property import Property
+    from pydantic_schemaorg.StatisticalVariable import StatisticalVariable

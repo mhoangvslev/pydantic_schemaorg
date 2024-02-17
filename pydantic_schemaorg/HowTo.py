@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from typing import List, Optional, Union
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.CreativeWork import CreativeWork
 
 
@@ -19,7 +19,7 @@ class HowTo(CreativeWork):
         default=None,
         description="A sub-property of instrument. A supply consumed when performing instructions or a direction.",
     )
-    steps: Optional[Union[List[Union[str, 'Text', 'ItemList', 'CreativeWork']], str, 'Text', 'ItemList', 'CreativeWork']] = Field(
+    steps: Optional[Union[List[Union[str, 'Text', 'CreativeWork', 'ItemList']], str, 'Text', 'CreativeWork', 'ItemList']] = Field(
         default=None,
         description="A single step item (as HowToStep, text, document, video, etc.) or a HowToSection (originally"
      "misnamed 'steps'; 'step' is preferred).",
@@ -62,8 +62,8 @@ class HowTo(CreativeWork):
 if TYPE_CHECKING:
     from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.HowToSupply import HowToSupply
-    from pydantic_schemaorg.ItemList import ItemList
     from pydantic_schemaorg.CreativeWork import CreativeWork
+    from pydantic_schemaorg.ItemList import ItemList
     from pydantic_schemaorg.Duration import Duration
     from pydantic_schemaorg.HowToTool import HowToTool
     from pydantic_schemaorg.QuantitativeValue import QuantitativeValue

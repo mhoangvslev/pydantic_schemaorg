@@ -3,10 +3,10 @@ from typing import TYPE_CHECKING
 
 from datetime import datetime
 from typing import List, Optional, Union
-from pydantic import StrictInt, StrictFloat
+from pydantic.v1 import StrictInt, StrictFloat
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.Intangible import Intangible
 
 
@@ -36,7 +36,7 @@ class Reservation(Intangible):
         default=None,
         description="The date and time the reservation was modified.",
     )
-    bookingAgent: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    bookingAgent: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="'bookingAgent' is an out-dated term indicating a 'broker' that serves as a booking agent.",
     )
@@ -44,7 +44,7 @@ class Reservation(Intangible):
         default=None,
         description="A unique identifier for the reservation.",
     )
-    underName: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    underName: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="The person or organization the reservation or ticket is for.",
     )
@@ -52,7 +52,7 @@ class Reservation(Intangible):
         default=None,
         description="The current status of the reservation.",
     )
-    provider: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    provider: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="The service provider, service operator, or service performer; the goods producer."
      "Another party (a seller) may offer those services or goods on behalf of the provider."
@@ -67,7 +67,7 @@ class Reservation(Intangible):
         description="Any membership in a frequent flyer, hotel loyalty program, etc. being applied to the"
      "reservation.",
     )
-    broker: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    broker: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="An entity that arranges for an exchange between a buyer and a seller. In most cases a broker"
      "never acquires or releases ownership of a product or service involved in an exchange."
@@ -91,8 +91,8 @@ class Reservation(Intangible):
 if TYPE_CHECKING:
     from pydantic_schemaorg.DateTime import DateTime
     from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.Organization import Organization
+    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.ReservationStatusType import ReservationStatusType
     from pydantic_schemaorg.Ticket import Ticket
     from pydantic_schemaorg.ProgramMembership import ProgramMembership

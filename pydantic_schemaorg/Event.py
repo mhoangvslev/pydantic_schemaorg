@@ -2,11 +2,11 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from typing import List, Optional, Union
-from pydantic import AnyUrl, StrictBool
+from pydantic.v1 import AnyUrl, StrictBool
 from datetime import date, datetime, time
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.Thing import Thing
 
 
@@ -24,7 +24,7 @@ class Event(Thing):
         description="An event that this event is a part of. For example, a collection of individual music performances"
      "might each have a music festival as their superEvent.",
     )
-    performers: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    performers: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="The main performer or performers of the event&#x2014;for example, a presenter, musician,"
      "or actor.",
@@ -47,7 +47,7 @@ class Event(Thing):
         description="A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors"
      "can be associated with individual items or with a series, episode, clip.",
     )
-    sponsor: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    sponsor: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="A person or organization that supports a thing through a pledge, promise, or financial"
      "contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event.",
@@ -62,7 +62,7 @@ class Event(Thing):
      "codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also"
      "[[availableLanguage]].",
     )
-    offers: Optional[Union[List[Union['Demand', 'Offer', str]], 'Demand', 'Offer', str]] = Field(
+    offers: Optional[Union[List[Union['Offer', 'Demand', str]], 'Offer', 'Demand', str]] = Field(
         default=None,
         description="An offer to provide this item&#x2014;for example, an offer to sell a product, rent the"
      "DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]]"
@@ -96,7 +96,7 @@ class Event(Thing):
         description="An Event that is part of this event. For example, a conference event includes many presentations,"
      "each of which is a subEvent of the conference.",
     )
-    attendees: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    attendees: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="A person attending the event.",
     )
@@ -122,7 +122,7 @@ class Event(Thing):
         description="The maximum physical attendee capacity of an [[Event]] whose [[eventAttendanceMode]]"
      "is [[OfflineEventAttendanceMode]] (or the offline aspects, in the case of a [[MixedEventAttendanceMode]]).",
     )
-    funder: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    funder: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="A person or organization that supports (sponsors) something through some kind of financial"
      "contribution.",
@@ -142,7 +142,7 @@ class Event(Thing):
         description="The maximum virtual attendee capacity of an [[Event]] whose [[eventAttendanceMode]]"
      "is [[OnlineEventAttendanceMode]] (or the online aspects, in the case of a [[MixedEventAttendanceMode]]).",
     )
-    attendee: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    attendee: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="A person or organization attending the event.",
     )
@@ -155,7 +155,7 @@ class Event(Thing):
         description="Keywords or tags used to describe some item. Multiple textual entries in a keywords list"
      "are typically delimited by commas, or by repeating the property.",
     )
-    location: Optional[Union[List[Union[str, 'Text', 'PostalAddress', 'Place', 'VirtualLocation']], str, 'Text', 'PostalAddress', 'Place', 'VirtualLocation']] = Field(
+    location: Optional[Union[List[Union[str, 'Text', 'VirtualLocation', 'PostalAddress', 'Place']], str, 'Text', 'VirtualLocation', 'PostalAddress', 'Place']] = Field(
         default=None,
         description="The location of, for example, where an event is happening, where an organization is located,"
      "or where an action takes place.",
@@ -164,7 +164,7 @@ class Event(Thing):
         default=None,
         description="A review of the item.",
     )
-    composer: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    composer: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="The person or organization who wrote a composition, or who is the composer of a work performed"
      "at some event.",
@@ -180,7 +180,7 @@ class Event(Thing):
         default=None,
         description="The CreativeWork that captured all or part of this Event.",
     )
-    performer: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    performer: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="A performer at the event&#x2014;for example, a presenter, musician, musical group"
      "or actor.",
@@ -189,13 +189,13 @@ class Event(Thing):
         default=None,
         description="The end date and time of the item (in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601)).",
     )
-    translator: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    translator: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="Organization or person who adapts a creative work to different languages, regional"
      "differences and technical requirements of a target market, or that translates during"
      "some event.",
     )
-    contributor: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    contributor: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="A secondary contributor to the CreativeWork or Event.",
     )
@@ -212,7 +212,7 @@ class Event(Thing):
         default=None,
         description="A work performed in some event, for example a play performed in a TheaterEvent.",
     )
-    organizer: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    organizer: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="An organizer of an Event.",
     )
@@ -224,8 +224,8 @@ class Event(Thing):
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.Organization import Organization
+    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.Grant import Grant
     from pydantic_schemaorg.Boolean import Boolean
     from pydantic_schemaorg.Thing import Thing
@@ -233,8 +233,8 @@ if TYPE_CHECKING:
     from pydantic_schemaorg.Time import Time
     from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.Language import Language
-    from pydantic_schemaorg.Demand import Demand
     from pydantic_schemaorg.Offer import Offer
+    from pydantic_schemaorg.Demand import Demand
     from pydantic_schemaorg.Integer import Integer
     from pydantic_schemaorg.Audience import Audience
     from pydantic_schemaorg.Schedule import Schedule
@@ -244,9 +244,9 @@ if TYPE_CHECKING:
     from pydantic_schemaorg.Date import Date
     from pydantic_schemaorg.URL import URL
     from pydantic_schemaorg.DefinedTerm import DefinedTerm
+    from pydantic_schemaorg.VirtualLocation import VirtualLocation
     from pydantic_schemaorg.PostalAddress import PostalAddress
     from pydantic_schemaorg.Place import Place
-    from pydantic_schemaorg.VirtualLocation import VirtualLocation
     from pydantic_schemaorg.Review import Review
     from pydantic_schemaorg.CreativeWork import CreativeWork
     from pydantic_schemaorg.EventStatusType import EventStatusType

@@ -5,7 +5,7 @@ from datetime import datetime, time
 from typing import List, Optional, Union
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.Intangible import Intangible
 
 
@@ -24,7 +24,7 @@ class Trip(Intangible):
         default=None,
         description="The location of origin of the trip, prior to any destination(s).",
     )
-    offers: Optional[Union[List[Union['Demand', 'Offer', str]], 'Demand', 'Offer', str]] = Field(
+    offers: Optional[Union[List[Union['Offer', 'Demand', str]], 'Offer', 'Demand', str]] = Field(
         default=None,
         description="An offer to provide this item&#x2014;for example, an offer to sell a product, rent the"
      "DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]]"
@@ -38,7 +38,7 @@ class Trip(Intangible):
         description="Destination(s) ( [[Place]] ) that make up a trip. For a trip where destination order is"
      "important use [[ItemList]] to specify that order (see examples).",
     )
-    provider: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    provider: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="The service provider, service operator, or service performer; the goods producer."
      "Another party (a seller) may offer those services or goods on behalf of the provider."
@@ -64,8 +64,8 @@ if TYPE_CHECKING:
     from pydantic_schemaorg.DateTime import DateTime
     from pydantic_schemaorg.Time import Time
     from pydantic_schemaorg.Place import Place
-    from pydantic_schemaorg.Demand import Demand
     from pydantic_schemaorg.Offer import Offer
+    from pydantic_schemaorg.Demand import Demand
     from pydantic_schemaorg.ItemList import ItemList
-    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.Organization import Organization
+    from pydantic_schemaorg.Person import Person

@@ -2,10 +2,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from typing import List, Optional, Union
-from pydantic import StrictInt, StrictFloat
+from pydantic.v1 import StrictInt, StrictFloat
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.Offer import Offer
 
 
@@ -24,7 +24,7 @@ class AggregateOffer(Offer):
         default=None,
         description="The number of offers for the product.",
     )
-    offers: Optional[Union[List[Union['Demand', 'Offer', str]], 'Demand', 'Offer', str]] = Field(
+    offers: Optional[Union[List[Union['Offer', 'Demand', str]], 'Offer', 'Demand', str]] = Field(
         default=None,
         description="An offer to provide this item&#x2014;for example, an offer to sell a product, rent the"
      "DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]]"
@@ -51,7 +51,7 @@ class AggregateOffer(Offer):
 
 if TYPE_CHECKING:
     from pydantic_schemaorg.Integer import Integer
-    from pydantic_schemaorg.Demand import Demand
     from pydantic_schemaorg.Offer import Offer
+    from pydantic_schemaorg.Demand import Demand
     from pydantic_schemaorg.Number import Number
     from pydantic_schemaorg.Text import Text

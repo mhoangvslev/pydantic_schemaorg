@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from typing import List, Optional, Union
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.MedicalEntity import MedicalEntity
 
 
@@ -19,7 +19,7 @@ class AnatomicalSystem(MedicalEntity):
     Model depth: 3
     """
     type_: str = Field(default="AnatomicalSystem", alias='@type', const=True)
-    comprisedOf: Optional[Union[List[Union['AnatomicalSystem', 'AnatomicalStructure', str]], 'AnatomicalSystem', 'AnatomicalStructure', str]] = Field(
+    comprisedOf: Optional[Union[List[Union['AnatomicalStructure', 'AnatomicalSystem', str]], 'AnatomicalStructure', 'AnatomicalSystem', str]] = Field(
         default=None,
         description="Specifying something physically contained by something else. Typically used here"
      "for the underlying anatomical structures, such as organs, that comprise the anatomical"

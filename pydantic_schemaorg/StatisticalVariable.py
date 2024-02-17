@@ -2,10 +2,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from typing import List, Optional, Union
-from pydantic import AnyUrl
+from pydantic.v1 import AnyUrl
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.ConstraintNode import ConstraintNode
 
 
@@ -36,7 +36,7 @@ class StatisticalVariable(ConstraintNode):
         description="Provides additional qualification to an observation. For example, a GDP observation"
      "measures the Nominal value.",
     )
-    measurementMethod: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'MeasurementMethodEnum', 'DefinedTerm']], AnyUrl, 'URL', str, 'Text', 'MeasurementMethodEnum', 'DefinedTerm']] = Field(
+    measurementMethod: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'DefinedTerm', 'MeasurementMethodEnum']], AnyUrl, 'URL', str, 'Text', 'DefinedTerm', 'MeasurementMethodEnum']] = Field(
         default=None,
         description="A subproperty of [[measurementTechnique]] that can be used for specifying specific"
      "methods, in particular via [[MeasurementMethodEnum]].",
@@ -92,7 +92,7 @@ if TYPE_CHECKING:
     from pydantic_schemaorg.Enumeration import Enumeration
     from pydantic_schemaorg.URL import URL
     from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.MeasurementMethodEnum import MeasurementMethodEnum
     from pydantic_schemaorg.DefinedTerm import DefinedTerm
+    from pydantic_schemaorg.MeasurementMethodEnum import MeasurementMethodEnum
     from pydantic_schemaorg.Property import Property
     from pydantic_schemaorg.Class import Class

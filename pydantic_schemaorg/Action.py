@@ -3,10 +3,10 @@ from typing import TYPE_CHECKING
 
 from typing import List, Optional, Union
 from datetime import datetime, time
-from pydantic import AnyUrl
+from pydantic.v1 import AnyUrl
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.Thing import Thing
 
 
@@ -25,12 +25,12 @@ class Action(Thing):
         default=None,
         description="The object that helped the agent perform the action. E.g. John wrote a book with *a pen*.",
     )
-    participant: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    participant: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="Other co-agents that participated in the action indirectly. E.g. John wrote a book with"
      "*Steve*.",
     )
-    provider: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    provider: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="The service provider, service operator, or service performer; the goods producer."
      "Another party (a seller) may offer those services or goods on behalf of the provider."
@@ -59,7 +59,7 @@ class Action(Thing):
         default=None,
         description="The result produced in the action. E.g. John wrote *a book*.",
     )
-    location: Optional[Union[List[Union[str, 'Text', 'PostalAddress', 'Place', 'VirtualLocation']], str, 'Text', 'PostalAddress', 'Place', 'VirtualLocation']] = Field(
+    location: Optional[Union[List[Union[str, 'Text', 'VirtualLocation', 'PostalAddress', 'Place']], str, 'Text', 'VirtualLocation', 'PostalAddress', 'Place']] = Field(
         default=None,
         description="The location of, for example, where an event is happening, where an organization is located,"
      "or where an action takes place.",
@@ -68,7 +68,7 @@ class Action(Thing):
         default=None,
         description="Indicates the current disposition of the Action.",
     )
-    agent: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    agent: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="The direct performer or driver of the action (animate or inanimate). E.g. *John* wrote"
      "a book.",
@@ -90,14 +90,14 @@ class Action(Thing):
 
 if TYPE_CHECKING:
     from pydantic_schemaorg.Thing import Thing
-    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.Organization import Organization
+    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.DateTime import DateTime
     from pydantic_schemaorg.Time import Time
     from pydantic_schemaorg.URL import URL
     from pydantic_schemaorg.EntryPoint import EntryPoint
     from pydantic_schemaorg.Text import Text
+    from pydantic_schemaorg.VirtualLocation import VirtualLocation
     from pydantic_schemaorg.PostalAddress import PostalAddress
     from pydantic_schemaorg.Place import Place
-    from pydantic_schemaorg.VirtualLocation import VirtualLocation
     from pydantic_schemaorg.ActionStatusType import ActionStatusType

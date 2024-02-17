@@ -1,12 +1,12 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
-from pydantic import AnyUrl
+from pydantic.v1 import AnyUrl
 from typing import List, Optional, Union
 from datetime import date
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.Thing import Thing
 
 
@@ -77,7 +77,7 @@ class Organization(Thing):
         default=None,
         description="The telephone number.",
     )
-    sponsor: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    sponsor: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="A person or organization that supports a thing through a pledge, promise, or financial"
      "contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event.",
@@ -92,7 +92,7 @@ class Organization(Thing):
         default=None,
         description="The number of employees in an organization, e.g. business.",
     )
-    owns: Optional[Union[List[Union['Product', 'OwnershipInfo', str]], 'Product', 'OwnershipInfo', str]] = Field(
+    owns: Optional[Union[List[Union['OwnershipInfo', 'Product', str]], 'OwnershipInfo', 'Product', str]] = Field(
         default=None,
         description="Products owned by the organization or person.",
     )
@@ -111,11 +111,11 @@ class Organization(Thing):
         description="nonprofitStatus indicates the legal status of a non-profit organization in its primary"
      "place of business.",
     )
-    members: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    members: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="A member of this organization.",
     )
-    member: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    member: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="A member of an Organization or a ProgramMembership. Organizations can be members of"
      "organizations; ProgramMembership is typically for individuals.",
@@ -200,7 +200,7 @@ class Organization(Thing):
         default=None,
         description="The overall rating, based on a collection of reviews or ratings, of the item.",
     )
-    serviceArea: Optional[Union[List[Union['Place', 'AdministrativeArea', 'GeoShape', str]], 'Place', 'AdministrativeArea', 'GeoShape', str]] = Field(
+    serviceArea: Optional[Union[List[Union['AdministrativeArea', 'GeoShape', 'Place', str]], 'AdministrativeArea', 'GeoShape', 'Place', str]] = Field(
         default=None,
         description="The geographic area where the service is provided.",
     )
@@ -224,7 +224,7 @@ class Organization(Thing):
         default=None,
         description="Awards won by or for this item.",
     )
-    funder: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    funder: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="A person or organization that supports (sponsors) something through some kind of financial"
      "contribution.",
@@ -239,7 +239,7 @@ class Organization(Thing):
         description="Keywords or tags used to describe some item. Multiple textual entries in a keywords list"
      "are typically delimited by commas, or by repeating the property.",
     )
-    location: Optional[Union[List[Union[str, 'Text', 'PostalAddress', 'Place', 'VirtualLocation']], str, 'Text', 'PostalAddress', 'Place', 'VirtualLocation']] = Field(
+    location: Optional[Union[List[Union[str, 'Text', 'VirtualLocation', 'PostalAddress', 'Place']], str, 'Text', 'VirtualLocation', 'PostalAddress', 'Place']] = Field(
         default=None,
         description="The location of, for example, where an event is happening, where an organization is located,"
      "or where an action takes place.",
@@ -289,7 +289,7 @@ class Organization(Thing):
         default=None,
         description="Points-of-Sales operated by the organization or person.",
     )
-    areaServed: Optional[Union[List[Union[str, 'Text', 'Place', 'AdministrativeArea', 'GeoShape']], str, 'Text', 'Place', 'AdministrativeArea', 'GeoShape']] = Field(
+    areaServed: Optional[Union[List[Union[str, 'Text', 'AdministrativeArea', 'GeoShape', 'Place']], str, 'Text', 'AdministrativeArea', 'GeoShape', 'Place']] = Field(
         default=None,
         description="The geographic area where a service or offered item is provided.",
     )
@@ -357,8 +357,8 @@ if TYPE_CHECKING:
     from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.Article import Article
     from pydantic_schemaorg.QuantitativeValue import QuantitativeValue
-    from pydantic_schemaorg.Product import Product
     from pydantic_schemaorg.OwnershipInfo import OwnershipInfo
+    from pydantic_schemaorg.Product import Product
     from pydantic_schemaorg.OfferCatalog import OfferCatalog
     from pydantic_schemaorg.NonprofitType import NonprofitType
     from pydantic_schemaorg.Thing import Thing
@@ -370,8 +370,8 @@ if TYPE_CHECKING:
     from pydantic_schemaorg.AboutPage import AboutPage
     from pydantic_schemaorg.ContactPoint import ContactPoint
     from pydantic_schemaorg.DefinedTerm import DefinedTerm
-    from pydantic_schemaorg.PostalAddress import PostalAddress
     from pydantic_schemaorg.VirtualLocation import VirtualLocation
+    from pydantic_schemaorg.PostalAddress import PostalAddress
     from pydantic_schemaorg.Demand import Demand
     from pydantic_schemaorg.EducationalOccupationalCredential import EducationalOccupationalCredential
     from pydantic_schemaorg.Language import Language

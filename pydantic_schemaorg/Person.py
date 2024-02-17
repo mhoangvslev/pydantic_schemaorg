@@ -2,11 +2,11 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from typing import List, Optional, Union
-from pydantic import AnyUrl
+from pydantic.v1 import AnyUrl
 from datetime import date
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.Thing import Thing
 
 
@@ -51,12 +51,12 @@ class Person(Thing):
         default=None,
         description="The telephone number.",
     )
-    sponsor: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    sponsor: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="A person or organization that supports a thing through a pledge, promise, or financial"
      "contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event.",
     )
-    owns: Optional[Union[List[Union['Product', 'OwnershipInfo', str]], 'Product', 'OwnershipInfo', str]] = Field(
+    owns: Optional[Union[List[Union['OwnershipInfo', 'Product', str]], 'OwnershipInfo', 'Product', str]] = Field(
         default=None,
         description="Products owned by the organization or person.",
     )
@@ -64,7 +64,7 @@ class Person(Thing):
         default=None,
         description="Indicates an OfferCatalog listing for this Organization, Person, or Service.",
     )
-    homeLocation: Optional[Union[List[Union['Place', 'ContactPoint', str]], 'Place', 'ContactPoint', str]] = Field(
+    homeLocation: Optional[Union[List[Union['ContactPoint', 'Place', str]], 'ContactPoint', 'Place', str]] = Field(
         default=None,
         description="A contact location for a person's residence.",
     )
@@ -165,7 +165,7 @@ class Person(Thing):
         default=None,
         description="Awards won by or for this item.",
     )
-    funder: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    funder: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="A person or organization that supports (sponsors) something through some kind of financial"
      "contribution.",
@@ -315,8 +315,8 @@ if TYPE_CHECKING:
     from pydantic_schemaorg.Distance import Distance
     from pydantic_schemaorg.Place import Place
     from pydantic_schemaorg.Offer import Offer
-    from pydantic_schemaorg.Product import Product
     from pydantic_schemaorg.OwnershipInfo import OwnershipInfo
+    from pydantic_schemaorg.Product import Product
     from pydantic_schemaorg.OfferCatalog import OfferCatalog
     from pydantic_schemaorg.ContactPoint import ContactPoint
     from pydantic_schemaorg.URL import URL

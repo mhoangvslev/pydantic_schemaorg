@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from typing import List, Optional, Union
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.MusicPlaylist import MusicPlaylist
 
 
@@ -19,7 +19,7 @@ class MusicRelease(MusicPlaylist):
         default=None,
         description="The album this is a release of.",
     )
-    creditedTo: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    creditedTo: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="The group the release is credited to if different than the byArtist. For example, Red"
      "and Blue is credited to \"Stefani Germanotta Band\", but by Lady Gaga.",
@@ -45,8 +45,8 @@ class MusicRelease(MusicPlaylist):
 
 if TYPE_CHECKING:
     from pydantic_schemaorg.MusicAlbum import MusicAlbum
-    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.Organization import Organization
+    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.Duration import Duration
     from pydantic_schemaorg.MusicReleaseFormatType import MusicReleaseFormatType

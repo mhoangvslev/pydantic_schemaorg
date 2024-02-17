@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from typing import List, Optional, Union
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.Intangible import Intangible
 
 
@@ -24,17 +24,17 @@ class Grant(Intangible):
     Model depth: 3
     """
     type_: str = Field(default="Grant", alias='@type', const=True)
-    sponsor: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    sponsor: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="A person or organization that supports a thing through a pledge, promise, or financial"
      "contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event.",
     )
-    funder: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    funder: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="A person or organization that supports (sponsors) something through some kind of financial"
      "contribution.",
     )
-    fundedItem: Optional[Union[List[Union['MedicalEntity', 'Organization', 'CreativeWork', 'Event', 'Product', 'BioChemEntity', 'Person', str]], 'MedicalEntity', 'Organization', 'CreativeWork', 'Event', 'Product', 'BioChemEntity', 'Person', str]] = Field(
+    fundedItem: Optional[Union[List[Union['Event', 'Organization', 'Product', 'CreativeWork', 'BioChemEntity', 'MedicalEntity', 'Person', str]], 'Event', 'Organization', 'Product', 'CreativeWork', 'BioChemEntity', 'MedicalEntity', 'Person', str]] = Field(
         default=None,
         description="Indicates something directly or indirectly funded or sponsored through a [[Grant]]."
      "See also [[ownershipFundingInfo]].",
@@ -42,10 +42,10 @@ class Grant(Intangible):
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.Organization import Organization
-    from pydantic_schemaorg.MedicalEntity import MedicalEntity
-    from pydantic_schemaorg.CreativeWork import CreativeWork
+    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.Event import Event
     from pydantic_schemaorg.Product import Product
+    from pydantic_schemaorg.CreativeWork import CreativeWork
     from pydantic_schemaorg.BioChemEntity import BioChemEntity
+    from pydantic_schemaorg.MedicalEntity import MedicalEntity

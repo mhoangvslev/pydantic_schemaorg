@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from typing import List, Optional, Union
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.MedicalEntity import MedicalEntity
 
 
@@ -43,7 +43,7 @@ class SuperficialAnatomy(MedicalEntity):
         default=None,
         description="A medical condition associated with this anatomy.",
     )
-    relatedAnatomy: Optional[Union[List[Union['AnatomicalSystem', 'AnatomicalStructure', str]], 'AnatomicalSystem', 'AnatomicalStructure', str]] = Field(
+    relatedAnatomy: Optional[Union[List[Union['AnatomicalStructure', 'AnatomicalSystem', str]], 'AnatomicalStructure', 'AnatomicalSystem', str]] = Field(
         default=None,
         description="Anatomical systems or structures that relate to the superficial anatomy.",
     )
@@ -59,5 +59,5 @@ if TYPE_CHECKING:
     from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.MedicalTherapy import MedicalTherapy
     from pydantic_schemaorg.MedicalCondition import MedicalCondition
-    from pydantic_schemaorg.AnatomicalSystem import AnatomicalSystem
     from pydantic_schemaorg.AnatomicalStructure import AnatomicalStructure
+    from pydantic_schemaorg.AnatomicalSystem import AnatomicalSystem

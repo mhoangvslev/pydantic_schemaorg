@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from typing import List, Optional, Union
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.CreativeWork import CreativeWork
 
 
@@ -28,7 +28,7 @@ class Claim(CreativeWork):
         default=None,
         description="Indicates an occurrence of a [[Claim]] in some [[CreativeWork]].",
     )
-    claimInterpreter: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    claimInterpreter: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="For a [[Claim]] interpreted from [[MediaObject]] content sed to indicate a claim contained,"
      "implied or refined from the content of a [[MediaObject]].",
@@ -41,5 +41,5 @@ class Claim(CreativeWork):
 
 if TYPE_CHECKING:
     from pydantic_schemaorg.CreativeWork import CreativeWork
-    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.Organization import Organization
+    from pydantic_schemaorg.Person import Person

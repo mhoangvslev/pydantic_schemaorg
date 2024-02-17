@@ -1,12 +1,12 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
-from pydantic import AnyUrl, StrictBool, StrictInt, StrictFloat
+from pydantic.v1 import AnyUrl, StrictBool, StrictInt, StrictFloat
 from typing import List, Optional, Union
 from datetime import date, datetime
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.Thing import Thing
 
 
@@ -40,7 +40,7 @@ class CreativeWork(Thing):
      "Values are typically expressed as text, although links to controlled value schemes"
      "are also supported.",
     )
-    audio: Optional[Union[List[Union['MusicRecording', 'AudioObject', 'Clip', str]], 'MusicRecording', 'AudioObject', 'Clip', str]] = Field(
+    audio: Optional[Union[List[Union['Clip', 'MusicRecording', 'AudioObject', str]], 'Clip', 'MusicRecording', 'AudioObject', str]] = Field(
         default=None,
         description="An embedded audio object.",
     )
@@ -94,7 +94,7 @@ class CreativeWork(Thing):
      "[[temporalCoverage]], [[dateCreated]], [[dateModified]], [[datePublished]])"
      "are not known to be appropriate.",
     )
-    size: Optional[Union[List[Union[str, 'Text', 'SizeSpecification', 'QuantitativeValue', 'DefinedTerm']], str, 'Text', 'SizeSpecification', 'QuantitativeValue', 'DefinedTerm']] = Field(
+    size: Optional[Union[List[Union[str, 'Text', 'QuantitativeValue', 'DefinedTerm', 'SizeSpecification']], str, 'Text', 'QuantitativeValue', 'DefinedTerm', 'SizeSpecification']] = Field(
         default=None,
         description="A standardized size of a product or creative work, specified either through a simple"
      "textual string (for example 'XL', '32Wx34L'), a QuantitativeValue with a unitCode,"
@@ -119,7 +119,7 @@ class CreativeWork(Thing):
         description="The location where the CreativeWork was created, which may not be the same as the location"
      "depicted in the CreativeWork.",
     )
-    sdPublisher: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    sdPublisher: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="Indicates the party responsible for generating and publishing the current structured"
      "data markup, typically in cases where the structured data is derived automatically"
@@ -128,7 +128,7 @@ class CreativeWork(Thing):
      "structured metadata. The [[sdPublisher]] property helps make such practices more"
      "explicit.",
     )
-    sponsor: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    sponsor: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="A person or organization that supports a thing through a pledge, promise, or financial"
      "contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event.",
@@ -204,7 +204,7 @@ class CreativeWork(Thing):
      "codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also"
      "[[availableLanguage]].",
     )
-    offers: Optional[Union[List[Union['Demand', 'Offer', str]], 'Demand', 'Offer', str]] = Field(
+    offers: Optional[Union[List[Union['Offer', 'Demand', str]], 'Offer', 'Demand', str]] = Field(
         default=None,
         description="An offer to provide this item&#x2014;for example, an offer to sell a product, rent the"
      "DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]]"
@@ -228,7 +228,7 @@ class CreativeWork(Thing):
         description="Indicates that the CreativeWork contains a reference to, but is not necessarily about"
      "a concept.",
     )
-    producer: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    producer: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="The person or organization who produced the work (e.g. music album, movie, TV/radio"
      "series etc.).",
@@ -242,7 +242,7 @@ class CreativeWork(Thing):
         description="The predominant type or kind characterizing the learning resource. For example, 'presentation',"
      "'handout'.",
     )
-    author: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    author: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="The author of this content or rating. Please note that author is special in that HTML 5"
      "provides a special mechanism for indicating authorship via the rel tag. That is equivalent"
@@ -349,11 +349,11 @@ class CreativeWork(Thing):
      "their multiple expressions, it is possible to use [[titleEIDR]] alone (for a general"
      "description), or alongside [[editEIDR]] for a more edit-specific description.",
     )
-    copyrightHolder: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    copyrightHolder: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="The party holding the legal copyright to the CreativeWork.",
     )
-    provider: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    provider: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="The service provider, service operator, or service performer; the goods producer."
      "Another party (a seller) may offer those services or goods on behalf of the provider."
@@ -401,7 +401,7 @@ class CreativeWork(Thing):
      "where the nature of the alignment can be described using a simple property, for example"
      "to express that a resource [[teaches]] or [[assesses]] a competency.",
     )
-    isBasedOnUrl: Optional[Union[List[Union[AnyUrl, 'URL', 'Product', 'CreativeWork', str]], AnyUrl, 'URL', 'Product', 'CreativeWork', str]] = Field(
+    isBasedOnUrl: Optional[Union[List[Union[AnyUrl, 'URL', 'CreativeWork', 'Product', str]], AnyUrl, 'URL', 'CreativeWork', 'Product', str]] = Field(
         default=None,
         description="A resource that was used in the creation of this resource. This term can be repeated for"
      "multiple sources. For example, http://example.com/great-multiplication-intro.html.",
@@ -423,12 +423,12 @@ class CreativeWork(Thing):
         default=None,
         description="Awards won by or for this item.",
     )
-    funder: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    funder: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="A person or organization that supports (sponsors) something through some kind of financial"
      "contribution.",
     )
-    publisher: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    publisher: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="The publisher of the creative work.",
     )
@@ -452,7 +452,7 @@ class CreativeWork(Thing):
         default=None,
         description="The year during which the claimed copyright for the CreativeWork was first asserted.",
     )
-    creator: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    creator: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="The creator/author of this CreativeWork. This is the same as the Author property for"
      "CreativeWork.",
@@ -473,7 +473,7 @@ class CreativeWork(Thing):
         default=None,
         description="A review of the item.",
     )
-    isBasedOn: Optional[Union[List[Union[AnyUrl, 'URL', 'Product', 'CreativeWork', str]], AnyUrl, 'URL', 'Product', 'CreativeWork', str]] = Field(
+    isBasedOn: Optional[Union[List[Union[AnyUrl, 'URL', 'CreativeWork', 'Product', str]], AnyUrl, 'URL', 'CreativeWork', 'Product', str]] = Field(
         default=None,
         description="A resource from which this work is derived or from which it is a modification or adaptation.",
     )
@@ -496,13 +496,13 @@ class CreativeWork(Thing):
         description="The predominant mode of learning supported by the learning resource. Acceptable values"
      "are 'active', 'expositive', or 'mixed'.",
     )
-    translator: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    translator: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="Organization or person who adapts a creative work to different languages, regional"
      "differences and technical requirements of a target market, or that translates during"
      "some event.",
     )
-    contributor: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    contributor: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="A secondary contributor to the CreativeWork or Event.",
     )
@@ -537,7 +537,7 @@ class CreativeWork(Thing):
         default=None,
         description="A license document that applies to this structured data, typically indicated by URL.",
     )
-    video: Optional[Union[List[Union['VideoObject', 'Clip', str]], 'VideoObject', 'Clip', str]] = Field(
+    video: Optional[Union[List[Union['Clip', 'VideoObject', str]], 'Clip', 'VideoObject', str]] = Field(
         default=None,
         description="An embedded video object.",
     )
@@ -556,7 +556,7 @@ class CreativeWork(Thing):
         default=None,
         description="The place and time the release was issued, expressed as a PublicationEvent.",
     )
-    maintainer: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    maintainer: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="A maintainer of a [[Dataset]], software package ([[SoftwareApplication]]), or other"
      "[[Project]]. A maintainer is a [[Person]] or [[Organization]] that manages contributions"
@@ -632,9 +632,9 @@ if TYPE_CHECKING:
     from pydantic_schemaorg.WebPage import WebPage
     from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.DefinedTerm import DefinedTerm
+    from pydantic_schemaorg.Clip import Clip
     from pydantic_schemaorg.MusicRecording import MusicRecording
     from pydantic_schemaorg.AudioObject import AudioObject
-    from pydantic_schemaorg.Clip import Clip
     from pydantic_schemaorg.DateTime import DateTime
     from pydantic_schemaorg.Date import Date
     from pydantic_schemaorg.Grant import Grant
@@ -642,14 +642,14 @@ if TYPE_CHECKING:
     from pydantic_schemaorg.Boolean import Boolean
     from pydantic_schemaorg.PublicationEvent import PublicationEvent
     from pydantic_schemaorg.Person import Person
-    from pydantic_schemaorg.SizeSpecification import SizeSpecification
     from pydantic_schemaorg.QuantitativeValue import QuantitativeValue
+    from pydantic_schemaorg.SizeSpecification import SizeSpecification
     from pydantic_schemaorg.Thing import Thing
     from pydantic_schemaorg.Place import Place
     from pydantic_schemaorg.Organization import Organization
     from pydantic_schemaorg.Language import Language
-    from pydantic_schemaorg.Demand import Demand
     from pydantic_schemaorg.Offer import Offer
+    from pydantic_schemaorg.Demand import Demand
     from pydantic_schemaorg.Country import Country
     from pydantic_schemaorg.Audience import Audience
     from pydantic_schemaorg.Integer import Integer

@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from typing import List, Optional, Union
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.AnatomicalStructure import AnatomicalStructure
 
 
@@ -16,7 +16,7 @@ class Nerve(AnatomicalStructure):
     Model depth: 4
     """
     type_: str = Field(default="Nerve", alias='@type', const=True)
-    sensoryUnit: Optional[Union[List[Union['SuperficialAnatomy', 'AnatomicalStructure', str]], 'SuperficialAnatomy', 'AnatomicalStructure', str]] = Field(
+    sensoryUnit: Optional[Union[List[Union['AnatomicalStructure', 'SuperficialAnatomy', str]], 'AnatomicalStructure', 'SuperficialAnatomy', str]] = Field(
         default=None,
         description="The neurological pathway extension that inputs and sends information to the brain or"
      "spinal cord.",
@@ -36,7 +36,7 @@ class Nerve(AnatomicalStructure):
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.SuperficialAnatomy import SuperficialAnatomy
     from pydantic_schemaorg.AnatomicalStructure import AnatomicalStructure
+    from pydantic_schemaorg.SuperficialAnatomy import SuperficialAnatomy
     from pydantic_schemaorg.BrainStructure import BrainStructure
     from pydantic_schemaorg.Muscle import Muscle

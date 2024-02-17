@@ -2,10 +2,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from typing import List, Optional, Union
-from pydantic import AnyUrl, StrictBool
+from pydantic.v1 import AnyUrl, StrictBool
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.Substance import Substance
 from pydantic_schemaorg.Product import Product
 
@@ -130,7 +130,7 @@ class Drug(Substance, Product):
         default=None,
         description="True if the drug is available in a generic form (regardless of name).",
     )
-    legalStatus: Optional[Union[List[Union[str, 'Text', 'DrugLegalStatus', 'MedicalEnumeration']], str, 'Text', 'DrugLegalStatus', 'MedicalEnumeration']] = Field(
+    legalStatus: Optional[Union[List[Union[str, 'Text', 'MedicalEnumeration', 'DrugLegalStatus']], str, 'Text', 'MedicalEnumeration', 'DrugLegalStatus']] = Field(
         default=None,
         description="The drug or supplement's legal status, including any controlled substance schedules"
      "that apply.",
@@ -167,5 +167,5 @@ if TYPE_CHECKING:
     from pydantic_schemaorg.MaximumDoseSchedule import MaximumDoseSchedule
     from pydantic_schemaorg.DrugClass import DrugClass
     from pydantic_schemaorg.DrugStrength import DrugStrength
-    from pydantic_schemaorg.DrugLegalStatus import DrugLegalStatus
     from pydantic_schemaorg.MedicalEnumeration import MedicalEnumeration
+    from pydantic_schemaorg.DrugLegalStatus import DrugLegalStatus

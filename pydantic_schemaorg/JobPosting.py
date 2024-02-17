@@ -2,11 +2,11 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from typing import List, Optional, Union
-from pydantic import AnyUrl, StrictBool, StrictInt, StrictFloat
+from pydantic.v1 import AnyUrl, StrictBool, StrictInt, StrictFloat
 from datetime import date, datetime
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.Intangible import Intangible
 
 
@@ -84,7 +84,7 @@ class JobPosting(Intangible):
         default=None,
         description="Type of employment (e.g. full-time, part-time, contract, temporary, seasonal, internship).",
     )
-    hiringOrganization: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    hiringOrganization: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="Organization or Person offering the job position.",
     )

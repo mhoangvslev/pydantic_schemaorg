@@ -253,7 +253,7 @@ class SchemaOrg:
 
     @staticmethod
     def _get_default_imports() -> List[Import]:
-        return [Import(classes_={"Field"}, classPath="pydantic", type="parent")]
+        return [Import(classes_={"Field"}, classPath="pydantic.v1", type="parent")]
 
     def write_init(self):
         with open(f"{PACKAGE_NAME}/__init__.py", "w") as init_file:

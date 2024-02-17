@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from typing import List, Optional, Union
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.HowTo import HowTo
 
 
@@ -26,7 +26,7 @@ class Recipe(HowTo):
         default=None,
         description="The time it takes to actually cook the dish, in [ISO 8601 duration format](http://en.wikipedia.org/wiki/ISO_8601).",
     )
-    recipeInstructions: Optional[Union[List[Union[str, 'Text', 'ItemList', 'CreativeWork']], str, 'Text', 'ItemList', 'CreativeWork']] = Field(
+    recipeInstructions: Optional[Union[List[Union[str, 'Text', 'CreativeWork', 'ItemList']], str, 'Text', 'CreativeWork', 'ItemList']] = Field(
         default=None,
         description="A step in making the recipe, in the form of a single item (document, video, etc.) or an ordered"
      "list with HowToStep and/or HowToSection items.",
@@ -66,7 +66,7 @@ if TYPE_CHECKING:
     from pydantic_schemaorg.RestrictedDiet import RestrictedDiet
     from pydantic_schemaorg.Duration import Duration
     from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.ItemList import ItemList
     from pydantic_schemaorg.CreativeWork import CreativeWork
+    from pydantic_schemaorg.ItemList import ItemList
     from pydantic_schemaorg.NutritionInformation import NutritionInformation
     from pydantic_schemaorg.QuantitativeValue import QuantitativeValue

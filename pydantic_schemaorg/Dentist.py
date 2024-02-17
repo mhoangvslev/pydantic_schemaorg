@@ -1,13 +1,13 @@
 from __future__ import annotations
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.MedicalBusiness import MedicalBusiness
-from pydantic_schemaorg.LocalBusiness import LocalBusiness
 from pydantic_schemaorg.MedicalOrganization import MedicalOrganization
+from pydantic_schemaorg.LocalBusiness import LocalBusiness
 
 
-class Dentist(MedicalBusiness, LocalBusiness, MedicalOrganization):
+class Dentist(MedicalBusiness, MedicalOrganization, LocalBusiness):
     """A dentist.
 
     See: https://schema.org/Dentist

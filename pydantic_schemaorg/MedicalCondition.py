@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from typing import List, Optional, Union
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.MedicalEntity import MedicalEntity
 
 
@@ -59,7 +59,7 @@ class MedicalCondition(MedicalEntity):
         default=None,
         description="Specifying a drug or medicine used in a medication procedure.",
     )
-    associatedAnatomy: Optional[Union[List[Union['AnatomicalSystem', 'SuperficialAnatomy', 'AnatomicalStructure', str]], 'AnatomicalSystem', 'SuperficialAnatomy', 'AnatomicalStructure', str]] = Field(
+    associatedAnatomy: Optional[Union[List[Union['AnatomicalStructure', 'SuperficialAnatomy', 'AnatomicalSystem', str]], 'AnatomicalStructure', 'SuperficialAnatomy', 'AnatomicalSystem', str]] = Field(
         default=None,
         description="The anatomy of the underlying organ system or structures associated with this entity.",
     )
@@ -105,8 +105,8 @@ if TYPE_CHECKING:
     from pydantic_schemaorg.MedicalStudyStatus import MedicalStudyStatus
     from pydantic_schemaorg.EventStatusType import EventStatusType
     from pydantic_schemaorg.Drug import Drug
-    from pydantic_schemaorg.AnatomicalSystem import AnatomicalSystem
-    from pydantic_schemaorg.SuperficialAnatomy import SuperficialAnatomy
     from pydantic_schemaorg.AnatomicalStructure import AnatomicalStructure
+    from pydantic_schemaorg.SuperficialAnatomy import SuperficialAnatomy
+    from pydantic_schemaorg.AnatomicalSystem import AnatomicalSystem
     from pydantic_schemaorg.MedicalRiskFactor import MedicalRiskFactor
     from pydantic_schemaorg.MedicalSignOrSymptom import MedicalSignOrSymptom

@@ -2,11 +2,11 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from typing import List, Optional, Union
-from pydantic import AnyUrl, StrictBool, StrictInt, StrictFloat
+from pydantic.v1 import AnyUrl, StrictBool, StrictInt, StrictFloat
 from datetime import date, datetime
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.Intangible import Intangible
 
 
@@ -49,7 +49,7 @@ class Order(Intangible):
         default=None,
         description="Date order was placed.",
     )
-    seller: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    seller: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="An entity which offers (sells / leases / lends / loans) the services / goods. A seller may"
      "also be a provider.",
@@ -70,7 +70,7 @@ class Order(Intangible):
         default=None,
         description="An identifier for the method of payment used (e.g. the last 4 digits of the credit card).",
     )
-    orderedItem: Optional[Union[List[Union['Product', 'Service', 'OrderItem', str]], 'Product', 'Service', 'OrderItem', str]] = Field(
+    orderedItem: Optional[Union[List[Union['OrderItem', 'Product', 'Service', str]], 'OrderItem', 'Product', 'Service', str]] = Field(
         default=None,
         description="The item ordered.",
     )
@@ -82,14 +82,14 @@ class Order(Intangible):
         default=None,
         description="The billing address for the order.",
     )
-    broker: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    broker: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="An entity that arranges for an exchange between a buyer and a seller. In most cases a broker"
      "never acquires or releases ownership of a product or service involved in an exchange."
      "If it is not clear whether an entity is a broker, seller, or buyer, the latter two terms"
      "are preferred.",
     )
-    customer: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    customer: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="Party placing the order or paying the invoice.",
     )
@@ -109,7 +109,7 @@ class Order(Intangible):
         default=None,
         description="Code used to redeem a discount.",
     )
-    merchant: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    merchant: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="'merchant' is an out-dated term for 'seller'.",
     )
@@ -121,13 +121,13 @@ if TYPE_CHECKING:
     from pydantic_schemaorg.URL import URL
     from pydantic_schemaorg.DateTime import DateTime
     from pydantic_schemaorg.Date import Date
-    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.Organization import Organization
+    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.Offer import Offer
     from pydantic_schemaorg.Number import Number
+    from pydantic_schemaorg.OrderItem import OrderItem
     from pydantic_schemaorg.Product import Product
     from pydantic_schemaorg.Service import Service
-    from pydantic_schemaorg.OrderItem import OrderItem
     from pydantic_schemaorg.PaymentMethod import PaymentMethod
     from pydantic_schemaorg.PostalAddress import PostalAddress
     from pydantic_schemaorg.Boolean import Boolean

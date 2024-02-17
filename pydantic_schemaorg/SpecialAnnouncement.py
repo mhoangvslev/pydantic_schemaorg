@@ -1,12 +1,12 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
-from pydantic import AnyUrl
+from pydantic.v1 import AnyUrl
 from typing import List, Optional, Union
 from datetime import date, datetime
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.CreativeWork import CreativeWork
 
 
@@ -66,7 +66,7 @@ class SpecialAnnouncement(CreativeWork):
         default=None,
         description="Information about public transport closures.",
     )
-    announcementLocation: Optional[Union[List[Union['CivicStructure', 'LocalBusiness', str]], 'CivicStructure', 'LocalBusiness', str]] = Field(
+    announcementLocation: Optional[Union[List[Union['LocalBusiness', 'CivicStructure', str]], 'LocalBusiness', 'CivicStructure', str]] = Field(
         default=None,
         description="Indicates a specific [[CivicStructure]] or [[LocalBusiness]] associated with the"
      "SpecialAnnouncement. For example, a specific testing facility or business with special"
@@ -77,7 +77,7 @@ class SpecialAnnouncement(CreativeWork):
         default=None,
         description="Information about school closures.",
     )
-    category: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'PhysicalActivityCategory', 'Thing', 'CategoryCode']], AnyUrl, 'URL', str, 'Text', 'PhysicalActivityCategory', 'Thing', 'CategoryCode']] = Field(
+    category: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'CategoryCode', 'Thing', 'PhysicalActivityCategory']], AnyUrl, 'URL', str, 'Text', 'CategoryCode', 'Thing', 'PhysicalActivityCategory']] = Field(
         default=None,
         description="A category for the item. Greater signs or slashes can be used to informally indicate a"
      "category hierarchy.",
@@ -118,7 +118,7 @@ class SpecialAnnouncement(CreativeWork):
         description="Information about getting tested (for a [[MedicalCondition]]), e.g. in the context"
      "of a pandemic.",
     )
-    diseaseSpreadStatistics: Optional[Union[List[Union[AnyUrl, 'URL', 'Observation', 'WebContent', 'Dataset', str]], AnyUrl, 'URL', 'Observation', 'WebContent', 'Dataset', str]] = Field(
+    diseaseSpreadStatistics: Optional[Union[List[Union[AnyUrl, 'URL', 'Observation', 'Dataset', 'WebContent', str]], AnyUrl, 'URL', 'Observation', 'Dataset', 'WebContent', str]] = Field(
         default=None,
         description="Statistical information about the spread of a disease, either as [[WebContent]], or"
      "described directly as a [[Dataset]], or the specific [[Observation]]s in the dataset."
@@ -130,12 +130,12 @@ class SpecialAnnouncement(CreativeWork):
 if TYPE_CHECKING:
     from pydantic_schemaorg.URL import URL
     from pydantic_schemaorg.WebContent import WebContent
-    from pydantic_schemaorg.CivicStructure import CivicStructure
     from pydantic_schemaorg.LocalBusiness import LocalBusiness
+    from pydantic_schemaorg.CivicStructure import CivicStructure
     from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.PhysicalActivityCategory import PhysicalActivityCategory
-    from pydantic_schemaorg.Thing import Thing
     from pydantic_schemaorg.CategoryCode import CategoryCode
+    from pydantic_schemaorg.Thing import Thing
+    from pydantic_schemaorg.PhysicalActivityCategory import PhysicalActivityCategory
     from pydantic_schemaorg.GovernmentService import GovernmentService
     from pydantic_schemaorg.DataFeed import DataFeed
     from pydantic_schemaorg.DateTime import DateTime

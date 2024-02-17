@@ -5,7 +5,7 @@ from datetime import datetime
 from typing import List, Optional, Union
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.StructuredValue import StructuredValue
 
 
@@ -25,7 +25,7 @@ class OwnershipInfo(StructuredValue):
         default=None,
         description="The date and time of giving up ownership on the product.",
     )
-    acquiredFrom: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    acquiredFrom: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="The organization or person from which the product was acquired.",
     )
@@ -37,7 +37,7 @@ class OwnershipInfo(StructuredValue):
 
 if TYPE_CHECKING:
     from pydantic_schemaorg.DateTime import DateTime
-    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.Organization import Organization
+    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.Product import Product
     from pydantic_schemaorg.Service import Service

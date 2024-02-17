@@ -2,10 +2,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from typing import List, Optional, Union
-from pydantic import AnyUrl, StrictBool, StrictInt, StrictFloat
+from pydantic.v1 import AnyUrl, StrictBool, StrictInt, StrictFloat
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.Thing import Thing
 
 
@@ -21,14 +21,14 @@ class Place(Thing):
         description="Represents a relationship between two geometries (or the places they represent), relating"
      "a geometry to another that covers it. As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).",
     )
-    geoContains: Optional[Union[List[Union['Place', 'GeospatialGeometry', str]], 'Place', 'GeospatialGeometry', str]] = Field(
+    geoContains: Optional[Union[List[Union['GeospatialGeometry', 'Place', str]], 'GeospatialGeometry', 'Place', str]] = Field(
         default=None,
         description="Represents a relationship between two geometries (or the places they represent), relating"
      "a containing geometry to a contained geometry. \"a contains b iff no points of b lie in"
      "the exterior of a, and at least one point of the interior of b lies in the interior of a\"."
      "As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).",
     )
-    photos: Optional[Union[List[Union['Photograph', 'ImageObject', str]], 'Photograph', 'ImageObject', str]] = Field(
+    photos: Optional[Union[List[Union['ImageObject', 'Photograph', str]], 'ImageObject', 'Photograph', str]] = Field(
         default=None,
         description="Photographs of this place.",
     )
@@ -56,7 +56,7 @@ class Place(Thing):
         default=None,
         description="The basic containment relation between a place and one that contains it.",
     )
-    geoOverlaps: Optional[Union[List[Union['Place', 'GeospatialGeometry', str]], 'Place', 'GeospatialGeometry', str]] = Field(
+    geoOverlaps: Optional[Union[List[Union['GeospatialGeometry', 'Place', str]], 'GeospatialGeometry', 'Place', str]] = Field(
         default=None,
         description="Represents a relationship between two geometries (or the places they represent), relating"
      "a geometry to another that geospatially overlaps it, i.e. they have some but not all points"
@@ -90,7 +90,7 @@ class Place(Thing):
      "points in common, and the dimension of the intersection is less than that of at least one"
      "of them\". As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).",
     )
-    geoIntersects: Optional[Union[List[Union['Place', 'GeospatialGeometry', str]], 'Place', 'GeospatialGeometry', str]] = Field(
+    geoIntersects: Optional[Union[List[Union['GeospatialGeometry', 'Place', str]], 'GeospatialGeometry', 'Place', str]] = Field(
         default=None,
         description="Represents spatial relations in which two geometries (or the places they represent)"
      "have at least one point in common. As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).",
@@ -104,7 +104,7 @@ class Place(Thing):
         default=None,
         description="The opening hours of a certain place.",
     )
-    geoWithin: Optional[Union[List[Union['Place', 'GeospatialGeometry', str]], 'Place', 'GeospatialGeometry', str]] = Field(
+    geoWithin: Optional[Union[List[Union['GeospatialGeometry', 'Place', str]], 'GeospatialGeometry', 'Place', str]] = Field(
         default=None,
         description="Represents a relationship between two geometries (or the places they represent), relating"
      "a geometry to one that contains it, i.e. it is inside (i.e. within) its interior. As defined"
@@ -118,7 +118,7 @@ class Place(Thing):
         default=None,
         description="The basic containment relation between a place and another that it contains.",
     )
-    geoDisjoint: Optional[Union[List[Union['Place', 'GeospatialGeometry', str]], 'Place', 'GeospatialGeometry', str]] = Field(
+    geoDisjoint: Optional[Union[List[Union['GeospatialGeometry', 'Place', str]], 'GeospatialGeometry', 'Place', str]] = Field(
         default=None,
         description="Represents spatial relations in which two geometries (or the places they represent)"
      "are topologically disjoint: \"they have no point in common. They form a set of disconnected"
@@ -197,7 +197,7 @@ class Place(Thing):
         default=None,
         description="The basic containment relation between a place and one that contains it.",
     )
-    geoCovers: Optional[Union[List[Union['Place', 'GeospatialGeometry', str]], 'Place', 'GeospatialGeometry', str]] = Field(
+    geoCovers: Optional[Union[List[Union['GeospatialGeometry', 'Place', str]], 'GeospatialGeometry', 'Place', str]] = Field(
         default=None,
         description="Represents a relationship between two geometries (or the places they represent), relating"
      "a covering geometry to a covered geometry. \"Every point of b is a point of (the interior"
@@ -213,11 +213,11 @@ class Place(Thing):
         description="Indicates whether it is allowed to smoke in the place, e.g. in the restaurant, hotel or"
      "hotel room.",
     )
-    photo: Optional[Union[List[Union['Photograph', 'ImageObject', str]], 'Photograph', 'ImageObject', str]] = Field(
+    photo: Optional[Union[List[Union['ImageObject', 'Photograph', str]], 'ImageObject', 'Photograph', str]] = Field(
         default=None,
         description="A photograph of this place.",
     )
-    geoTouches: Optional[Union[List[Union['Place', 'GeospatialGeometry', str]], 'Place', 'GeospatialGeometry', str]] = Field(
+    geoTouches: Optional[Union[List[Union['GeospatialGeometry', 'Place', str]], 'GeospatialGeometry', 'Place', str]] = Field(
         default=None,
         description="Represents spatial relations in which two geometries (or the places they represent)"
      "touch: \"they have at least one boundary point in common, but no interior points.\" (A"
@@ -243,8 +243,8 @@ class Place(Thing):
 
 if TYPE_CHECKING:
     from pydantic_schemaorg.GeospatialGeometry import GeospatialGeometry
-    from pydantic_schemaorg.Photograph import Photograph
     from pydantic_schemaorg.ImageObject import ImageObject
+    from pydantic_schemaorg.Photograph import Photograph
     from pydantic_schemaorg.Review import Review
     from pydantic_schemaorg.Event import Event
     from pydantic_schemaorg.Boolean import Boolean

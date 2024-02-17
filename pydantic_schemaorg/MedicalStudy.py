@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from typing import List, Optional, Union
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.MedicalEntity import MedicalEntity
 
 
@@ -22,7 +22,7 @@ class MedicalStudy(MedicalEntity):
     Model depth: 3
     """
     type_: str = Field(default="MedicalStudy", alias='@type', const=True)
-    sponsor: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    sponsor: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="A person or organization that supports a thing through a pledge, promise, or financial"
      "contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event.",
@@ -47,8 +47,8 @@ class MedicalStudy(MedicalEntity):
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.Organization import Organization
+    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.MedicalEntity import MedicalEntity
     from pydantic_schemaorg.MedicalCondition import MedicalCondition
     from pydantic_schemaorg.Text import Text

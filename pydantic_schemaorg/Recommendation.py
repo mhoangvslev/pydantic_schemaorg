@@ -1,11 +1,11 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
-from pydantic import AnyUrl
+from pydantic.v1 import AnyUrl
 from typing import List, Optional, Union
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.Review import Review
 
 
@@ -20,7 +20,7 @@ class Recommendation(Review):
     Model depth: 4
     """
     type_: str = Field(default="Recommendation", alias='@type', const=True)
-    category: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'PhysicalActivityCategory', 'Thing', 'CategoryCode']], AnyUrl, 'URL', str, 'Text', 'PhysicalActivityCategory', 'Thing', 'CategoryCode']] = Field(
+    category: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'CategoryCode', 'Thing', 'PhysicalActivityCategory']], AnyUrl, 'URL', str, 'Text', 'CategoryCode', 'Thing', 'PhysicalActivityCategory']] = Field(
         default=None,
         description="A category for the item. Greater signs or slashes can be used to informally indicate a"
      "category hierarchy.",
@@ -30,6 +30,6 @@ class Recommendation(Review):
 if TYPE_CHECKING:
     from pydantic_schemaorg.URL import URL
     from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.PhysicalActivityCategory import PhysicalActivityCategory
-    from pydantic_schemaorg.Thing import Thing
     from pydantic_schemaorg.CategoryCode import CategoryCode
+    from pydantic_schemaorg.Thing import Thing
+    from pydantic_schemaorg.PhysicalActivityCategory import PhysicalActivityCategory

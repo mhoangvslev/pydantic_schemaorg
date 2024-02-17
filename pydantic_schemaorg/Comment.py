@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from typing import List, Optional, Union
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.CreativeWork import CreativeWork
 
 
@@ -28,7 +28,7 @@ class Comment(CreativeWork):
         default=None,
         description="The number of upvotes this question, answer or comment has received from the community.",
     )
-    parentItem: Optional[Union[List[Union['CreativeWork', 'Comment', str]], 'CreativeWork', 'Comment', str]] = Field(
+    parentItem: Optional[Union[List[Union['Comment', 'CreativeWork', str]], 'Comment', 'CreativeWork', str]] = Field(
         default=None,
         description="The parent of a question, answer or item in general. Typically used for Q/A discussion"
      "threads e.g. a chain of comments with the first comment being an [[Article]] or other"

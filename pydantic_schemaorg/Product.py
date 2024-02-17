@@ -3,10 +3,10 @@ from typing import TYPE_CHECKING
 
 from typing import List, Optional, Union
 from datetime import date
-from pydantic import AnyUrl, StrictBool
+from pydantic.v1 import AnyUrl, StrictBool
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.Thing import Thing
 
 
@@ -64,7 +64,7 @@ class Product(Thing):
         default=None,
         description="Review of the item.",
     )
-    size: Optional[Union[List[Union[str, 'Text', 'SizeSpecification', 'QuantitativeValue', 'DefinedTerm']], str, 'Text', 'SizeSpecification', 'QuantitativeValue', 'DefinedTerm']] = Field(
+    size: Optional[Union[List[Union[str, 'Text', 'QuantitativeValue', 'DefinedTerm', 'SizeSpecification']], str, 'Text', 'QuantitativeValue', 'DefinedTerm', 'SizeSpecification']] = Field(
         default=None,
         description="A standardized size of a product or creative work, specified either through a simple"
      "textual string (for example 'XL', '32Wx34L'), a QuantitativeValue with a unitCode,"
@@ -92,7 +92,7 @@ class Product(Thing):
         default=None,
         description="Specifies a MerchantReturnPolicy that may be applicable.",
     )
-    category: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'PhysicalActivityCategory', 'Thing', 'CategoryCode']], AnyUrl, 'URL', str, 'Text', 'PhysicalActivityCategory', 'Thing', 'CategoryCode']] = Field(
+    category: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'CategoryCode', 'Thing', 'PhysicalActivityCategory']], AnyUrl, 'URL', str, 'Text', 'CategoryCode', 'Thing', 'PhysicalActivityCategory']] = Field(
         default=None,
         description="A category for the item. Greater signs or slashes can be used to informally indicate a"
      "category hierarchy.",
@@ -101,7 +101,7 @@ class Product(Thing):
         default=None,
         description="The Manufacturer Part Number (MPN) of the product, or the product to which the offer refers.",
     )
-    offers: Optional[Union[List[Union['Demand', 'Offer', str]], 'Demand', 'Offer', str]] = Field(
+    offers: Optional[Union[List[Union['Offer', 'Demand', str]], 'Offer', 'Demand', str]] = Field(
         default=None,
         description="An offer to provide this item&#x2014;for example, an offer to sell a product, rent the"
      "DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]]"
@@ -142,7 +142,7 @@ class Product(Thing):
         default=None,
         description="The weight of the product or person.",
     )
-    width: Optional[Union[List[Union['Distance', 'QuantitativeValue', str]], 'Distance', 'QuantitativeValue', str]] = Field(
+    width: Optional[Union[List[Union['QuantitativeValue', 'Distance', str]], 'QuantitativeValue', 'Distance', str]] = Field(
         default=None,
         description="The width of the item.",
     )
@@ -151,7 +151,7 @@ class Product(Thing):
         description="The GTIN-14 code of the product, or the product to which the offer refers. See [GS1 GTIN"
      "Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more details.",
     )
-    positiveNotes: Optional[Union[List[Union[str, 'Text', 'ItemList', 'WebContent', 'ListItem']], str, 'Text', 'ItemList', 'WebContent', 'ListItem']] = Field(
+    positiveNotes: Optional[Union[List[Union[str, 'Text', 'ListItem', 'WebContent', 'ItemList']], str, 'Text', 'ListItem', 'WebContent', 'ItemList']] = Field(
         default=None,
         description="Provides positive considerations regarding something, for example product highlights"
      "or (alongside [[negativeNotes]]) pro/con lists for reviews. In the case of a [[Review]],"
@@ -257,7 +257,7 @@ class Product(Thing):
      "the gauge of a screw. Usually an exact measurement, but can also be a range of measurements"
      "for adjustable products, for example belts and ski bindings.",
     )
-    negativeNotes: Optional[Union[List[Union[str, 'Text', 'ItemList', 'WebContent', 'ListItem']], str, 'Text', 'ItemList', 'WebContent', 'ListItem']] = Field(
+    negativeNotes: Optional[Union[List[Union[str, 'Text', 'ListItem', 'WebContent', 'ItemList']], str, 'Text', 'ListItem', 'WebContent', 'ItemList']] = Field(
         default=None,
         description="Provides negative considerations regarding something, most typically in pro/con"
      "lists for reviews (alongside [[positiveNotes]]). For symmetry In the case of a [[Review]],"
@@ -352,23 +352,23 @@ if TYPE_CHECKING:
     from pydantic_schemaorg.DefinedTerm import DefinedTerm
     from pydantic_schemaorg.Grant import Grant
     from pydantic_schemaorg.Review import Review
-    from pydantic_schemaorg.SizeSpecification import SizeSpecification
     from pydantic_schemaorg.QuantitativeValue import QuantitativeValue
+    from pydantic_schemaorg.SizeSpecification import SizeSpecification
     from pydantic_schemaorg.ProductReturnPolicy import ProductReturnPolicy
     from pydantic_schemaorg.Distance import Distance
     from pydantic_schemaorg.MerchantReturnPolicy import MerchantReturnPolicy
     from pydantic_schemaorg.URL import URL
-    from pydantic_schemaorg.PhysicalActivityCategory import PhysicalActivityCategory
-    from pydantic_schemaorg.Thing import Thing
     from pydantic_schemaorg.CategoryCode import CategoryCode
-    from pydantic_schemaorg.Demand import Demand
+    from pydantic_schemaorg.Thing import Thing
+    from pydantic_schemaorg.PhysicalActivityCategory import PhysicalActivityCategory
     from pydantic_schemaorg.Offer import Offer
+    from pydantic_schemaorg.Demand import Demand
     from pydantic_schemaorg.Country import Country
     from pydantic_schemaorg.Audience import Audience
     from pydantic_schemaorg.Boolean import Boolean
-    from pydantic_schemaorg.ItemList import ItemList
-    from pydantic_schemaorg.WebContent import WebContent
     from pydantic_schemaorg.ListItem import ListItem
+    from pydantic_schemaorg.WebContent import WebContent
+    from pydantic_schemaorg.ItemList import ItemList
     from pydantic_schemaorg.Brand import Brand
     from pydantic_schemaorg.Service import Service
     from pydantic_schemaorg.AggregateRating import AggregateRating

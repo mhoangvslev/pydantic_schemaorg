@@ -2,10 +2,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from typing import List, Optional, Union
-from pydantic import StrictInt, StrictFloat
+from pydantic.v1 import StrictInt, StrictFloat
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.Intangible import Intangible
 
 
@@ -29,7 +29,7 @@ class OrderItem(Intangible):
         default=None,
         description="The identifier of the order item.",
     )
-    orderedItem: Optional[Union[List[Union['Product', 'Service', 'OrderItem', str]], 'Product', 'Service', 'OrderItem', str]] = Field(
+    orderedItem: Optional[Union[List[Union['OrderItem', 'Product', 'Service', str]], 'OrderItem', 'Product', 'Service', str]] = Field(
         default=None,
         description="The item ordered.",
     )

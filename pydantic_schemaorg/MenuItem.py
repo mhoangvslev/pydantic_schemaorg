@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from typing import List, Optional, Union
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.Intangible import Intangible
 
 
@@ -20,7 +20,7 @@ class MenuItem(Intangible):
         description="Indicates a dietary restriction or guideline for which this recipe or menu item is suitable,"
      "e.g. diabetic, halal etc.",
     )
-    offers: Optional[Union[List[Union['Demand', 'Offer', str]], 'Demand', 'Offer', str]] = Field(
+    offers: Optional[Union[List[Union['Offer', 'Demand', str]], 'Offer', 'Demand', str]] = Field(
         default=None,
         description="An offer to provide this item&#x2014;for example, an offer to sell a product, rent the"
      "DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]]"
@@ -29,7 +29,7 @@ class MenuItem(Intangible):
      "of common types, it can be used in others. In that case, using a second type, such as Product"
      "or a subtype of Product, can clarify the nature of the offer.",
     )
-    menuAddOn: Optional[Union[List[Union['MenuSection', 'MenuItem', str]], 'MenuSection', 'MenuItem', str]] = Field(
+    menuAddOn: Optional[Union[List[Union['MenuItem', 'MenuSection', str]], 'MenuItem', 'MenuSection', str]] = Field(
         default=None,
         description="Additional menu item(s) such as a side dish of salad or side order of fries that can be added"
      "to this menu item. Additionally it can be a menu section containing allowed add-on menu"
@@ -43,7 +43,7 @@ class MenuItem(Intangible):
 
 if TYPE_CHECKING:
     from pydantic_schemaorg.RestrictedDiet import RestrictedDiet
-    from pydantic_schemaorg.Demand import Demand
     from pydantic_schemaorg.Offer import Offer
+    from pydantic_schemaorg.Demand import Demand
     from pydantic_schemaorg.MenuSection import MenuSection
     from pydantic_schemaorg.NutritionInformation import NutritionInformation

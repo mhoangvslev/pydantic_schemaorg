@@ -2,10 +2,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from typing import List, Optional, Union
-from pydantic import AnyUrl, StrictBool, StrictInt, StrictFloat
+from pydantic.v1 import AnyUrl, StrictBool, StrictInt, StrictFloat
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.StructuredValue import StructuredValue
 
 
@@ -45,7 +45,7 @@ class QuantitativeValue(StructuredValue):
      "'.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to indicate a decimal point. Avoid"
      "using these symbols as a readability separator.",
     )
-    valueReference: Optional[Union[List[Union[str, 'Text', 'DefinedTerm', 'MeasurementTypeEnumeration', 'StructuredValue', 'Enumeration', 'QualitativeValue', 'QuantitativeValue', 'PropertyValue']], str, 'Text', 'DefinedTerm', 'MeasurementTypeEnumeration', 'StructuredValue', 'Enumeration', 'QualitativeValue', 'QuantitativeValue', 'PropertyValue']] = Field(
+    valueReference: Optional[Union[List[Union[str, 'Text', 'QuantitativeValue', 'DefinedTerm', 'QualitativeValue', 'PropertyValue', 'StructuredValue', 'Enumeration', 'MeasurementTypeEnumeration']], str, 'Text', 'QuantitativeValue', 'DefinedTerm', 'QualitativeValue', 'PropertyValue', 'StructuredValue', 'Enumeration', 'MeasurementTypeEnumeration']] = Field(
         default=None,
         description="A secondary value that provides additional information on the original value, e.g."
      "a reference temperature or a type of measurement.",
@@ -68,6 +68,6 @@ if TYPE_CHECKING:
     from pydantic_schemaorg.Boolean import Boolean
     from pydantic_schemaorg.StructuredValue import StructuredValue
     from pydantic_schemaorg.DefinedTerm import DefinedTerm
-    from pydantic_schemaorg.MeasurementTypeEnumeration import MeasurementTypeEnumeration
-    from pydantic_schemaorg.Enumeration import Enumeration
     from pydantic_schemaorg.QualitativeValue import QualitativeValue
+    from pydantic_schemaorg.Enumeration import Enumeration
+    from pydantic_schemaorg.MeasurementTypeEnumeration import MeasurementTypeEnumeration

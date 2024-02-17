@@ -2,10 +2,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from typing import List, Optional, Union
-from pydantic import AnyUrl
+from pydantic.v1 import AnyUrl
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.Thing import Thing
 
 
@@ -27,7 +27,7 @@ class BioChemEntity(Thing):
         description="Subcellular location where this BioChemEntity is located; please use PropertyValue"
      "if you want to include any evidence.",
     )
-    associatedDisease: Optional[Union[List[Union[AnyUrl, 'URL', 'MedicalCondition', 'PropertyValue', str]], AnyUrl, 'URL', 'MedicalCondition', 'PropertyValue', str]] = Field(
+    associatedDisease: Optional[Union[List[Union[AnyUrl, 'URL', 'PropertyValue', 'MedicalCondition', str]], AnyUrl, 'URL', 'PropertyValue', 'MedicalCondition', str]] = Field(
         default=None,
         description="Disease associated to this BioChemEntity. Such disease can be a MedicalCondition or"
      "a URL. If you want to add an evidence supporting the association, please use PropertyValue.",

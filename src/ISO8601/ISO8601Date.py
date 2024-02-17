@@ -2,14 +2,14 @@ import re
 from typing import no_type_check, Optional, Dict, cast, Any, Pattern, TYPE_CHECKING, Generator, AnyStr, Union
 
 from pydantic import BaseConfig
-from pydantic.fields import ModelField
-from pydantic.utils import update_not_none
-from pydantic.validators import str_validator, constr_length_validator
+from pydantic.v1.fields import ModelField
+from pydantic.v1.utils import update_not_none
+from pydantic.v1.validators import str_validator, constr_length_validator
 
 from pydantic_schemaorg.ISO8601 import errors
 
 if TYPE_CHECKING:
-    from pydantic.typing import AnyCallable
+    from pydantic.v1.typing import AnyCallable
 
     CallableGenerator = Generator[AnyCallable, None, None]
 

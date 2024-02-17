@@ -2,10 +2,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from typing import List, Optional, Union
-from pydantic import StrictBool
+from pydantic.v1 import StrictBool
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.Event import Event
 
 
@@ -26,7 +26,7 @@ class PublicationEvent(Event):
         default=None,
         description="A flag to signal that the item, event, or place is accessible for free.",
     )
-    publishedBy: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    publishedBy: Optional[Union[List[Union['Organization', 'Person', str]], 'Organization', 'Person', str]] = Field(
         default=None,
         description="An agent associated with the publication event.",
     )
@@ -35,5 +35,5 @@ class PublicationEvent(Event):
 if TYPE_CHECKING:
     from pydantic_schemaorg.BroadcastService import BroadcastService
     from pydantic_schemaorg.Boolean import Boolean
-    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.Organization import Organization
+    from pydantic_schemaorg.Person import Person

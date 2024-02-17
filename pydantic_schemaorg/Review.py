@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from typing import List, Optional, Union
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.CreativeWork import CreativeWork
 
 
@@ -27,7 +27,7 @@ class Review(CreativeWork):
      "would commonly be used on a [[ClaimReview]], while [[relatedClaimReview]] would be"
      "used on [[MediaReview]].",
     )
-    positiveNotes: Optional[Union[List[Union[str, 'Text', 'ItemList', 'WebContent', 'ListItem']], str, 'Text', 'ItemList', 'WebContent', 'ListItem']] = Field(
+    positiveNotes: Optional[Union[List[Union[str, 'Text', 'ListItem', 'WebContent', 'ItemList']], str, 'Text', 'ListItem', 'WebContent', 'ItemList']] = Field(
         default=None,
         description="Provides positive considerations regarding something, for example product highlights"
      "or (alongside [[negativeNotes]]) pro/con lists for reviews. In the case of a [[Review]],"
@@ -62,7 +62,7 @@ class Review(CreativeWork):
         default=None,
         description="The actual body of the review.",
     )
-    negativeNotes: Optional[Union[List[Union[str, 'Text', 'ItemList', 'WebContent', 'ListItem']], str, 'Text', 'ItemList', 'WebContent', 'ListItem']] = Field(
+    negativeNotes: Optional[Union[List[Union[str, 'Text', 'ListItem', 'WebContent', 'ItemList']], str, 'Text', 'ListItem', 'WebContent', 'ItemList']] = Field(
         default=None,
         description="Provides negative considerations regarding something, most typically in pro/con"
      "lists for reviews (alongside [[positiveNotes]]). For symmetry In the case of a [[Review]],"
@@ -79,7 +79,7 @@ class Review(CreativeWork):
 if TYPE_CHECKING:
     from pydantic_schemaorg.Thing import Thing
     from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.ItemList import ItemList
-    from pydantic_schemaorg.WebContent import WebContent
     from pydantic_schemaorg.ListItem import ListItem
+    from pydantic_schemaorg.WebContent import WebContent
+    from pydantic_schemaorg.ItemList import ItemList
     from pydantic_schemaorg.Rating import Rating

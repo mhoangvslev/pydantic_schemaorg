@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from typing import List, Optional, Union
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.Thing import Thing
 
 
@@ -47,7 +47,7 @@ class MedicalEntity(Thing):
         default=None,
         description="If applicable, a medical specialty in which this entity is relevant.",
     )
-    legalStatus: Optional[Union[List[Union[str, 'Text', 'DrugLegalStatus', 'MedicalEnumeration']], str, 'Text', 'DrugLegalStatus', 'MedicalEnumeration']] = Field(
+    legalStatus: Optional[Union[List[Union[str, 'Text', 'MedicalEnumeration', 'DrugLegalStatus']], str, 'Text', 'MedicalEnumeration', 'DrugLegalStatus']] = Field(
         default=None,
         description="The drug or supplement's legal status, including any controlled substance schedules"
      "that apply.",
@@ -63,5 +63,5 @@ if TYPE_CHECKING:
     from pydantic_schemaorg.MedicineSystem import MedicineSystem
     from pydantic_schemaorg.MedicalSpecialty import MedicalSpecialty
     from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.DrugLegalStatus import DrugLegalStatus
     from pydantic_schemaorg.MedicalEnumeration import MedicalEnumeration
+    from pydantic_schemaorg.DrugLegalStatus import DrugLegalStatus

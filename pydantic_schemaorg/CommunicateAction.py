@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 from typing import List, Optional, Union
 
 
-from pydantic import Field
+from pydantic.v1 import Field
 from pydantic_schemaorg.InteractAction import InteractAction
 
 
@@ -30,7 +30,7 @@ class CommunicateAction(InteractAction):
         default=None,
         description="A sub property of instrument. The language used on this action.",
     )
-    recipient: Optional[Union[List[Union['Audience', 'Person', 'ContactPoint', 'Organization', str]], 'Audience', 'Person', 'ContactPoint', 'Organization', str]] = Field(
+    recipient: Optional[Union[List[Union['Organization', 'Audience', 'ContactPoint', 'Person', str]], 'Organization', 'Audience', 'ContactPoint', 'Person', str]] = Field(
         default=None,
         description="A sub property of participant. The participant who is at the receiving end of the action.",
     )
@@ -40,7 +40,7 @@ if TYPE_CHECKING:
     from pydantic_schemaorg.Thing import Thing
     from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.Language import Language
-    from pydantic_schemaorg.Audience import Audience
-    from pydantic_schemaorg.Person import Person
-    from pydantic_schemaorg.ContactPoint import ContactPoint
     from pydantic_schemaorg.Organization import Organization
+    from pydantic_schemaorg.Audience import Audience
+    from pydantic_schemaorg.ContactPoint import ContactPoint
+    from pydantic_schemaorg.Person import Person
