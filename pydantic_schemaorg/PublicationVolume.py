@@ -16,18 +16,18 @@ class PublicationVolume(CreativeWork):
     Model depth: 3
     """
     type_: str = Field(default="PublicationVolume", alias='@type', const=True)
-    pageStart: Optional[Union[List[Union[int, 'Integer', str, 'Text']], int, 'Integer', str, 'Text']] = Field(
+    pagination: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
         default=None,
-        description="The page on which the work starts; for example \"135\" or \"xiii\".",
+        description="Any description of pages that is not separated into pageStart and pageEnd; for example,"
+     "\"1-6, 9, 55\" or \"10-12, 46-49\".",
     )
     volumeNumber: Optional[Union[List[Union[int, 'Integer', str, 'Text']], int, 'Integer', str, 'Text']] = Field(
         default=None,
         description="Identifies the volume of publication or multi-part work; for example, \"iii\" or \"2\".",
     )
-    pagination: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    pageStart: Optional[Union[List[Union[int, 'Integer', str, 'Text']], int, 'Integer', str, 'Text']] = Field(
         default=None,
-        description="Any description of pages that is not separated into pageStart and pageEnd; for example,"
-     "\"1-6, 9, 55\" or \"10-12, 46-49\".",
+        description="The page on which the work starts; for example \"135\" or \"xiii\".",
     )
     pageEnd: Optional[Union[List[Union[int, 'Integer', str, 'Text']], int, 'Integer', str, 'Text']] = Field(
         default=None,
@@ -36,5 +36,5 @@ class PublicationVolume(CreativeWork):
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Integer import Integer
     from pydantic_schemaorg.Text import Text
+    from pydantic_schemaorg.Integer import Integer

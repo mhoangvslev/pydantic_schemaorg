@@ -24,7 +24,7 @@ class PodcastSeries(CreativeWorkSeries):
     )
     actor: Optional[Union[List[Union['Person', str]], 'Person', str]] = Field(
         default=None,
-        description="An actor, e.g. in tv, radio, movie, video games etc., or in an event. Actors can be associated"
+        description="An actor, e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated"
      "with individual items or with a series, episode, clip.",
     )
     

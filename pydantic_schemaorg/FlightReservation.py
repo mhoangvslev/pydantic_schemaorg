@@ -17,10 +17,6 @@ class FlightReservation(Reservation):
     Model depth: 4
     """
     type_: str = Field(default="FlightReservation", alias='@type', const=True)
-    passengerSequenceNumber: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
-        default=None,
-        description="The passenger's sequence number as assigned by the airline.",
-    )
     securityScreening: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
         default=None,
         description="The type of security screening the passenger is subject to.",
@@ -29,6 +25,10 @@ class FlightReservation(Reservation):
         default=None,
         description="The priority status assigned to a passenger for security or boarding (e.g. FastTrack"
      "or Priority).",
+    )
+    passengerSequenceNumber: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+        default=None,
+        description="The passenger's sequence number as assigned by the airline.",
     )
     boardingGroup: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
         default=None,

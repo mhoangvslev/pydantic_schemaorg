@@ -16,10 +16,6 @@ class LymphaticVessel(Vessel):
     Model depth: 5
     """
     type_: str = Field(default="LymphaticVessel", alias='@type', const=True)
-    originatesFrom: Optional[Union[List[Union['Vessel', str]], 'Vessel', str]] = Field(
-        default=None,
-        description="The vasculature the lymphatic structure originates, or afferents, from.",
-    )
     runsTo: Optional[Union[List[Union['Vessel', str]], 'Vessel', str]] = Field(
         default=None,
         description="The vasculature the lymphatic structure runs, or efferents, to.",
@@ -28,6 +24,10 @@ class LymphaticVessel(Vessel):
         default=None,
         description="The anatomical or organ system drained by this vessel; generally refers to a specific"
      "part of an organ.",
+    )
+    originatesFrom: Optional[Union[List[Union['Vessel', str]], 'Vessel', str]] = Field(
+        default=None,
+        description="The vasculature the lymphatic structure originates, or afferents, from.",
     )
     
 

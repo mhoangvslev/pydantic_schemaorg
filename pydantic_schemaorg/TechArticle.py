@@ -16,13 +16,13 @@ class TechArticle(Article):
     Model depth: 4
     """
     type_: str = Field(default="TechArticle", alias='@type', const=True)
-    proficiencyLevel: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
-        default=None,
-        description="Proficiency needed for this content; expected values: 'Beginner', 'Expert'.",
-    )
     dependencies: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
         default=None,
         description="Prerequisites needed to fulfill steps in article.",
+    )
+    proficiencyLevel: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+        default=None,
+        description="Proficiency needed for this content; expected values: 'Beginner', 'Expert'.",
     )
     
 

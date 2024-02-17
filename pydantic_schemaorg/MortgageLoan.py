@@ -11,7 +11,7 @@ from pydantic_schemaorg.LoanOrCredit import LoanOrCredit
 
 class MortgageLoan(LoanOrCredit):
     """A loan in which property or real estate is used as collateral. (A loan securitized against"
-     "some real estate).
+     "some real estate.)
 
     See: https://schema.org/MortgageLoan
     Model depth: 6

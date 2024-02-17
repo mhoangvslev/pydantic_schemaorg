@@ -6,7 +6,7 @@ from pydantic_schemaorg.SizeSystemEnumeration import SizeSystemEnumeration
 
 
 class WearableSizeSystemEnumeration(SizeSystemEnumeration):
-    """Enumerates common size systems specific for wearable products
+    """Enumerates common size systems specific for wearable products.
 
     See: https://schema.org/WearableSizeSystemEnumeration
     Model depth: 5

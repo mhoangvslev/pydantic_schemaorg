@@ -20,62 +20,14 @@ class CDCPMDRecord(StructuredValue):
     Model depth: 4
     """
     type_: str = Field(default="CDCPMDRecord", alias='@type', const=True)
-    cvdNumVentUse: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str]], StrictInt, StrictFloat, 'Number', str]] = Field(
-        default=None,
-        description="numventuse - MECHANICAL VENTILATORS IN USE: Total number of ventilators in use.",
-    )
-    cvdNumTotBeds: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str]], StrictInt, StrictFloat, 'Number', str]] = Field(
-        default=None,
-        description="numtotbeds - ALL HOSPITAL BEDS: Total number of all Inpatient and outpatient beds, including"
-     "all staffed,ICU, licensed, and overflow (surge) beds used for inpatients or outpatients.",
-    )
     cvdNumC19Died: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str]], StrictInt, StrictFloat, 'Number', str]] = Field(
         default=None,
         description="numc19died - DEATHS: Patients with suspected or confirmed COVID-19 who died in the hospital,"
      "ED, or any overflow location.",
     )
-    cvdNumC19HOPats: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str]], StrictInt, StrictFloat, 'Number', str]] = Field(
+    cvdNumVentUse: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str]], StrictInt, StrictFloat, 'Number', str]] = Field(
         default=None,
-        description="numc19hopats - HOSPITAL ONSET: Patients hospitalized in an NHSN inpatient care location"
-     "with onset of suspected or confirmed COVID-19 14 or more days after hospitalization.",
-    )
-    cvdFacilityCounty: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
-        default=None,
-        description="Name of the County of the NHSN facility that this data record applies to. Use [[cvdFacilityId]]"
-     "to identify the facility. To provide other details, [[healthcareReportingData]]"
-     "can be used on a [[Hospital]] entry.",
-    )
-    cvdNumC19OverflowPats: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str]], StrictInt, StrictFloat, 'Number', str]] = Field(
-        default=None,
-        description="numc19overflowpats - ED/OVERFLOW: Patients with suspected or confirmed COVID-19"
-     "who are in the ED or any overflow location awaiting an inpatient bed.",
-    )
-    cvdNumBeds: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str]], StrictInt, StrictFloat, 'Number', str]] = Field(
-        default=None,
-        description="numbeds - HOSPITAL INPATIENT BEDS: Inpatient beds, including all staffed, licensed,"
-     "and overflow (surge) beds used for inpatients.",
-    )
-    datePosted: Optional[Union[List[Union[datetime, 'DateTime', date, 'Date', str]], datetime, 'DateTime', date, 'Date', str]] = Field(
-        default=None,
-        description="Publication date of an online listing.",
-    )
-    cvdNumICUBedsOcc: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str]], StrictInt, StrictFloat, 'Number', str]] = Field(
-        default=None,
-        description="numicubedsocc - ICU BED OCCUPANCY: Total number of staffed inpatient ICU beds that are"
-     "occupied.",
-    )
-    cvdNumVent: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str]], StrictInt, StrictFloat, 'Number', str]] = Field(
-        default=None,
-        description="numvent - MECHANICAL VENTILATORS: Total number of ventilators available.",
-    )
-    cvdNumC19HospPats: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str]], StrictInt, StrictFloat, 'Number', str]] = Field(
-        default=None,
-        description="numc19hosppats - HOSPITALIZED: Patients currently hospitalized in an inpatient care"
-     "location who have suspected or confirmed COVID-19.",
-    )
-    cvdNumICUBeds: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str]], StrictInt, StrictFloat, 'Number', str]] = Field(
-        default=None,
-        description="numicubeds - ICU BEDS: Total number of staffed inpatient intensive care unit (ICU) beds.",
+        description="numventuse - MECHANICAL VENTILATORS IN USE: Total number of ventilators in use.",
     )
     cvdNumC19OFMechVentPats: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str]], StrictInt, StrictFloat, 'Number', str]] = Field(
         default=None,
@@ -89,25 +41,73 @@ class CDCPMDRecord(StructuredValue):
      "inpatient care location who have suspected or confirmed COVID-19 and are on a mechanical"
      "ventilator.",
     )
-    cvdFacilityId: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    cvdNumC19HOPats: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str]], StrictInt, StrictFloat, 'Number', str]] = Field(
         default=None,
-        description="Identifier of the NHSN facility that this data record applies to. Use [[cvdFacilityCounty]]"
-     "to indicate the county. To provide other details, [[healthcareReportingData]] can"
-     "be used on a [[Hospital]] entry.",
+        description="numc19hopats - HOSPITAL ONSET: Patients hospitalized in an NHSN inpatient care location"
+     "with onset of suspected or confirmed COVID-19 14 or more days after hospitalization.",
     )
-    cvdCollectionDate: Optional[Union[List[Union[datetime, 'DateTime', str, 'Text']], datetime, 'DateTime', str, 'Text']] = Field(
+    cvdNumICUBeds: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str]], StrictInt, StrictFloat, 'Number', str]] = Field(
         default=None,
-        description="collectiondate - Date for which patient counts are reported.",
+        description="numicubeds - ICU BEDS: Total number of staffed inpatient intensive care unit (ICU) beds.",
     )
     cvdNumBedsOcc: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str]], StrictInt, StrictFloat, 'Number', str]] = Field(
         default=None,
         description="numbedsocc - HOSPITAL INPATIENT BED OCCUPANCY: Total number of staffed inpatient beds"
      "that are occupied.",
     )
+    cvdNumC19HospPats: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str]], StrictInt, StrictFloat, 'Number', str]] = Field(
+        default=None,
+        description="numc19hosppats - HOSPITALIZED: Patients currently hospitalized in an inpatient care"
+     "location who have suspected or confirmed COVID-19.",
+    )
+    cvdNumTotBeds: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str]], StrictInt, StrictFloat, 'Number', str]] = Field(
+        default=None,
+        description="numtotbeds - ALL HOSPITAL BEDS: Total number of all inpatient and outpatient beds, including"
+     "all staffed, ICU, licensed, and overflow (surge) beds used for inpatients or outpatients.",
+    )
+    cvdNumVent: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str]], StrictInt, StrictFloat, 'Number', str]] = Field(
+        default=None,
+        description="numvent - MECHANICAL VENTILATORS: Total number of ventilators available.",
+    )
+    cvdCollectionDate: Optional[Union[List[Union[datetime, 'DateTime', str, 'Text']], datetime, 'DateTime', str, 'Text']] = Field(
+        default=None,
+        description="collectiondate - Date for which patient counts are reported.",
+    )
+    cvdNumC19OverflowPats: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str]], StrictInt, StrictFloat, 'Number', str]] = Field(
+        default=None,
+        description="numc19overflowpats - ED/OVERFLOW: Patients with suspected or confirmed COVID-19"
+     "who are in the ED or any overflow location awaiting an inpatient bed.",
+    )
+    cvdNumBeds: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str]], StrictInt, StrictFloat, 'Number', str]] = Field(
+        default=None,
+        description="numbeds - HOSPITAL INPATIENT BEDS: Inpatient beds, including all staffed, licensed,"
+     "and overflow (surge) beds used for inpatients.",
+    )
+    cvdFacilityId: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+        default=None,
+        description="Identifier of the NHSN facility that this data record applies to. Use [[cvdFacilityCounty]]"
+     "to indicate the county. To provide other details, [[healthcareReportingData]] can"
+     "be used on a [[Hospital]] entry.",
+    )
+    datePosted: Optional[Union[List[Union[datetime, 'DateTime', date, 'Date', str]], datetime, 'DateTime', date, 'Date', str]] = Field(
+        default=None,
+        description="Publication date of an online listing.",
+    )
+    cvdNumICUBedsOcc: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str]], StrictInt, StrictFloat, 'Number', str]] = Field(
+        default=None,
+        description="numicubedsocc - ICU BED OCCUPANCY: Total number of staffed inpatient ICU beds that are"
+     "occupied.",
+    )
+    cvdFacilityCounty: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+        default=None,
+        description="Name of the County of the NHSN facility that this data record applies to. Use [[cvdFacilityId]]"
+     "to identify the facility. To provide other details, [[healthcareReportingData]]"
+     "can be used on a [[Hospital]] entry.",
+    )
     
 
 if TYPE_CHECKING:
     from pydantic_schemaorg.Number import Number
-    from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.DateTime import DateTime
+    from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.Date import Date

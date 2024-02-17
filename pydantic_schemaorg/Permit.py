@@ -1,8 +1,8 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
-from typing import List, Optional, Union
 from datetime import date, datetime
+from typing import List, Optional, Union
 
 
 from pydantic import Field
@@ -16,14 +16,6 @@ class Permit(Intangible):
     Model depth: 3
     """
     type_: str = Field(default="Permit", alias='@type', const=True)
-    issuedThrough: Optional[Union[List[Union['Service', str]], 'Service', str]] = Field(
-        default=None,
-        description="The service through with the permit was granted.",
-    )
-    validFor: Optional[Union[List[Union['Duration', str]], 'Duration', str]] = Field(
-        default=None,
-        description="The duration of validity of a permit or similar thing.",
-    )
     validUntil: Optional[Union[List[Union[date, 'Date', str]], date, 'Date', str]] = Field(
         default=None,
         description="The date when the item is no longer valid.",
@@ -31,6 +23,10 @@ class Permit(Intangible):
     validFrom: Optional[Union[List[Union[datetime, 'DateTime', date, 'Date', str]], datetime, 'DateTime', date, 'Date', str]] = Field(
         default=None,
         description="The date when the item becomes valid.",
+    )
+    validFor: Optional[Union[List[Union['Duration', str]], 'Duration', str]] = Field(
+        default=None,
+        description="The duration of validity of a permit or similar thing.",
     )
     permitAudience: Optional[Union[List[Union['Audience', str]], 'Audience', str]] = Field(
         default=None,
@@ -44,13 +40,17 @@ class Permit(Intangible):
         default=None,
         description="The geographic area where a permit or similar thing is valid.",
     )
+    issuedThrough: Optional[Union[List[Union['Service', str]], 'Service', str]] = Field(
+        default=None,
+        description="The service through which the permit was granted.",
+    )
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Service import Service
-    from pydantic_schemaorg.Duration import Duration
     from pydantic_schemaorg.Date import Date
     from pydantic_schemaorg.DateTime import DateTime
+    from pydantic_schemaorg.Duration import Duration
     from pydantic_schemaorg.Audience import Audience
     from pydantic_schemaorg.Organization import Organization
     from pydantic_schemaorg.AdministrativeArea import AdministrativeArea
+    from pydantic_schemaorg.Service import Service

@@ -15,11 +15,6 @@ class Vein(Vessel):
     Model depth: 5
     """
     type_: str = Field(default="Vein", alias='@type', const=True)
-    tributary: Optional[Union[List[Union['AnatomicalStructure', str]], 'AnatomicalStructure', str]] = Field(
-        default=None,
-        description="The anatomical or organ system that the vein flows into; a larger structure that the vein"
-     "connects to.",
-    )
     drainsTo: Optional[Union[List[Union['Vessel', str]], 'Vessel', str]] = Field(
         default=None,
         description="The vasculature that the vein drains into.",
@@ -29,9 +24,14 @@ class Vein(Vessel):
         description="The anatomical or organ system drained by this vessel; generally refers to a specific"
      "part of an organ.",
     )
+    tributary: Optional[Union[List[Union['AnatomicalStructure', str]], 'AnatomicalStructure', str]] = Field(
+        default=None,
+        description="The anatomical or organ system that the vein flows into; a larger structure that the vein"
+     "connects to.",
+    )
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.AnatomicalStructure import AnatomicalStructure
     from pydantic_schemaorg.Vessel import Vessel
     from pydantic_schemaorg.AnatomicalSystem import AnatomicalSystem
+    from pydantic_schemaorg.AnatomicalStructure import AnatomicalStructure

@@ -15,21 +15,21 @@ class ScreeningEvent(Event):
     Model depth: 3
     """
     type_: str = Field(default="ScreeningEvent", alias='@type', const=True)
-    workPresented: Optional[Union[List[Union['Movie', str]], 'Movie', str]] = Field(
+    videoFormat: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
         default=None,
-        description="The movie presented during this event.",
+        description="The type of screening or video broadcast used (e.g. IMAX, 3D, SD, HD, etc.).",
     )
     subtitleLanguage: Optional[Union[List[Union[str, 'Text', 'Language']], str, 'Text', 'Language']] = Field(
         default=None,
         description="Languages in which subtitles/captions are available, in [IETF BCP 47 standard format](http://tools.ietf.org/html/bcp47).",
     )
-    videoFormat: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    workPresented: Optional[Union[List[Union['Movie', str]], 'Movie', str]] = Field(
         default=None,
-        description="The type of screening or video broadcast used (e.g. IMAX, 3D, SD, HD, etc.).",
+        description="The movie presented during this event.",
     )
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Movie import Movie
     from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.Language import Language
+    from pydantic_schemaorg.Movie import Movie

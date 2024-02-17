@@ -24,18 +24,28 @@ class Grant(Intangible):
     Model depth: 3
     """
     type_: str = Field(default="Grant", alias='@type', const=True)
-    fundedItem: Optional[Union[List[Union['Thing', str]], 'Thing', str]] = Field(
-        default=None,
-        description="Indicates an item funded or sponsored through a [[Grant]].",
-    )
     sponsor: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
         default=None,
         description="A person or organization that supports a thing through a pledge, promise, or financial"
-     "contribution. e.g. a sponsor of a Medical Study or a corporate sponsor of an event.",
+     "contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event.",
+    )
+    funder: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+        default=None,
+        description="A person or organization that supports (sponsors) something through some kind of financial"
+     "contribution.",
+    )
+    fundedItem: Optional[Union[List[Union['MedicalEntity', 'Organization', 'CreativeWork', 'Event', 'Product', 'BioChemEntity', 'Person', str]], 'MedicalEntity', 'Organization', 'CreativeWork', 'Event', 'Product', 'BioChemEntity', 'Person', str]] = Field(
+        default=None,
+        description="Indicates something directly or indirectly funded or sponsored through a [[Grant]]."
+     "See also [[ownershipFundingInfo]].",
     )
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Thing import Thing
     from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.Organization import Organization
+    from pydantic_schemaorg.MedicalEntity import MedicalEntity
+    from pydantic_schemaorg.CreativeWork import CreativeWork
+    from pydantic_schemaorg.Event import Event
+    from pydantic_schemaorg.Product import Product
+    from pydantic_schemaorg.BioChemEntity import BioChemEntity

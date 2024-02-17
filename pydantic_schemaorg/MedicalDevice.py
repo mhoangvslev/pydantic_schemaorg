@@ -24,6 +24,22 @@ class MedicalDevice(MedicalEntity):
         description="A description of the workup, testing, and other preparations required before implanting"
      "this device.",
     )
+    procedure: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+        default=None,
+        description="A description of the procedure involved in setting up, using, and/or installing the"
+     "device.",
+    )
+    contraindication: Optional[Union[List[Union[str, 'Text', 'MedicalContraindication']], str, 'Text', 'MedicalContraindication']] = Field(
+        default=None,
+        description="A contraindication for this therapy.",
+    )
+    adverseOutcome: Optional[Union[List[Union['MedicalEntity', str]], 'MedicalEntity', str]] = Field(
+        default=None,
+        description="A possible complication and/or side effect of this therapy. If it is known that an adverse"
+     "outcome is serious (resulting in death, disability, or permanent damage; requiring"
+     "hospitalization; or otherwise life-threatening or requiring immediate medical attention),"
+     "tag it as a seriousAdverseOutcome instead.",
+    )
     seriousAdverseOutcome: Optional[Union[List[Union['MedicalEntity', str]], 'MedicalEntity', str]] = Field(
         default=None,
         description="A possible serious complication and/or serious side effect of this therapy. Serious"
@@ -32,25 +48,9 @@ class MedicalDevice(MedicalEntity):
      "cause congenital anomalies or birth defects; or jeopardize the patient and may require"
      "medical or surgical intervention to prevent one of the outcomes in this definition.",
     )
-    procedure: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
-        default=None,
-        description="A description of the procedure involved in setting up, using, and/or installing the"
-     "device.",
-    )
-    adverseOutcome: Optional[Union[List[Union['MedicalEntity', str]], 'MedicalEntity', str]] = Field(
-        default=None,
-        description="A possible complication and/or side effect of this therapy. If it is known that an adverse"
-     "outcome is serious (resulting in death, disability, or permanent damage; requiring"
-     "hospitalization; or is otherwise life-threatening or requires immediate medical"
-     "attention), tag it as a seriouseAdverseOutcome instead.",
-    )
-    contraindication: Optional[Union[List[Union[str, 'Text', 'MedicalContraindication']], str, 'Text', 'MedicalContraindication']] = Field(
-        default=None,
-        description="A contraindication for this therapy.",
-    )
     
 
 if TYPE_CHECKING:
     from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.MedicalEntity import MedicalEntity
     from pydantic_schemaorg.MedicalContraindication import MedicalContraindication
+    from pydantic_schemaorg.MedicalEntity import MedicalEntity

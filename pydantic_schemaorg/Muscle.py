@@ -16,6 +16,10 @@ class Muscle(AnatomicalStructure):
     Model depth: 4
     """
     type_: str = Field(default="Muscle", alias='@type', const=True)
+    antagonist: Optional[Union[List[Union['Muscle', str]], 'Muscle', str]] = Field(
+        default=None,
+        description="The muscle whose action counteracts the specified muscle.",
+    )
     nerve: Optional[Union[List[Union['Nerve', str]], 'Nerve', str]] = Field(
         default=None,
         description="The underlying innervation associated with the muscle.",
@@ -23,10 +27,6 @@ class Muscle(AnatomicalStructure):
     muscleAction: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
         default=None,
         description="The movement the muscle generates.",
-    )
-    antagonist: Optional[Union[List[Union['Muscle', str]], 'Muscle', str]] = Field(
-        default=None,
-        description="The muscle whose action counteracts the specified muscle.",
     )
     bloodSupply: Optional[Union[List[Union['Vessel', str]], 'Vessel', str]] = Field(
         default=None,

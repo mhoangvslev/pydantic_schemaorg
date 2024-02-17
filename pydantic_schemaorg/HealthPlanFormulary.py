@@ -17,17 +17,17 @@ class HealthPlanFormulary(Intangible):
     Model depth: 3
     """
     type_: str = Field(default="HealthPlanFormulary", alias='@type', const=True)
-    offersPrescriptionByMail: Optional[Union[List[Union[StrictBool, 'Boolean', str]], StrictBool, 'Boolean', str]] = Field(
+    healthPlanCostSharing: Optional[Union[List[Union[StrictBool, 'Boolean', str]], StrictBool, 'Boolean', str]] = Field(
         default=None,
-        description="Whether prescriptions can be delivered by mail.",
+        description="The costs to the patient for services under this network or formulary.",
     )
     healthPlanDrugTier: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
         default=None,
         description="The tier(s) of drugs offered by this formulary or insurance plan.",
     )
-    healthPlanCostSharing: Optional[Union[List[Union[StrictBool, 'Boolean', str]], StrictBool, 'Boolean', str]] = Field(
+    offersPrescriptionByMail: Optional[Union[List[Union[StrictBool, 'Boolean', str]], StrictBool, 'Boolean', str]] = Field(
         default=None,
-        description="Whether The costs to the patient for services under this network or formulary.",
+        description="Whether prescriptions can be delivered by mail.",
     )
     
 

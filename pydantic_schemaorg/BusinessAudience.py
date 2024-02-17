@@ -22,7 +22,7 @@ class BusinessAudience(Audience):
     )
     numberOfEmployees: Optional[Union[List[Union['QuantitativeValue', str]], 'QuantitativeValue', str]] = Field(
         default=None,
-        description="The number of employees in an organization e.g. business.",
+        description="The number of employees in an organization, e.g. business.",
     )
     yearlyRevenue: Optional[Union[List[Union['QuantitativeValue', str]], 'QuantitativeValue', str]] = Field(
         default=None,

@@ -17,31 +17,9 @@ class MedicalCondition(MedicalEntity):
     Model depth: 3
     """
     type_: str = Field(default="MedicalCondition", alias='@type', const=True)
-    epidemiology: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
-        default=None,
-        description="The characteristics of associated patients, such as age, gender, race etc.",
-    )
     typicalTest: Optional[Union[List[Union['MedicalTest', str]], 'MedicalTest', str]] = Field(
         default=None,
         description="A medical test typically performed given this condition.",
-    )
-    riskFactor: Optional[Union[List[Union['MedicalRiskFactor', str]], 'MedicalRiskFactor', str]] = Field(
-        default=None,
-        description="A modifiable or non-modifiable factor that increases the risk of a patient contracting"
-     "this condition, e.g. age, coexisting condition.",
-    )
-    stage: Optional[Union[List[Union['MedicalConditionStage', str]], 'MedicalConditionStage', str]] = Field(
-        default=None,
-        description="The stage of the condition, if applicable.",
-    )
-    naturalProgression: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
-        default=None,
-        description="The expected progression of the condition if it is not treated and allowed to progress"
-     "naturally.",
-    )
-    expectedPrognosis: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
-        default=None,
-        description="The likely outcome in either the short term or long term of the medical condition.",
     )
     differentialDiagnosis: Optional[Union[List[Union['DDxElement', str]], 'DDxElement', str]] = Field(
         default=None,
@@ -51,32 +29,39 @@ class MedicalCondition(MedicalEntity):
      "collection of signs and symptoms to reach the most parsimonious diagnosis or diagnoses"
      "in a patient.",
     )
-    primaryPrevention: Optional[Union[List[Union['MedicalTherapy', str]], 'MedicalTherapy', str]] = Field(
-        default=None,
-        description="A preventative therapy used to prevent an initial occurrence of the medical condition,"
-     "such as vaccination.",
-    )
-    possibleTreatment: Optional[Union[List[Union['MedicalTherapy', str]], 'MedicalTherapy', str]] = Field(
-        default=None,
-        description="A possible treatment to address this condition, sign or symptom.",
-    )
-    status: Optional[Union[List[Union[str, 'Text', 'MedicalStudyStatus', 'EventStatusType']], str, 'Text', 'MedicalStudyStatus', 'EventStatusType']] = Field(
-        default=None,
-        description="The status of the study (enumerated).",
-    )
-    pathophysiology: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
-        default=None,
-        description="Changes in the normal mechanical, physical, and biochemical functions that are associated"
-     "with this activity or condition.",
-    )
     secondaryPrevention: Optional[Union[List[Union['MedicalTherapy', str]], 'MedicalTherapy', str]] = Field(
         default=None,
         description="A preventative therapy used to prevent reoccurrence of the medical condition after"
      "an initial episode of the condition.",
     )
+    expectedPrognosis: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+        default=None,
+        description="The likely outcome in either the short term or long term of the medical condition.",
+    )
+    stage: Optional[Union[List[Union['MedicalConditionStage', str]], 'MedicalConditionStage', str]] = Field(
+        default=None,
+        description="The stage of the condition, if applicable.",
+    )
+    possibleTreatment: Optional[Union[List[Union['MedicalTherapy', str]], 'MedicalTherapy', str]] = Field(
+        default=None,
+        description="A possible treatment to address this condition, sign or symptom.",
+    )
+    primaryPrevention: Optional[Union[List[Union['MedicalTherapy', str]], 'MedicalTherapy', str]] = Field(
+        default=None,
+        description="A preventative therapy used to prevent an initial occurrence of the medical condition,"
+     "such as vaccination.",
+    )
+    status: Optional[Union[List[Union[str, 'Text', 'MedicalStudyStatus', 'EventStatusType']], str, 'Text', 'MedicalStudyStatus', 'EventStatusType']] = Field(
+        default=None,
+        description="The status of the study (enumerated).",
+    )
     drug: Optional[Union[List[Union['Drug', str]], 'Drug', str]] = Field(
         default=None,
         description="Specifying a drug or medicine used in a medication procedure.",
+    )
+    associatedAnatomy: Optional[Union[List[Union['AnatomicalSystem', 'SuperficialAnatomy', 'AnatomicalStructure', str]], 'AnatomicalSystem', 'SuperficialAnatomy', 'AnatomicalStructure', str]] = Field(
+        default=None,
+        description="The anatomy of the underlying organ system or structures associated with this entity.",
     )
     possibleComplication: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
         default=None,
@@ -84,9 +69,10 @@ class MedicalCondition(MedicalEntity):
      "may include worsening of the signs or symptoms of the disease, extension of the condition"
      "to other organ systems, etc.",
     )
-    associatedAnatomy: Optional[Union[List[Union['AnatomicalStructure', 'AnatomicalSystem', 'SuperficialAnatomy', str]], 'AnatomicalStructure', 'AnatomicalSystem', 'SuperficialAnatomy', str]] = Field(
+    riskFactor: Optional[Union[List[Union['MedicalRiskFactor', str]], 'MedicalRiskFactor', str]] = Field(
         default=None,
-        description="The anatomy of the underlying organ system or structures associated with this entity.",
+        description="A modifiable or non-modifiable factor that increases the risk of a patient contracting"
+     "this condition, e.g. age, coexisting condition.",
     )
     signOrSymptom: Optional[Union[List[Union['MedicalSignOrSymptom', str]], 'MedicalSignOrSymptom', str]] = Field(
         default=None,
@@ -94,19 +80,33 @@ class MedicalCondition(MedicalEntity):
      "of the medical condition while symptoms are the subjective experience of the medical"
      "condition.",
     )
+    pathophysiology: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+        default=None,
+        description="Changes in the normal mechanical, physical, and biochemical functions that are associated"
+     "with this activity or condition.",
+    )
+    naturalProgression: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+        default=None,
+        description="The expected progression of the condition if it is not treated and allowed to progress"
+     "naturally.",
+    )
+    epidemiology: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+        default=None,
+        description="The characteristics of associated patients, such as age, gender, race etc.",
+    )
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.MedicalTest import MedicalTest
-    from pydantic_schemaorg.MedicalRiskFactor import MedicalRiskFactor
-    from pydantic_schemaorg.MedicalConditionStage import MedicalConditionStage
     from pydantic_schemaorg.DDxElement import DDxElement
     from pydantic_schemaorg.MedicalTherapy import MedicalTherapy
+    from pydantic_schemaorg.Text import Text
+    from pydantic_schemaorg.MedicalConditionStage import MedicalConditionStage
     from pydantic_schemaorg.MedicalStudyStatus import MedicalStudyStatus
     from pydantic_schemaorg.EventStatusType import EventStatusType
     from pydantic_schemaorg.Drug import Drug
-    from pydantic_schemaorg.AnatomicalStructure import AnatomicalStructure
     from pydantic_schemaorg.AnatomicalSystem import AnatomicalSystem
     from pydantic_schemaorg.SuperficialAnatomy import SuperficialAnatomy
+    from pydantic_schemaorg.AnatomicalStructure import AnatomicalStructure
+    from pydantic_schemaorg.MedicalRiskFactor import MedicalRiskFactor
     from pydantic_schemaorg.MedicalSignOrSymptom import MedicalSignOrSymptom

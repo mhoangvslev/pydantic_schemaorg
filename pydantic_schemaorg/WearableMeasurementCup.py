@@ -6,7 +6,7 @@ from pydantic_schemaorg.WearableMeasurementTypeEnumeration import WearableMeasur
 
 
 class WearableMeasurementCup(WearableMeasurementTypeEnumeration):
-    """Measurement of the cup, for example of a bra
+    """Measurement of the cup, for example of a bra.
 
     See: https://schema.org/WearableMeasurementCup
     Model depth: 6

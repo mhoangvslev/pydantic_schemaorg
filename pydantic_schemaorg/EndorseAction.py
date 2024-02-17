@@ -9,7 +9,7 @@ from pydantic_schemaorg.ReactAction import ReactAction
 
 
 class EndorseAction(ReactAction):
-    """An agent approves/certifies/likes/supports/sanction an object.
+    """An agent approves/certifies/likes/supports/sanctions an object.
 
     See: https://schema.org/EndorseAction
     Model depth: 5

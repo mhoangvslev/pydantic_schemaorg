@@ -6,7 +6,7 @@ from pydantic_schemaorg.WearableMeasurementTypeEnumeration import WearableMeasur
 
 
 class WearableMeasurementSleeve(WearableMeasurementTypeEnumeration):
-    """Measurement of the sleeve length, for example of a shirt
+    """Measurement of the sleeve length, for example of a shirt.
 
     See: https://schema.org/WearableMeasurementSleeve
     Model depth: 6

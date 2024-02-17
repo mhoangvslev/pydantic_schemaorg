@@ -16,17 +16,17 @@ class MedicalRiskEstimator(MedicalEntity):
     Model depth: 3
     """
     type_: str = Field(default="MedicalRiskEstimator", alias='@type', const=True)
-    estimatesRiskOf: Optional[Union[List[Union['MedicalEntity', str]], 'MedicalEntity', str]] = Field(
-        default=None,
-        description="The condition, complication, or symptom whose risk is being estimated.",
-    )
     includedRiskFactor: Optional[Union[List[Union['MedicalRiskFactor', str]], 'MedicalRiskFactor', str]] = Field(
         default=None,
         description="A modifiable or non-modifiable risk factor included in the calculation, e.g. age, coexisting"
      "condition.",
     )
+    estimatesRiskOf: Optional[Union[List[Union['MedicalEntity', str]], 'MedicalEntity', str]] = Field(
+        default=None,
+        description="The condition, complication, or symptom whose risk is being estimated.",
+    )
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.MedicalEntity import MedicalEntity
     from pydantic_schemaorg.MedicalRiskFactor import MedicalRiskFactor
+    from pydantic_schemaorg.MedicalEntity import MedicalEntity

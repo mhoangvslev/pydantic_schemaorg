@@ -6,7 +6,7 @@ from pydantic_schemaorg.WearableMeasurementTypeEnumeration import WearableMeasur
 
 
 class WearableMeasurementCollar(WearableMeasurementTypeEnumeration):
-    """Measurement of the collar, for example of a shirt
+    """Measurement of the collar, for example of a shirt.
 
     See: https://schema.org/WearableMeasurementCollar
     Model depth: 6

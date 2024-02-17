@@ -24,6 +24,19 @@ class SizeSpecification(QualitativeValue):
      "\"GS1\" or \"ISO-EN13402\"), country code (for example \"US\" or \"JP\"), or a measuring"
      "system (for example \"Metric\" or \"Imperial\").",
     )
+    suggestedMeasurement: Optional[Union[List[Union['QuantitativeValue', str]], 'QuantitativeValue', str]] = Field(
+        default=None,
+        description="A suggested range of body measurements for the intended audience or person, for example"
+     "inseam between 32 and 34 inches or height between 170 and 190 cm. Typically found on a size"
+     "chart for wearable products.",
+    )
+    sizeGroup: Optional[Union[List[Union[str, 'Text', 'SizeGroupEnumeration']], str, 'Text', 'SizeGroupEnumeration']] = Field(
+        default=None,
+        description="The size group (also known as \"size type\") for a product's size. Size groups are common"
+     "in the fashion industry to define size segments and suggested audiences for wearable"
+     "products. Multiple values can be combined, for example \"men's big and tall\", \"petite"
+     "maternity\" or \"regular\".",
+    )
     hasMeasurement: Optional[Union[List[Union['QuantitativeValue', str]], 'QuantitativeValue', str]] = Field(
         default=None,
         description="A product measurement, for example the inseam of pants, the wheel size of a bicycle, or"
@@ -35,23 +48,10 @@ class SizeSpecification(QualitativeValue):
         description="The suggested gender of the intended person or audience, for example \"male\", \"female\","
      "or \"unisex\".",
     )
-    sizeGroup: Optional[Union[List[Union[str, 'Text', 'SizeGroupEnumeration']], str, 'Text', 'SizeGroupEnumeration']] = Field(
-        default=None,
-        description="The size group (also known as \"size type\") for a product's size. Size groups are common"
-     "in the fashion industry to define size segments and suggested audiences for wearable"
-     "products. Multiple values can be combined, for example \"men's big and tall\", \"petite"
-     "maternity\" or \"regular\"",
-    )
     suggestedAge: Optional[Union[List[Union['QuantitativeValue', str]], 'QuantitativeValue', str]] = Field(
         default=None,
         description="The age or age range for the intended audience or person, for example 3-12 months for infants,"
      "1-5 years for toddlers.",
-    )
-    suggestedMeasurement: Optional[Union[List[Union['QuantitativeValue', str]], 'QuantitativeValue', str]] = Field(
-        default=None,
-        description="A suggested range of body measurements for the intended audience or person, for example"
-     "inseam between 32 and 34 inches or height between 170 and 190 cm. Typically found on a size"
-     "chart for wearable products.",
     )
     
 
@@ -59,5 +59,5 @@ if TYPE_CHECKING:
     from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.SizeSystemEnumeration import SizeSystemEnumeration
     from pydantic_schemaorg.QuantitativeValue import QuantitativeValue
-    from pydantic_schemaorg.GenderType import GenderType
     from pydantic_schemaorg.SizeGroupEnumeration import SizeGroupEnumeration
+    from pydantic_schemaorg.GenderType import GenderType

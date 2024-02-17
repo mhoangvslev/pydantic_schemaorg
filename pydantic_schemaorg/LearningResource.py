@@ -22,22 +22,25 @@ class LearningResource(CreativeWork):
     Model depth: 3
     """
     type_: str = Field(default="LearningResource", alias='@type', const=True)
-    educationalAlignment: Optional[Union[List[Union['AlignmentObject', str]], 'AlignmentObject', str]] = Field(
-        default=None,
-        description="An alignment to an established educational framework. This property should not be used"
-     "where the nature of the alignment can be described using a simple property, for example"
-     "to express that a resource [[teaches]] or [[assesses]] a competency.",
-    )
     teaches: Optional[Union[List[Union[str, 'Text', 'DefinedTerm']], str, 'Text', 'DefinedTerm']] = Field(
         default=None,
         description="The item being described is intended to help a person learn the competency or learning"
      "outcome defined by the referenced term.",
     )
-    competencyRequired: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'DefinedTerm']], AnyUrl, 'URL', str, 'Text', 'DefinedTerm']] = Field(
+    educationalUse: Optional[Union[List[Union[str, 'Text', 'DefinedTerm']], str, 'Text', 'DefinedTerm']] = Field(
         default=None,
-        description="Knowledge, skill, ability or personal attribute that must be demonstrated by a person"
-     "or other entity in order to do something such as earn an Educational Occupational Credential"
-     "or understand a LearningResource.",
+        description="The purpose of a work in the context of education; for example, 'assignment', 'group"
+     "work'.",
+    )
+    assesses: Optional[Union[List[Union[str, 'Text', 'DefinedTerm']], str, 'Text', 'DefinedTerm']] = Field(
+        default=None,
+        description="The item being described is intended to assess the competency or learning outcome defined"
+     "by the referenced term.",
+    )
+    learningResourceType: Optional[Union[List[Union[str, 'Text', 'DefinedTerm']], str, 'Text', 'DefinedTerm']] = Field(
+        default=None,
+        description="The predominant type or kind characterizing the learning resource. For example, 'presentation',"
+     "'handout'.",
     )
     educationalLevel: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'DefinedTerm']], AnyUrl, 'URL', str, 'Text', 'DefinedTerm']] = Field(
         default=None,
@@ -45,25 +48,22 @@ class LearningResource(CreativeWork):
      "of educational levels include 'beginner', 'intermediate' or 'advanced', and formal"
      "sets of level indicators.",
     )
-    assesses: Optional[Union[List[Union[str, 'Text', 'DefinedTerm']], str, 'Text', 'DefinedTerm']] = Field(
+    educationalAlignment: Optional[Union[List[Union['AlignmentObject', str]], 'AlignmentObject', str]] = Field(
         default=None,
-        description="The item being described is intended to assess the competency or learning outcome defined"
-     "by the referenced term.",
+        description="An alignment to an established educational framework. This property should not be used"
+     "where the nature of the alignment can be described using a simple property, for example"
+     "to express that a resource [[teaches]] or [[assesses]] a competency.",
     )
-    educationalUse: Optional[Union[List[Union[str, 'Text', 'DefinedTerm']], str, 'Text', 'DefinedTerm']] = Field(
+    competencyRequired: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'DefinedTerm']], AnyUrl, 'URL', str, 'Text', 'DefinedTerm']] = Field(
         default=None,
-        description="The purpose of a work in the context of education; for example, 'assignment', 'group"
-     "work'.",
-    )
-    learningResourceType: Optional[Union[List[Union[str, 'Text', 'DefinedTerm']], str, 'Text', 'DefinedTerm']] = Field(
-        default=None,
-        description="The predominant type or kind characterizing the learning resource. For example, 'presentation',"
-     "'handout'.",
+        description="Knowledge, skill, ability or personal attribute that must be demonstrated by a person"
+     "or other entity in order to do something such as earn an Educational Occupational Credential"
+     "or understand a LearningResource.",
     )
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.AlignmentObject import AlignmentObject
     from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.DefinedTerm import DefinedTerm
     from pydantic_schemaorg.URL import URL
+    from pydantic_schemaorg.AlignmentObject import AlignmentObject

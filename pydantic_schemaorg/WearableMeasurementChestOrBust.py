@@ -6,7 +6,7 @@ from pydantic_schemaorg.WearableMeasurementTypeEnumeration import WearableMeasur
 
 
 class WearableMeasurementChestOrBust(WearableMeasurementTypeEnumeration):
-    """Measurement of the chest/bust section, for example of a suit
+    """Measurement of the chest/bust section, for example of a suit.
 
     See: https://schema.org/WearableMeasurementChestOrBust
     Model depth: 6

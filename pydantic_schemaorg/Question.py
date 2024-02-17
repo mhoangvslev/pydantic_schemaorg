@@ -16,20 +16,15 @@ class Question(Comment):
     Model depth: 4
     """
     type_: str = Field(default="Question", alias='@type', const=True)
+    answerCount: Optional[Union[List[Union[int, 'Integer', str]], int, 'Integer', str]] = Field(
+        default=None,
+        description="The number of answers this question has received.",
+    )
     eduQuestionType: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
         default=None,
         description="For questions that are part of learning resources (e.g. Quiz), eduQuestionType indicates"
      "the format of question being given. Example: \"Multiple choice\", \"Open ended\","
      "\"Flashcard\".",
-    )
-    answerCount: Optional[Union[List[Union[int, 'Integer', str]], int, 'Integer', str]] = Field(
-        default=None,
-        description="The number of answers this question has received.",
-    )
-    suggestedAnswer: Optional[Union[List[Union['ItemList', 'Answer', str]], 'ItemList', 'Answer', str]] = Field(
-        default=None,
-        description="An answer (possibly one of several, possibly incorrect) to a Question, e.g. on a Question/Answer"
-     "site.",
     )
     acceptedAnswer: Optional[Union[List[Union['ItemList', 'Answer', str]], 'ItemList', 'Answer', str]] = Field(
         default=None,
@@ -37,10 +32,24 @@ class Question(Comment):
      "vary in their selection mechanisms, e.g. drawing on community opinion and/or the view"
      "of the Question author.",
     )
+    suggestedAnswer: Optional[Union[List[Union['ItemList', 'Answer', str]], 'ItemList', 'Answer', str]] = Field(
+        default=None,
+        description="An answer (possibly one of several, possibly incorrect) to a Question, e.g. on a Question/Answer"
+     "site.",
+    )
+    parentItem: Optional[Union[List[Union['CreativeWork', 'Comment', str]], 'CreativeWork', 'Comment', str]] = Field(
+        default=None,
+        description="The parent of a question, answer or item in general. Typically used for Q/A discussion"
+     "threads e.g. a chain of comments with the first comment being an [[Article]] or other"
+     "[[CreativeWork]]. See also [[comment]] which points from something to a comment about"
+     "it.",
+    )
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.Integer import Integer
+    from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.ItemList import ItemList
     from pydantic_schemaorg.Answer import Answer
+    from pydantic_schemaorg.CreativeWork import CreativeWork
+    from pydantic_schemaorg.Comment import Comment

@@ -6,7 +6,7 @@ from pydantic_schemaorg.WearableMeasurementTypeEnumeration import WearableMeasur
 
 
 class WearableMeasurementWidth(WearableMeasurementTypeEnumeration):
-    """Measurement of the width, for example of shoes
+    """Measurement of the width, for example of shoes.
 
     See: https://schema.org/WearableMeasurementWidth
     Model depth: 6

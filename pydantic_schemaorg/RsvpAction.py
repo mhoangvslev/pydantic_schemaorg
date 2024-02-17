@@ -20,17 +20,17 @@ class RsvpAction(InformAction):
         default=None,
         description="If responding yes, the number of guests who will attend in addition to the invitee.",
     )
-    comment: Optional[Union[List[Union['Comment', str]], 'Comment', str]] = Field(
-        default=None,
-        description="Comments, typically from users.",
-    )
     rsvpResponse: Optional[Union[List[Union['RsvpResponseType', str]], 'RsvpResponseType', str]] = Field(
         default=None,
         description="The response (yes, no, maybe) to the RSVP.",
+    )
+    comment: Optional[Union[List[Union['Comment', str]], 'Comment', str]] = Field(
+        default=None,
+        description="Comments, typically from users.",
     )
     
 
 if TYPE_CHECKING:
     from pydantic_schemaorg.Number import Number
-    from pydantic_schemaorg.Comment import Comment
     from pydantic_schemaorg.RsvpResponseType import RsvpResponseType
+    from pydantic_schemaorg.Comment import Comment

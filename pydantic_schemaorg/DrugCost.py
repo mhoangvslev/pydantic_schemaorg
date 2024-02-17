@@ -1,8 +1,8 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
-from typing import List, Optional, Union
 from pydantic import StrictInt, StrictFloat
+from typing import List, Optional, Union
 
 
 from pydantic import Field
@@ -21,9 +21,9 @@ class DrugCost(MedicalEntity):
     Model depth: 3
     """
     type_: str = Field(default="DrugCost", alias='@type', const=True)
-    costCategory: Optional[Union[List[Union['DrugCostCategory', str]], 'DrugCostCategory', str]] = Field(
+    costPerUnit: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str, 'Text', 'QualitativeValue']], StrictInt, StrictFloat, 'Number', str, 'Text', 'QualitativeValue']] = Field(
         default=None,
-        description="The category of cost, such as wholesale, retail, reimbursement cap, etc.",
+        description="The cost per unit of the drug.",
     )
     drugUnit: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
         default=None,
@@ -35,11 +35,11 @@ class DrugCost(MedicalEntity):
     )
     costCurrency: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
         default=None,
-        description="The currency (in 3-letter of the drug cost. See: http://en.wikipedia.org/wiki/ISO_4217.",
+        description="The currency (in 3-letter) of the drug cost. See: http://en.wikipedia.org/wiki/ISO_4217.",
     )
-    costPerUnit: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str, 'Text', 'QualitativeValue']], StrictInt, StrictFloat, 'Number', str, 'Text', 'QualitativeValue']] = Field(
+    costCategory: Optional[Union[List[Union['DrugCostCategory', str]], 'DrugCostCategory', str]] = Field(
         default=None,
-        description="The cost per unit of the drug.",
+        description="The category of cost, such as wholesale, retail, reimbursement cap, etc.",
     )
     costOrigin: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
         default=None,
@@ -49,8 +49,8 @@ class DrugCost(MedicalEntity):
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.DrugCostCategory import DrugCostCategory
-    from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.AdministrativeArea import AdministrativeArea
     from pydantic_schemaorg.Number import Number
+    from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.QualitativeValue import QualitativeValue
+    from pydantic_schemaorg.AdministrativeArea import AdministrativeArea
+    from pydantic_schemaorg.DrugCostCategory import DrugCostCategory

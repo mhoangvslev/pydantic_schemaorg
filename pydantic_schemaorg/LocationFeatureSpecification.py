@@ -21,14 +21,14 @@ class LocationFeatureSpecification(PropertyValue):
         default=None,
         description="The date when the item becomes valid.",
     )
+    hoursAvailable: Optional[Union[List[Union['OpeningHoursSpecification', str]], 'OpeningHoursSpecification', str]] = Field(
+        default=None,
+        description="The hours during which this service or contact is available.",
+    )
     validThrough: Optional[Union[List[Union[datetime, 'DateTime', date, 'Date', str]], datetime, 'DateTime', date, 'Date', str]] = Field(
         default=None,
         description="The date after when the item is not valid. For example the end of an offer, salary period,"
      "or a period of opening hours.",
-    )
-    hoursAvailable: Optional[Union[List[Union['OpeningHoursSpecification', str]], 'OpeningHoursSpecification', str]] = Field(
-        default=None,
-        description="The hours during which this service or contact is available.",
     )
     
 

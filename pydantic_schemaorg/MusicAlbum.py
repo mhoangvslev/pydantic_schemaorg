@@ -15,10 +15,9 @@ class MusicAlbum(MusicPlaylist):
     Model depth: 4
     """
     type_: str = Field(default="MusicAlbum", alias='@type', const=True)
-    albumProductionType: Optional[Union[List[Union['MusicAlbumProductionType', str]], 'MusicAlbumProductionType', str]] = Field(
+    albumRelease: Optional[Union[List[Union['MusicRelease', str]], 'MusicRelease', str]] = Field(
         default=None,
-        description="Classification of the album by it's type of content: soundtrack, live album, studio"
-     "album, etc.",
+        description="A release of this album.",
     )
     albumReleaseType: Optional[Union[List[Union['MusicAlbumReleaseType', str]], 'MusicAlbumReleaseType', str]] = Field(
         default=None,
@@ -28,15 +27,16 @@ class MusicAlbum(MusicPlaylist):
         default=None,
         description="The artist that performed this album or recording.",
     )
-    albumRelease: Optional[Union[List[Union['MusicRelease', str]], 'MusicRelease', str]] = Field(
+    albumProductionType: Optional[Union[List[Union['MusicAlbumProductionType', str]], 'MusicAlbumProductionType', str]] = Field(
         default=None,
-        description="A release of this album.",
+        description="Classification of the album by its type of content: soundtrack, live album, studio album,"
+     "etc.",
     )
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.MusicAlbumProductionType import MusicAlbumProductionType
+    from pydantic_schemaorg.MusicRelease import MusicRelease
     from pydantic_schemaorg.MusicAlbumReleaseType import MusicAlbumReleaseType
     from pydantic_schemaorg.MusicGroup import MusicGroup
     from pydantic_schemaorg.Person import Person
-    from pydantic_schemaorg.MusicRelease import MusicRelease
+    from pydantic_schemaorg.MusicAlbumProductionType import MusicAlbumProductionType

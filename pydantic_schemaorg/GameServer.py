@@ -19,17 +19,17 @@ class GameServer(Intangible):
         default=None,
         description="Status of a game server.",
     )
-    playersOnline: Optional[Union[List[Union[int, 'Integer', str]], int, 'Integer', str]] = Field(
-        default=None,
-        description="Number of players on the server.",
-    )
     game: Optional[Union[List[Union['VideoGame', str]], 'VideoGame', str]] = Field(
         default=None,
         description="Video game which is played on this server.",
+    )
+    playersOnline: Optional[Union[List[Union[int, 'Integer', str]], int, 'Integer', str]] = Field(
+        default=None,
+        description="Number of players on the server.",
     )
     
 
 if TYPE_CHECKING:
     from pydantic_schemaorg.GameServerStatus import GameServerStatus
-    from pydantic_schemaorg.Integer import Integer
     from pydantic_schemaorg.VideoGame import VideoGame
+    from pydantic_schemaorg.Integer import Integer

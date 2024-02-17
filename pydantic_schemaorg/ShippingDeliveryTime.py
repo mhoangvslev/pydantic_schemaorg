@@ -17,10 +17,9 @@ class ShippingDeliveryTime(StructuredValue):
     Model depth: 4
     """
     type_: str = Field(default="ShippingDeliveryTime", alias='@type', const=True)
-    transitTime: Optional[Union[List[Union['QuantitativeValue', str]], 'QuantitativeValue', str]] = Field(
+    businessDays: Optional[Union[List[Union['OpeningHoursSpecification', str]], 'OpeningHoursSpecification', str]] = Field(
         default=None,
-        description="The typical delay the order has been sent for delivery and the goods reach the final customer."
-     "Typical properties: minValue, maxValue, unitCode (d for DAY).",
+        description="Days of the week when the merchant typically operates, indicated via opening hours markup.",
     )
     cutoffTime: Optional[Union[List[Union[time, 'Time', str]], time, 'Time', str]] = Field(
         default=None,
@@ -39,13 +38,14 @@ class ShippingDeliveryTime(StructuredValue):
      "business days (if a unitCode is used, coded as \"d\"), i.e. only counting days when the"
      "business normally operates.",
     )
-    businessDays: Optional[Union[List[Union['OpeningHoursSpecification', str]], 'OpeningHoursSpecification', str]] = Field(
+    transitTime: Optional[Union[List[Union['QuantitativeValue', str]], 'QuantitativeValue', str]] = Field(
         default=None,
-        description="Days of the week when the merchant typically operates, indicated via opening hours markup.",
+        description="The typical delay the order has been sent for delivery and the goods reach the final customer."
+     "Typical properties: minValue, maxValue, unitCode (d for DAY).",
     )
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.QuantitativeValue import QuantitativeValue
-    from pydantic_schemaorg.Time import Time
     from pydantic_schemaorg.OpeningHoursSpecification import OpeningHoursSpecification
+    from pydantic_schemaorg.Time import Time
+    from pydantic_schemaorg.QuantitativeValue import QuantitativeValue

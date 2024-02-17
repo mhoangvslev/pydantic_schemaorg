@@ -10,7 +10,7 @@ from pydantic_schemaorg.CivicStructure import CivicStructure
 from pydantic_schemaorg.MedicalOrganization import MedicalOrganization
 
 
-class Hospital(MedicalOrganization, EmergencyService, CivicStructure):
+class Hospital(EmergencyService, CivicStructure, MedicalOrganization):
     """A hospital.
 
     See: https://schema.org/Hospital
@@ -21,12 +21,12 @@ class Hospital(MedicalOrganization, EmergencyService, CivicStructure):
         default=None,
         description="A medical specialty of the provider.",
     )
-    healthcareReportingData: Optional[Union[List[Union['Dataset', 'CDCPMDRecord', str]], 'Dataset', 'CDCPMDRecord', str]] = Field(
+    healthcareReportingData: Optional[Union[List[Union['CDCPMDRecord', 'Dataset', str]], 'CDCPMDRecord', 'Dataset', str]] = Field(
         default=None,
         description="Indicates data describing a hospital, e.g. a CDC [[CDCPMDRecord]] or as some kind of"
      "[[Dataset]].",
     )
-    availableService: Optional[Union[List[Union['MedicalTherapy', 'MedicalProcedure', 'MedicalTest', str]], 'MedicalTherapy', 'MedicalProcedure', 'MedicalTest', str]] = Field(
+    availableService: Optional[Union[List[Union['MedicalTherapy', 'MedicalTest', 'MedicalProcedure', str]], 'MedicalTherapy', 'MedicalTest', 'MedicalProcedure', str]] = Field(
         default=None,
         description="A medical service available from this provider.",
     )
@@ -34,8 +34,8 @@ class Hospital(MedicalOrganization, EmergencyService, CivicStructure):
 
 if TYPE_CHECKING:
     from pydantic_schemaorg.MedicalSpecialty import MedicalSpecialty
-    from pydantic_schemaorg.Dataset import Dataset
     from pydantic_schemaorg.CDCPMDRecord import CDCPMDRecord
+    from pydantic_schemaorg.Dataset import Dataset
     from pydantic_schemaorg.MedicalTherapy import MedicalTherapy
-    from pydantic_schemaorg.MedicalProcedure import MedicalProcedure
     from pydantic_schemaorg.MedicalTest import MedicalTest
+    from pydantic_schemaorg.MedicalProcedure import MedicalProcedure

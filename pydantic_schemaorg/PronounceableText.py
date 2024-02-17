@@ -15,9 +15,11 @@ class PronounceableText(Text):
     Model depth: 6
     """
     type_: str = Field(default="PronounceableText", alias='@type', const=True)
-    textValue: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    inLanguage: Optional[Union[List[Union[str, 'Text', 'Language']], str, 'Text', 'Language']] = Field(
         default=None,
-        description="Text value being annotated.",
+        description="The language of the content or performance or used in an action. Please use one of the language"
+     "codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also"
+     "[[availableLanguage]].",
     )
     phoneticText: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
         default=None,
@@ -28,11 +30,9 @@ class PronounceableText(Text):
         default=None,
         description="Form of markup used. eg. [SSML](https://www.w3.org/TR/speech-synthesis11) or [IPA](https://www.wikidata.org/wiki/Property:P898).",
     )
-    inLanguage: Optional[Union[List[Union[str, 'Text', 'Language']], str, 'Text', 'Language']] = Field(
+    textValue: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
         default=None,
-        description="The language of the content or performance or used in an action. Please use one of the language"
-     "codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also"
-     "[[availableLanguage]].",
+        description="Text value being annotated.",
     )
     
 

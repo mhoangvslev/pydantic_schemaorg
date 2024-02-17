@@ -16,10 +16,9 @@ class DoseSchedule(MedicalIntangible):
     Model depth: 4
     """
     type_: str = Field(default="DoseSchedule", alias='@type', const=True)
-    targetPopulation: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    frequency: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
         default=None,
-        description="Characteristics of the population for which this is intended, or which typically uses"
-     "it, e.g. 'adults'.",
+        description="How often the dose is taken, e.g. 'daily'.",
     )
     doseValue: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', 'QualitativeValue', str]], StrictInt, StrictFloat, 'Number', 'QualitativeValue', str]] = Field(
         default=None,
@@ -29,9 +28,10 @@ class DoseSchedule(MedicalIntangible):
         default=None,
         description="The unit of the dose, e.g. 'mg'.",
     )
-    frequency: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    targetPopulation: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
         default=None,
-        description="How often the dose is taken, e.g. 'daily'.",
+        description="Characteristics of the population for which this is intended, or which typically uses"
+     "it, e.g. 'adults'.",
     )
     
 

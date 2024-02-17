@@ -16,6 +16,10 @@ class Comment(CreativeWork):
     Model depth: 3
     """
     type_: str = Field(default="Comment", alias='@type', const=True)
+    sharedContent: Optional[Union[List[Union['CreativeWork', str]], 'CreativeWork', str]] = Field(
+        default=None,
+        description="A CreativeWork such as an image, video, or audio clip shared as part of this posting.",
+    )
     downvoteCount: Optional[Union[List[Union[int, 'Integer', str]], int, 'Integer', str]] = Field(
         default=None,
         description="The number of downvotes this question, answer or comment has received from the community.",
@@ -24,11 +28,15 @@ class Comment(CreativeWork):
         default=None,
         description="The number of upvotes this question, answer or comment has received from the community.",
     )
-    parentItem: Optional[Union[List[Union['Comment', str]], 'Comment', str]] = Field(
+    parentItem: Optional[Union[List[Union['CreativeWork', 'Comment', str]], 'CreativeWork', 'Comment', str]] = Field(
         default=None,
-        description="The parent of a question, answer or item in general.",
+        description="The parent of a question, answer or item in general. Typically used for Q/A discussion"
+     "threads e.g. a chain of comments with the first comment being an [[Article]] or other"
+     "[[CreativeWork]]. See also [[comment]] which points from something to a comment about"
+     "it.",
     )
     
 
 if TYPE_CHECKING:
+    from pydantic_schemaorg.CreativeWork import CreativeWork
     from pydantic_schemaorg.Integer import Integer

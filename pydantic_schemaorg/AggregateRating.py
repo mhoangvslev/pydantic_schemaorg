@@ -19,13 +19,13 @@ class AggregateRating(Rating):
         default=None,
         description="The count of total number of reviews.",
     )
-    ratingCount: Optional[Union[List[Union[int, 'Integer', str]], int, 'Integer', str]] = Field(
-        default=None,
-        description="The count of total number of ratings.",
-    )
     itemReviewed: Optional[Union[List[Union['Thing', str]], 'Thing', str]] = Field(
         default=None,
         description="The item that is being reviewed/rated.",
+    )
+    ratingCount: Optional[Union[List[Union[int, 'Integer', str]], int, 'Integer', str]] = Field(
+        default=None,
+        description="The count of total number of ratings.",
     )
     
 

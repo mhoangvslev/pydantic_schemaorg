@@ -6,7 +6,7 @@ from pydantic_schemaorg.WearableMeasurementTypeEnumeration import WearableMeasur
 
 
 class WearableMeasurementWaist(WearableMeasurementTypeEnumeration):
-    """Measurement of the waist section, for example of pants
+    """Measurement of the waist section, for example of pants.
 
     See: https://schema.org/WearableMeasurementWaist
     Model depth: 6

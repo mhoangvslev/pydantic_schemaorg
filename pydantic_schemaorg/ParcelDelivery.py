@@ -1,8 +1,8 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
-from typing import List, Optional, Union
 from pydantic import AnyUrl
+from typing import List, Optional, Union
 from datetime import date, datetime
 
 
@@ -17,33 +17,28 @@ class ParcelDelivery(Intangible):
     Model depth: 3
     """
     type_: str = Field(default="ParcelDelivery", alias='@type', const=True)
-    trackingNumber: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
-        default=None,
-        description="Shipper tracking number.",
-    )
-    itemShipped: Optional[Union[List[Union['Product', str]], 'Product', str]] = Field(
-        default=None,
-        description="Item(s) being shipped.",
-    )
     trackingUrl: Optional[Union[List[Union[AnyUrl, 'URL', str]], AnyUrl, 'URL', str]] = Field(
         default=None,
         description="Tracking url for the parcel delivery.",
     )
-    expectedArrivalFrom: Optional[Union[List[Union[datetime, 'DateTime', date, 'Date', str]], datetime, 'DateTime', date, 'Date', str]] = Field(
+    deliveryStatus: Optional[Union[List[Union['DeliveryEvent', str]], 'DeliveryEvent', str]] = Field(
         default=None,
-        description="The earliest date the package may arrive.",
+        description="New entry added as the package passes through each leg of its journey (from shipment to"
+     "final delivery).",
     )
-    expectedArrivalUntil: Optional[Union[List[Union[datetime, 'DateTime', date, 'Date', str]], datetime, 'DateTime', date, 'Date', str]] = Field(
+    trackingNumber: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
         default=None,
-        description="The latest date the package may arrive.",
-    )
-    deliveryAddress: Optional[Union[List[Union['PostalAddress', str]], 'PostalAddress', str]] = Field(
-        default=None,
-        description="Destination address.",
+        description="Shipper tracking number.",
     )
     hasDeliveryMethod: Optional[Union[List[Union['DeliveryMethod', str]], 'DeliveryMethod', str]] = Field(
         default=None,
         description="Method used for delivery or shipping.",
+    )
+    provider: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+        default=None,
+        description="The service provider, service operator, or service performer; the goods producer."
+     "Another party (a seller) may offer those services or goods on behalf of the provider."
+     "A provider may also serve as the seller.",
     )
     carrier: Optional[Union[List[Union['Organization', str]], 'Organization', str]] = Field(
         default=None,
@@ -53,16 +48,21 @@ class ParcelDelivery(Intangible):
         default=None,
         description="Shipper's address.",
     )
-    provider: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    itemShipped: Optional[Union[List[Union['Product', str]], 'Product', str]] = Field(
         default=None,
-        description="The service provider, service operator, or service performer; the goods producer."
-     "Another party (a seller) may offer those services or goods on behalf of the provider."
-     "A provider may also serve as the seller.",
+        description="Item(s) being shipped.",
     )
-    deliveryStatus: Optional[Union[List[Union['DeliveryEvent', str]], 'DeliveryEvent', str]] = Field(
+    deliveryAddress: Optional[Union[List[Union['PostalAddress', str]], 'PostalAddress', str]] = Field(
         default=None,
-        description="New entry added as the package passes through each leg of its journey (from shipment to"
-     "final delivery).",
+        description="Destination address.",
+    )
+    expectedArrivalUntil: Optional[Union[List[Union[datetime, 'DateTime', date, 'Date', str]], datetime, 'DateTime', date, 'Date', str]] = Field(
+        default=None,
+        description="The latest date the package may arrive.",
+    )
+    expectedArrivalFrom: Optional[Union[List[Union[datetime, 'DateTime', date, 'Date', str]], datetime, 'DateTime', date, 'Date', str]] = Field(
+        default=None,
+        description="The earliest date the package may arrive.",
     )
     partOfOrder: Optional[Union[List[Union['Order', str]], 'Order', str]] = Field(
         default=None,
@@ -71,14 +71,14 @@ class ParcelDelivery(Intangible):
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.Product import Product
     from pydantic_schemaorg.URL import URL
+    from pydantic_schemaorg.DeliveryEvent import DeliveryEvent
+    from pydantic_schemaorg.Text import Text
+    from pydantic_schemaorg.DeliveryMethod import DeliveryMethod
+    from pydantic_schemaorg.Person import Person
+    from pydantic_schemaorg.Organization import Organization
+    from pydantic_schemaorg.PostalAddress import PostalAddress
+    from pydantic_schemaorg.Product import Product
     from pydantic_schemaorg.DateTime import DateTime
     from pydantic_schemaorg.Date import Date
-    from pydantic_schemaorg.PostalAddress import PostalAddress
-    from pydantic_schemaorg.DeliveryMethod import DeliveryMethod
-    from pydantic_schemaorg.Organization import Organization
-    from pydantic_schemaorg.Person import Person
-    from pydantic_schemaorg.DeliveryEvent import DeliveryEvent
     from pydantic_schemaorg.Order import Order

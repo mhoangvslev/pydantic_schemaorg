@@ -6,7 +6,7 @@ from pydantic_schemaorg.WearableMeasurementTypeEnumeration import WearableMeasur
 
 
 class WearableMeasurementHips(WearableMeasurementTypeEnumeration):
-    """Measurement of the hip section, for example of a skirt
+    """Measurement of the hip section, for example of a skirt.
 
     See: https://schema.org/WearableMeasurementHips
     Model depth: 6

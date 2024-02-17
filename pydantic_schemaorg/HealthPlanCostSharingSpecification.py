@@ -21,13 +21,13 @@ class HealthPlanCostSharingSpecification(Intangible):
         description="Whether the coinsurance applies before or after deductible, etc. TODO: Is this a closed"
      "set?",
     )
+    healthPlanCopay: Optional[Union[List[Union['PriceSpecification', str]], 'PriceSpecification', str]] = Field(
+        default=None,
+        description="The copay amount.",
+    )
     healthPlanPharmacyCategory: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
         default=None,
         description="The category or type of pharmacy associated with this cost sharing.",
-    )
-    healthPlanCopay: Optional[Union[List[Union['PriceSpecification', str]], 'PriceSpecification', str]] = Field(
-        default=None,
-        description="Whether The copay amount.",
     )
     healthPlanCopayOption: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
         default=None,
@@ -35,7 +35,7 @@ class HealthPlanCostSharingSpecification(Intangible):
     )
     healthPlanCoinsuranceRate: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str]], StrictInt, StrictFloat, 'Number', str]] = Field(
         default=None,
-        description="Whether The rate of coinsurance expressed as a number between 0.0 and 1.0.",
+        description="The rate of coinsurance expressed as a number between 0.0 and 1.0.",
     )
     
 

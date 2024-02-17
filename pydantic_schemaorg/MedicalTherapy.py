@@ -19,6 +19,10 @@ class MedicalTherapy(TherapeuticProcedure):
     Model depth: 5
     """
     type_: str = Field(default="MedicalTherapy", alias='@type', const=True)
+    contraindication: Optional[Union[List[Union[str, 'Text', 'MedicalContraindication']], str, 'Text', 'MedicalContraindication']] = Field(
+        default=None,
+        description="A contraindication for this therapy.",
+    )
     duplicateTherapy: Optional[Union[List[Union['MedicalTherapy', str]], 'MedicalTherapy', str]] = Field(
         default=None,
         description="A therapy that duplicates or overlaps this one.",
@@ -31,13 +35,9 @@ class MedicalTherapy(TherapeuticProcedure):
      "cause congenital anomalies or birth defects; or jeopardize the patient and may require"
      "medical or surgical intervention to prevent one of the outcomes in this definition.",
     )
-    contraindication: Optional[Union[List[Union[str, 'Text', 'MedicalContraindication']], str, 'Text', 'MedicalContraindication']] = Field(
-        default=None,
-        description="A contraindication for this therapy.",
-    )
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.MedicalEntity import MedicalEntity
     from pydantic_schemaorg.Text import Text
     from pydantic_schemaorg.MedicalContraindication import MedicalContraindication
+    from pydantic_schemaorg.MedicalEntity import MedicalEntity

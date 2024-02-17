@@ -16,119 +16,119 @@ class VideoGameSeries(CreativeWorkSeries):
     Model depth: 4
     """
     type_: str = Field(default="VideoGameSeries", alias='@type', const=True)
-    actors: Optional[Union[List[Union['Person', str]], 'Person', str]] = Field(
+    musicBy: Optional[Union[List[Union['MusicGroup', 'Person', str]], 'MusicGroup', 'Person', str]] = Field(
         default=None,
-        description="An actor, e.g. in tv, radio, movie, video games etc. Actors can be associated with individual"
-     "items or with a series, episode, clip.",
-    )
-    containsSeason: Optional[Union[List[Union['CreativeWorkSeason', str]], 'CreativeWorkSeason', str]] = Field(
-        default=None,
-        description="A season that is part of the media series.",
-    )
-    numberOfSeasons: Optional[Union[List[Union[int, 'Integer', str]], int, 'Integer', str]] = Field(
-        default=None,
-        description="The number of seasons in this series.",
-    )
-    gameLocation: Optional[Union[List[Union[AnyUrl, 'URL', 'PostalAddress', 'Place', str]], AnyUrl, 'URL', 'PostalAddress', 'Place', str]] = Field(
-        default=None,
-        description="Real or fictional location of the game (or part of game).",
-    )
-    trailer: Optional[Union[List[Union['VideoObject', str]], 'VideoObject', str]] = Field(
-        default=None,
-        description="The trailer of a movie or tv/radio series, season, episode, etc.",
-    )
-    episodes: Optional[Union[List[Union['Episode', str]], 'Episode', str]] = Field(
-        default=None,
-        description="An episode of a TV/radio series or season.",
-    )
-    numberOfEpisodes: Optional[Union[List[Union[int, 'Integer', str]], int, 'Integer', str]] = Field(
-        default=None,
-        description="The number of episodes in this season or series.",
+        description="The composer of the soundtrack.",
     )
     director: Optional[Union[List[Union['Person', str]], 'Person', str]] = Field(
         default=None,
-        description="A director of e.g. tv, radio, movie, video gaming etc. content, or of an event. Directors"
+        description="A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors"
      "can be associated with individual items or with a series, episode, clip.",
     )
-    productionCompany: Optional[Union[List[Union['Organization', str]], 'Organization', str]] = Field(
+    numberOfPlayers: Optional[Union[List[Union['QuantitativeValue', str]], 'QuantitativeValue', str]] = Field(
         default=None,
-        description="The production company or studio responsible for the item e.g. series, video game, episode"
-     "etc.",
-    )
-    gamePlatform: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'Thing']], AnyUrl, 'URL', str, 'Text', 'Thing']] = Field(
-        default=None,
-        description="The electronic systems used to play <a href=\"http://en.wikipedia.org/wiki/Category:Video_game_platforms\">video"
-     "games</a>.",
-    )
-    seasons: Optional[Union[List[Union['CreativeWorkSeason', str]], 'CreativeWorkSeason', str]] = Field(
-        default=None,
-        description="A season in a media series.",
-    )
-    season: Optional[Union[List[Union[AnyUrl, 'URL', 'CreativeWorkSeason', str]], AnyUrl, 'URL', 'CreativeWorkSeason', str]] = Field(
-        default=None,
-        description="A season in a media series.",
-    )
-    playMode: Optional[Union[List[Union['GamePlayMode', str]], 'GamePlayMode', str]] = Field(
-        default=None,
-        description="Indicates whether this game is multi-player, co-op or single-player. The game can be"
-     "marked as multi-player, co-op and single-player at the same time.",
-    )
-    characterAttribute: Optional[Union[List[Union['Thing', str]], 'Thing', str]] = Field(
-        default=None,
-        description="A piece of data that represents a particular aspect of a fictional character (skill,"
-     "power, character points, advantage, disadvantage).",
-    )
-    cheatCode: Optional[Union[List[Union['CreativeWork', str]], 'CreativeWork', str]] = Field(
-        default=None,
-        description="Cheat codes to the game.",
-    )
-    actor: Optional[Union[List[Union['Person', str]], 'Person', str]] = Field(
-        default=None,
-        description="An actor, e.g. in tv, radio, movie, video games etc., or in an event. Actors can be associated"
-     "with individual items or with a series, episode, clip.",
+        description="Indicate how many people can play this game (minimum, maximum, or range).",
     )
     quest: Optional[Union[List[Union['Thing', str]], 'Thing', str]] = Field(
         default=None,
         description="The task that a player-controlled character, or group of characters may complete in"
      "order to gain a reward.",
     )
+    gamePlatform: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'Thing']], AnyUrl, 'URL', str, 'Text', 'Thing']] = Field(
+        default=None,
+        description="The electronic systems used to play <a href=\"http://en.wikipedia.org/wiki/Category:Video_game_platforms\">video"
+     "games</a>.",
+    )
+    trailer: Optional[Union[List[Union['VideoObject', str]], 'VideoObject', str]] = Field(
+        default=None,
+        description="The trailer of a movie or TV/radio series, season, episode, etc.",
+    )
+    numberOfEpisodes: Optional[Union[List[Union[int, 'Integer', str]], int, 'Integer', str]] = Field(
+        default=None,
+        description="The number of episodes in this season or series.",
+    )
     gameItem: Optional[Union[List[Union['Thing', str]], 'Thing', str]] = Field(
         default=None,
         description="An item is an object within the game world that can be collected by a player or, occasionally,"
      "a non-player character.",
     )
-    numberOfPlayers: Optional[Union[List[Union['QuantitativeValue', str]], 'QuantitativeValue', str]] = Field(
+    episodes: Optional[Union[List[Union['Episode', str]], 'Episode', str]] = Field(
         default=None,
-        description="Indicate how many people can play this game (minimum, maximum, or range).",
+        description="An episode of a TV/radio series or season.",
     )
-    episode: Optional[Union[List[Union['Episode', str]], 'Episode', str]] = Field(
+    actor: Optional[Union[List[Union['Person', str]], 'Person', str]] = Field(
         default=None,
-        description="An episode of a tv, radio or game media within a series or season.",
+        description="An actor, e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated"
+     "with individual items or with a series, episode, clip.",
+    )
+    characterAttribute: Optional[Union[List[Union['Thing', str]], 'Thing', str]] = Field(
+        default=None,
+        description="A piece of data that represents a particular aspect of a fictional character (skill,"
+     "power, character points, advantage, disadvantage).",
     )
     directors: Optional[Union[List[Union['Person', str]], 'Person', str]] = Field(
         default=None,
-        description="A director of e.g. tv, radio, movie, video games etc. content. Directors can be associated"
+        description="A director of e.g. TV, radio, movie, video games etc. content. Directors can be associated"
      "with individual items or with a series, episode, clip.",
     )
-    musicBy: Optional[Union[List[Union['Person', 'MusicGroup', str]], 'Person', 'MusicGroup', str]] = Field(
+    gameLocation: Optional[Union[List[Union[AnyUrl, 'URL', 'PostalAddress', 'Place', str]], AnyUrl, 'URL', 'PostalAddress', 'Place', str]] = Field(
         default=None,
-        description="The composer of the soundtrack.",
+        description="Real or fictional location of the game (or part of game).",
+    )
+    playMode: Optional[Union[List[Union['GamePlayMode', str]], 'GamePlayMode', str]] = Field(
+        default=None,
+        description="Indicates whether this game is multi-player, co-op or single-player. The game can be"
+     "marked as multi-player, co-op and single-player at the same time.",
+    )
+    season: Optional[Union[List[Union[AnyUrl, 'URL', 'CreativeWorkSeason', str]], AnyUrl, 'URL', 'CreativeWorkSeason', str]] = Field(
+        default=None,
+        description="A season in a media series.",
+    )
+    productionCompany: Optional[Union[List[Union['Organization', str]], 'Organization', str]] = Field(
+        default=None,
+        description="The production company or studio responsible for the item, e.g. series, video game,"
+     "episode etc.",
+    )
+    episode: Optional[Union[List[Union['Episode', str]], 'Episode', str]] = Field(
+        default=None,
+        description="An episode of a TV, radio or game media within a series or season.",
+    )
+    cheatCode: Optional[Union[List[Union['CreativeWork', str]], 'CreativeWork', str]] = Field(
+        default=None,
+        description="Cheat codes to the game.",
+    )
+    numberOfSeasons: Optional[Union[List[Union[int, 'Integer', str]], int, 'Integer', str]] = Field(
+        default=None,
+        description="The number of seasons in this series.",
+    )
+    containsSeason: Optional[Union[List[Union['CreativeWorkSeason', str]], 'CreativeWorkSeason', str]] = Field(
+        default=None,
+        description="A season that is part of the media series.",
+    )
+    actors: Optional[Union[List[Union['Person', str]], 'Person', str]] = Field(
+        default=None,
+        description="An actor, e.g. in TV, radio, movie, video games etc. Actors can be associated with individual"
+     "items or with a series, episode, clip.",
+    )
+    seasons: Optional[Union[List[Union['CreativeWorkSeason', str]], 'CreativeWorkSeason', str]] = Field(
+        default=None,
+        description="A season in a media series.",
     )
     
 
 if TYPE_CHECKING:
+    from pydantic_schemaorg.MusicGroup import MusicGroup
     from pydantic_schemaorg.Person import Person
-    from pydantic_schemaorg.CreativeWorkSeason import CreativeWorkSeason
-    from pydantic_schemaorg.Integer import Integer
+    from pydantic_schemaorg.QuantitativeValue import QuantitativeValue
+    from pydantic_schemaorg.Thing import Thing
     from pydantic_schemaorg.URL import URL
+    from pydantic_schemaorg.Text import Text
+    from pydantic_schemaorg.VideoObject import VideoObject
+    from pydantic_schemaorg.Integer import Integer
+    from pydantic_schemaorg.Episode import Episode
     from pydantic_schemaorg.PostalAddress import PostalAddress
     from pydantic_schemaorg.Place import Place
-    from pydantic_schemaorg.VideoObject import VideoObject
-    from pydantic_schemaorg.Episode import Episode
-    from pydantic_schemaorg.Organization import Organization
-    from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.Thing import Thing
     from pydantic_schemaorg.GamePlayMode import GamePlayMode
+    from pydantic_schemaorg.CreativeWorkSeason import CreativeWorkSeason
+    from pydantic_schemaorg.Organization import Organization
     from pydantic_schemaorg.CreativeWork import CreativeWork
-    from pydantic_schemaorg.QuantitativeValue import QuantitativeValue
-    from pydantic_schemaorg.MusicGroup import MusicGroup

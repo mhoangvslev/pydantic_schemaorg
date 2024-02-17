@@ -1,8 +1,8 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
-from typing import List, Optional, Union
 from pydantic import AnyUrl
+from typing import List, Optional, Union
 
 
 from pydantic import Field
@@ -18,6 +18,17 @@ class CourseInstance(Event):
     Model depth: 3
     """
     type_: str = Field(default="CourseInstance", alias='@type', const=True)
+    courseMode: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text']], AnyUrl, 'URL', str, 'Text']] = Field(
+        default=None,
+        description="The medium or means of delivery of the course instance or the mode of study, either as a"
+     "text label (e.g. \"online\", \"onsite\" or \"blended\"; \"synchronous\" or \"asynchronous\";"
+     "\"full-time\" or \"part-time\") or as a URL reference to a term from a controlled vocabulary"
+     "(e.g. https://ceds.ed.gov/element/001311#Asynchronous).",
+    )
+    courseSchedule: Optional[Union[List[Union['Schedule', str]], 'Schedule', str]] = Field(
+        default=None,
+        description="Represents the length and pace of a course, expressed as a [[Schedule]].",
+    )
     courseWorkload: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
         default=None,
         description="The amount of work expected of students taking the course, often provided as a figure"
@@ -28,16 +39,10 @@ class CourseInstance(Event):
         default=None,
         description="A person assigned to instruct or provide instructional assistance for the [[CourseInstance]].",
     )
-    courseMode: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text']], AnyUrl, 'URL', str, 'Text']] = Field(
-        default=None,
-        description="The medium or means of delivery of the course instance or the mode of study, either as a"
-     "text label (e.g. \"online\", \"onsite\" or \"blended\"; \"synchronous\" or \"asynchronous\";"
-     "\"full-time\" or \"part-time\") or as a URL reference to a term from a controlled vocabulary"
-     "(e.g. https://ceds.ed.gov/element/001311#Asynchronous ).",
-    )
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.Person import Person
     from pydantic_schemaorg.URL import URL
+    from pydantic_schemaorg.Text import Text
+    from pydantic_schemaorg.Schedule import Schedule
+    from pydantic_schemaorg.Person import Person

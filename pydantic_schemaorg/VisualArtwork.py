@@ -1,8 +1,8 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
-from pydantic import AnyUrl
 from typing import List, Optional, Union
+from pydantic import AnyUrl
 
 
 from pydantic import Field
@@ -16,13 +16,14 @@ class VisualArtwork(CreativeWork):
     Model depth: 3
     """
     type_: str = Field(default="VisualArtwork", alias='@type', const=True)
-    artworkSurface: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text']], AnyUrl, 'URL', str, 'Text']] = Field(
+    letterer: Optional[Union[List[Union['Person', str]], 'Person', str]] = Field(
         default=None,
-        description="The supporting materials for the artwork, e.g. Canvas, Paper, Wood, Board, etc.",
+        description="The individual who adds lettering, including speech balloons and sound effects, to"
+     "artwork.",
     )
-    depth: Optional[Union[List[Union['Distance', 'QuantitativeValue', str]], 'Distance', 'QuantitativeValue', str]] = Field(
+    colorist: Optional[Union[List[Union['Person', str]], 'Person', str]] = Field(
         default=None,
-        description="The depth of the item.",
+        description="The individual who adds color to inked drawings.",
     )
     artEdition: Optional[Union[List[Union[int, 'Integer', str, 'Text']], int, 'Integer', str, 'Text']] = Field(
         default=None,
@@ -30,55 +31,54 @@ class VisualArtwork(CreativeWork):
      "a limited edition of 20 prints, 'artEdition' refers to the total number of copies (in"
      "this example \"20\").",
     )
-    colorist: Optional[Union[List[Union['Person', str]], 'Person', str]] = Field(
-        default=None,
-        description="The individual who adds color to inked drawings.",
-    )
-    height: Optional[Union[List[Union['Distance', 'QuantitativeValue', str]], 'Distance', 'QuantitativeValue', str]] = Field(
-        default=None,
-        description="The height of the item.",
-    )
-    artMedium: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text']], AnyUrl, 'URL', str, 'Text']] = Field(
-        default=None,
-        description="The material used. (e.g. Oil, Watercolour, Acrylic, Linoprint, Marble, Cyanotype,"
-     "Digital, Lithograph, DryPoint, Intaglio, Pastel, Woodcut, Pencil, Mixed Media, etc.)",
-    )
     artist: Optional[Union[List[Union['Person', str]], 'Person', str]] = Field(
         default=None,
         description="The primary artist for a work in a medium other than pencils or digital line art--for example,"
      "if the primary artwork is done in watercolors or digital paints.",
     )
-    width: Optional[Union[List[Union['Distance', 'QuantitativeValue', str]], 'Distance', 'QuantitativeValue', str]] = Field(
+    height: Optional[Union[List[Union['QuantitativeValue', 'Distance', str]], 'QuantitativeValue', 'Distance', str]] = Field(
         default=None,
-        description="The width of the item.",
-    )
-    letterer: Optional[Union[List[Union['Person', str]], 'Person', str]] = Field(
-        default=None,
-        description="The individual who adds lettering, including speech balloons and sound effects, to"
-     "artwork.",
+        description="The height of the item.",
     )
     artform: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text']], AnyUrl, 'URL', str, 'Text']] = Field(
         default=None,
         description="e.g. Painting, Drawing, Sculpture, Print, Photograph, Assemblage, Collage, etc.",
     )
-    surface: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text']], AnyUrl, 'URL', str, 'Text']] = Field(
+    width: Optional[Union[List[Union['Distance', 'QuantitativeValue', str]], 'Distance', 'QuantitativeValue', str]] = Field(
         default=None,
-        description="A material used as a surface in some artwork, e.g. Canvas, Paper, Wood, Board, etc.",
+        description="The width of the item.",
     )
     penciler: Optional[Union[List[Union['Person', str]], 'Person', str]] = Field(
         default=None,
         description="The individual who draws the primary narrative artwork.",
     )
+    surface: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text']], AnyUrl, 'URL', str, 'Text']] = Field(
+        default=None,
+        description="A material used as a surface in some artwork, e.g. Canvas, Paper, Wood, Board, etc.",
+    )
     inker: Optional[Union[List[Union['Person', str]], 'Person', str]] = Field(
         default=None,
         description="The individual who traces over the pencil drawings in ink after pencils are complete.",
     )
+    artMedium: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text']], AnyUrl, 'URL', str, 'Text']] = Field(
+        default=None,
+        description="The material used. (E.g. Oil, Watercolour, Acrylic, Linoprint, Marble, Cyanotype,"
+     "Digital, Lithograph, DryPoint, Intaglio, Pastel, Woodcut, Pencil, Mixed Media, etc.)",
+    )
+    depth: Optional[Union[List[Union['QuantitativeValue', 'Distance', str]], 'QuantitativeValue', 'Distance', str]] = Field(
+        default=None,
+        description="The depth of the item.",
+    )
+    artworkSurface: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text']], AnyUrl, 'URL', str, 'Text']] = Field(
+        default=None,
+        description="The supporting materials for the artwork, e.g. Canvas, Paper, Wood, Board, etc.",
+    )
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.URL import URL
-    from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.Distance import Distance
-    from pydantic_schemaorg.QuantitativeValue import QuantitativeValue
-    from pydantic_schemaorg.Integer import Integer
     from pydantic_schemaorg.Person import Person
+    from pydantic_schemaorg.Integer import Integer
+    from pydantic_schemaorg.Text import Text
+    from pydantic_schemaorg.QuantitativeValue import QuantitativeValue
+    from pydantic_schemaorg.Distance import Distance
+    from pydantic_schemaorg.URL import URL

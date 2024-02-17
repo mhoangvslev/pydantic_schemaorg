@@ -28,7 +28,7 @@ class TaxiReservation(Reservation):
     )
     pickupTime: Optional[Union[List[Union[datetime, 'DateTime', str]], datetime, 'DateTime', str]] = Field(
         default=None,
-        description="When a taxi will pickup a passenger or a rental car can be picked up.",
+        description="When a taxi will pick up a passenger or a rental car can be picked up.",
     )
     
 

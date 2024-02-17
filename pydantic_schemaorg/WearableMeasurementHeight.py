@@ -6,7 +6,7 @@ from pydantic_schemaorg.WearableMeasurementTypeEnumeration import WearableMeasur
 
 
 class WearableMeasurementHeight(WearableMeasurementTypeEnumeration):
-    """Measurement of the height, for example the heel height of a shoe
+    """Measurement of the height, for example the heel height of a shoe.
 
     See: https://schema.org/WearableMeasurementHeight
     Model depth: 6
