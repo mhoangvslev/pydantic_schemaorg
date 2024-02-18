@@ -3,50 +3,135 @@ from typing import TYPE_CHECKING
 
 from typing import List, Optional, Union
 from pydantic import StrictInt, StrictFloat
+from typing import List, Optional, Union
+from pydantic import AnyUrl, StrictBool, StrictInt, StrictFloat
 
 
 from pydantic import Field
-from pydantic_schemaorg.StructuredValue import StructuredValue
 
 
-class GeoCoordinates(StructuredValue):
+
+from pydantic_schemaorg import SchemaOrgBase
+
+
+
+class GeoCoordinates(SchemaOrgBase):
     """The geographic coordinates of a place or event.
 
     See: https://schema.org/GeoCoordinates
     Model depth: 4
     """
-    type_: str = Field(default="GeoCoordinates", alias='@type', const=True)
-    addressCountry: Optional[Union[List[Union[str, 'Text', 'Country']], str, 'Text', 'Country']] = Field(
+    type_: str = Field(default="GeoCoordinates", alias='@type')
+    
+    addressCountry: Union[List[str], str] = Field(
         default=None,
         description="The country. For example, USA. You can also provide the two-letter [ISO 3166-1 alpha-2"
-     "country code](http://en.wikipedia.org/wiki/ISO_3166-1).",
+     "country code](http://en.wikipedia.org/wiki/ISO_3166-1).",union_mode="smart"
     )
-    elevation: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str, 'Text']], StrictInt, StrictFloat, 'Number', str, 'Text']] = Field(
+    
+    elevation: Union[List[str], str] = Field(
         default=None,
         description="The elevation of a location ([WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System))."
      "Values may be of the form 'NUMBER UNIT\_OF\_MEASUREMENT' (e.g., '1,000 m', '3,200 ft')"
-     "while numbers alone should be assumed to be a value in meters.",
+     "while numbers alone should be assumed to be a value in meters.",union_mode="smart"
     )
-    latitude: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str, 'Text']], StrictInt, StrictFloat, 'Number', str, 'Text']] = Field(
+    
+    latitude: Union[List[str], str] = Field(
         default=None,
-        description="The latitude of a location. For example ```37.42242``` ([WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System)).",
+        description="The latitude of a location. For example ```37.42242``` ([WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System)).",union_mode="smart"
     )
-    longitude: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str, 'Text']], StrictInt, StrictFloat, 'Number', str, 'Text']] = Field(
+    
+    longitude: Union[List[str], str] = Field(
         default=None,
-        description="The longitude of a location. For example ```-122.08585``` ([WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System)).",
+        description="The longitude of a location. For example ```-122.08585``` ([WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System)).",union_mode="smart"
     )
-    address: Optional[Union[List[Union[str, 'Text', 'PostalAddress']], str, 'Text', 'PostalAddress']] = Field(
+    
+    address: Union[List[str], str] = Field(
         default=None,
-        description="Physical address of the item.",
+        description="Physical address of the item.",union_mode="smart"
     )
-    postalCode: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    postalCode: Union[List[str], str] = Field(
         default=None,
-        description="The postal code. For example, 94043.",
+        description="The postal code. For example, 94043.",union_mode="smart"
+    )
+    
+    subjectOf: Union[List[str], str] = Field(
+        default=None,
+        description="A CreativeWork or Event about this Thing.",union_mode="smart"
+    )
+    
+    mainEntityOfPage: Union[List[str], str] = Field(
+        default=None,
+        description="Indicates a page (or other CreativeWork) for which this thing is the main entity being"
+     "described. See [background notes](/docs/datamodel.html#mainEntityBackground)"
+     "for details.",union_mode="smart"
+    )
+    
+    identifier: Union[List[str], str] = Field(
+        default=None,
+        description="The identifier property represents any kind of identifier for any kind of [[Thing]],"
+     "such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for"
+     "representing many of these, either as textual strings or as URL (URI) links. See [background"
+     "notes](/docs/datamodel.html#identifierBg) for more details.",union_mode="smart"
+    )
+    
+    image: Union[List[str], str] = Field(
+        default=None,
+        description="An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].",union_mode="smart"
+    )
+    
+    name: Union[List[str], str] = Field(
+        default=None,
+        description="The name of the item.",union_mode="smart"
+    )
+    
+    url: Union[List[str], str] = Field(
+        default=None,
+        description="URL of the item.",union_mode="smart"
+    )
+    
+    sameAs: Union[List[str], str] = Field(
+        default=None,
+        description="URL of a reference Web page that unambiguously indicates the item's identity. E.g. the"
+     "URL of the item's Wikipedia page, Wikidata entry, or official website.",union_mode="smart"
+    )
+    
+    disambiguatingDescription: Union[List[str], str] = Field(
+        default=None,
+        description="A sub property of description. A short description of the item used to disambiguate from"
+     "other, similar items. Information from other properties (in particular, name) may"
+     "be necessary for the description to be useful for disambiguation.",union_mode="smart"
+    )
+    
+    alternateName: Union[List[str], str] = Field(
+        default=None,
+        description="An alias for the item.",union_mode="smart"
+    )
+    
+    description: Union[List[str], str] = Field(
+        default=None,
+        description="A description of the item.",union_mode="smart"
+    )
+    
+    potentialAction: Union[List[str], str] = Field(
+        default=None,
+        description="Indicates a potential Action, which describes an idealized action in which this thing"
+     "would play an 'object' role.",union_mode="smart"
+    )
+    
+    additionalType: Union[List[str], str] = Field(
+        default=None,
+        description="An additional type for the item, typically used for adding more specific types from external"
+     "vocabularies in microdata syntax. This is a relationship between something and a class"
+     "that the thing is in. Typically the value is a URI-identified RDF class, and in this case"
+     "corresponds to the use of rdf:type in RDF. Text values can be used sparingly, for cases"
+     "where useful information can be added without their being an appropriate schema to reference."
+     "In the case of text values, the class label should follow the schema.org <a href=\"http://schema.org/docs/styleguide.html\">style"
+     "guide</a>.",union_mode="smart"
     )
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.Country import Country
-    from pydantic_schemaorg.Number import Number
-    from pydantic_schemaorg.PostalAddress import PostalAddress
+    from pydantic_schemaorg import Text, PostalAddress, Country, Number, StrictInt, StrictFloat
+    from pydantic_schemaorg import Event, Action, PropertyValue, TextObject, Text, URL, ImageObject, CreativeWork, AnyUrl

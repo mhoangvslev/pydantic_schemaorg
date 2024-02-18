@@ -3,13 +3,24 @@ import os
 from pathlib import Path
 from typing import Dict, Union, Set, List, Tuple, Callable
 
+from itertools import chain
+
 import jinja2
 
 from constants import data_type_map, PACKAGE_NAME
 from jinja import jinja_env
 from models import PydanticClass, PydanticField, Import
 
+class UniqueList(list):
+    def append_filtered(self, o, key=lambda x: x):
+        for item in self:
+            if type(item) == type(o) and key(item) == key(o):
+                return
+        self.append(o)
 
+    def extend_filtered(self, li, key=lambda x: x):
+        for l in li:
+            self.append_filtered(l, key)
 class SchemaOrg:
     def __init__(
             self,
@@ -102,7 +113,7 @@ class SchemaOrg:
                 if name != field_type:
                     imports = self.update_imports(
                         imports,
-                        class_path=f"{PACKAGE_NAME}.{field_type}",
+                        class_path=f"{PACKAGE_NAME}",
                         classes_={field_type},
                         type="pydantic_field",
                     )
@@ -118,6 +129,15 @@ class SchemaOrg:
                 pydantic_types += ("str",)
 
             type_tuple = ", ".join(pydantic_types)
+            for pt in pydantic_types:
+                pt = pt.strip("'")
+                if pt in ["str"]: continue
+                imports = self.update_imports(
+                    imports,
+                    class_path=f"{PACKAGE_NAME}",
+                    classes_={pt},
+                    type="pydantic_field",
+                )
 
             if not pydantic_types:
                 continue
@@ -133,7 +153,7 @@ class SchemaOrg:
                     f"Union[List[Union[{type_tuple}]], {type_tuple}]"
                 )
                 if optional:
-                    pydantic_types = f"Optional[{pydantic_types}]"
+                    pydantic_types = f"{pydantic_types}"
             else:
                 imports = self.update_imports(
                     imports,
@@ -144,7 +164,7 @@ class SchemaOrg:
                 pydantic_types = (
                     type_tuple
                     if type_tuple == "Any"
-                    else f"Optional[Union[List[{type_tuple}], {type_tuple}]]"
+                    else f"Union[List[{type_tuple}], {type_tuple}]"
                 )
             fields.append(
                 PydanticField(
@@ -155,6 +175,7 @@ class SchemaOrg:
                     type=pydantic_types,
                 )
             )
+    
         return fields, imports
 
     def load_type(self, name: str) -> PydanticClass:
@@ -170,17 +191,34 @@ class SchemaOrg:
         parents, forward_refs, depth = self.extract_parents(node)
 
         for parent in parents:
-            imports = self.update_imports(
-                imports,
-                class_path=f"{PACKAGE_NAME}.{parent.valid_name}",
-                classes_={parent.valid_name},
-                type="parent",
-            )
+            parent_name = parent.valid_name
+            if parent_name == "SchemaOrgBase":
+                continue
+            parent_class = self.load_type(parent_name)
+            parent_fields = parent_class.fields
+            parent_imports = parent_class.field_imports + parent_class.pydantic_imports
+
+            # imports = self.update_imports(
+            #     imports,
+            #     class_path=f"{PACKAGE_NAME}",
+            #     classes_={parent.valid_name},
+            #     type="parent",
+            # )
+
+            imports.extend(parent_imports)
+
+            fields.extend(parent_fields)
+
+        fields_set = UniqueList()
+        fields_set.extend_filtered(fields, key=lambda x: x.name)
+
+        imports_set = UniqueList()
+        imports_set.extend_filtered(imports, key=lambda x: f"type={x.type}, classPath={x.classPath}, classes={x.classes_}")
 
         self.pydantic_classes[name] = PydanticClass(
             name=name,
             description=self.cast_description(node.get("rdfs:comment", "")),
-            fields=list(fields),
+            fields=fields_set,
             parents=parents,
             parent_imports=list(filter(lambda x: x.type == 'parent', imports)),
             depth=depth,
@@ -200,6 +238,7 @@ class SchemaOrg:
                     jinja2_version=jinja2.__version__,
                     timestamp=datetime.datetime.now(),
                     model=self.pydantic_classes[name],
+                    field_classes=list(chain(*map(lambda x: list(x.classes_), self.pydantic_classes[name].field_imports)))
                 )
             template.stream(**template_args).dump(model_file)
         return self.pydantic_classes[name]

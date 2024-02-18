@@ -3,64 +3,151 @@ from typing import TYPE_CHECKING
 
 from typing import List, Optional, Union
 from pydantic import AnyUrl
+from typing import List, Optional, Union
+from pydantic import AnyUrl, StrictBool, StrictInt, StrictFloat
 
 
 from pydantic import Field
-from pydantic_schemaorg.Intangible import Intangible
 
 
-class HealthInsurancePlan(Intangible):
+
+from pydantic_schemaorg import SchemaOrgBase
+
+
+
+class HealthInsurancePlan(SchemaOrgBase):
     """A US-style health insurance plan, including PPOs, EPOs, and HMOs.
 
     See: https://schema.org/HealthInsurancePlan
     Model depth: 3
     """
-    type_: str = Field(default="HealthInsurancePlan", alias='@type', const=True)
-    healthPlanDrugTier: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    type_: str = Field(default="HealthInsurancePlan", alias='@type')
+    
+    healthPlanDrugTier: Union[List[str], str] = Field(
         default=None,
-        description="The tier(s) of drugs offered by this formulary or insurance plan.",
+        description="The tier(s) of drugs offered by this formulary or insurance plan.",union_mode="smart"
     )
-    includesHealthPlanNetwork: Optional[Union[List[Union['HealthPlanNetwork', str]], 'HealthPlanNetwork', str]] = Field(
+    
+    includesHealthPlanNetwork: Union[List[str], str] = Field(
         default=None,
-        description="Networks covered by this plan.",
+        description="Networks covered by this plan.",union_mode="smart"
     )
-    healthPlanId: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    healthPlanId: Union[List[str], str] = Field(
         default=None,
         description="The 14-character, HIOS-generated Plan ID number. (Plan IDs must be unique, even across"
-     "different markets.)",
+     "different markets.)",union_mode="smart"
     )
-    usesHealthPlanIdStandard: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text']], AnyUrl, 'URL', str, 'Text']] = Field(
+    
+    usesHealthPlanIdStandard: Union[List[str], str] = Field(
         default=None,
         description="The standard for interpreting the Plan ID. The preferred is \"HIOS\". See the Centers"
-     "for Medicare & Medicaid Services for more details.",
+     "for Medicare & Medicaid Services for more details.",union_mode="smart"
     )
-    contactPoint: Optional[Union[List[Union['ContactPoint', str]], 'ContactPoint', str]] = Field(
+    
+    contactPoint: Union[List[str], str] = Field(
         default=None,
-        description="A contact point for a person or organization.",
+        description="A contact point for a person or organization.",union_mode="smart"
     )
-    includesHealthPlanFormulary: Optional[Union[List[Union['HealthPlanFormulary', str]], 'HealthPlanFormulary', str]] = Field(
+    
+    includesHealthPlanFormulary: Union[List[str], str] = Field(
         default=None,
-        description="Formularies covered by this plan.",
+        description="Formularies covered by this plan.",union_mode="smart"
     )
-    healthPlanMarketingUrl: Optional[Union[List[Union[AnyUrl, 'URL', str]], AnyUrl, 'URL', str]] = Field(
+    
+    healthPlanMarketingUrl: Union[List[str], str] = Field(
         default=None,
         description="The URL that goes directly to the plan brochure for the specific standard plan or plan"
-     "variation.",
+     "variation.",union_mode="smart"
     )
-    healthPlanDrugOption: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    healthPlanDrugOption: Union[List[str], str] = Field(
         default=None,
-        description="TODO.",
+        description="TODO.",union_mode="smart"
     )
-    benefitsSummaryUrl: Optional[Union[List[Union[AnyUrl, 'URL', str]], AnyUrl, 'URL', str]] = Field(
+    
+    benefitsSummaryUrl: Union[List[str], str] = Field(
         default=None,
         description="The URL that goes directly to the summary of benefits and coverage for the specific standard"
-     "plan or plan variation.",
+     "plan or plan variation.",union_mode="smart"
+    )
+    
+    subjectOf: Union[List[str], str] = Field(
+        default=None,
+        description="A CreativeWork or Event about this Thing.",union_mode="smart"
+    )
+    
+    mainEntityOfPage: Union[List[str], str] = Field(
+        default=None,
+        description="Indicates a page (or other CreativeWork) for which this thing is the main entity being"
+     "described. See [background notes](/docs/datamodel.html#mainEntityBackground)"
+     "for details.",union_mode="smart"
+    )
+    
+    identifier: Union[List[str], str] = Field(
+        default=None,
+        description="The identifier property represents any kind of identifier for any kind of [[Thing]],"
+     "such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for"
+     "representing many of these, either as textual strings or as URL (URI) links. See [background"
+     "notes](/docs/datamodel.html#identifierBg) for more details.",union_mode="smart"
+    )
+    
+    image: Union[List[str], str] = Field(
+        default=None,
+        description="An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].",union_mode="smart"
+    )
+    
+    name: Union[List[str], str] = Field(
+        default=None,
+        description="The name of the item.",union_mode="smart"
+    )
+    
+    url: Union[List[str], str] = Field(
+        default=None,
+        description="URL of the item.",union_mode="smart"
+    )
+    
+    sameAs: Union[List[str], str] = Field(
+        default=None,
+        description="URL of a reference Web page that unambiguously indicates the item's identity. E.g. the"
+     "URL of the item's Wikipedia page, Wikidata entry, or official website.",union_mode="smart"
+    )
+    
+    disambiguatingDescription: Union[List[str], str] = Field(
+        default=None,
+        description="A sub property of description. A short description of the item used to disambiguate from"
+     "other, similar items. Information from other properties (in particular, name) may"
+     "be necessary for the description to be useful for disambiguation.",union_mode="smart"
+    )
+    
+    alternateName: Union[List[str], str] = Field(
+        default=None,
+        description="An alias for the item.",union_mode="smart"
+    )
+    
+    description: Union[List[str], str] = Field(
+        default=None,
+        description="A description of the item.",union_mode="smart"
+    )
+    
+    potentialAction: Union[List[str], str] = Field(
+        default=None,
+        description="Indicates a potential Action, which describes an idealized action in which this thing"
+     "would play an 'object' role.",union_mode="smart"
+    )
+    
+    additionalType: Union[List[str], str] = Field(
+        default=None,
+        description="An additional type for the item, typically used for adding more specific types from external"
+     "vocabularies in microdata syntax. This is a relationship between something and a class"
+     "that the thing is in. Typically the value is a URI-identified RDF class, and in this case"
+     "corresponds to the use of rdf:type in RDF. Text values can be used sparingly, for cases"
+     "where useful information can be added without their being an appropriate schema to reference."
+     "In the case of text values, the class label should follow the schema.org <a href=\"http://schema.org/docs/styleguide.html\">style"
+     "guide</a>.",union_mode="smart"
     )
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.HealthPlanNetwork import HealthPlanNetwork
-    from pydantic_schemaorg.URL import URL
-    from pydantic_schemaorg.ContactPoint import ContactPoint
-    from pydantic_schemaorg.HealthPlanFormulary import HealthPlanFormulary
+    from pydantic_schemaorg import Text, ContactPoint, URL, HealthPlanNetwork, AnyUrl, HealthPlanFormulary
+    from pydantic_schemaorg import Event, Action, PropertyValue, TextObject, Text, URL, ImageObject, CreativeWork, AnyUrl

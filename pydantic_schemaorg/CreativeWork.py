@@ -4,184 +4,221 @@ from typing import TYPE_CHECKING
 from pydantic import AnyUrl, StrictBool, StrictInt, StrictFloat
 from typing import List, Optional, Union
 from datetime import date, datetime
+from typing import List, Optional, Union
+from pydantic import AnyUrl
 
 
 from pydantic import Field
-from pydantic_schemaorg.Thing import Thing
 
 
-class CreativeWork(Thing):
+
+from pydantic_schemaorg import SchemaOrgBase
+
+
+
+class CreativeWork(SchemaOrgBase):
     """The most generic kind of creative work, including books, movies, photographs, software"
      "programs, etc.
 
     See: https://schema.org/CreativeWork
     Model depth: 2
     """
-    type_: str = Field(default="CreativeWork", alias='@type', const=True)
-    archivedAt: Optional[Union[List[Union[AnyUrl, 'URL', 'WebPage', str]], AnyUrl, 'URL', 'WebPage', str]] = Field(
+    type_: str = Field(default="CreativeWork", alias='@type')
+    
+    archivedAt: Union[List[str], str] = Field(
         default=None,
         description="Indicates a page or other link involved in archival of a [[CreativeWork]]. In the case"
      "of [[MediaReview]], the items in a [[MediaReviewItem]] may often become inaccessible,"
      "but be archived by archival, journalistic, activist, or law enforcement organizations."
-     "In such cases, the referenced page may not directly publish the content.",
+     "In such cases, the referenced page may not directly publish the content.",union_mode="smart"
     )
-    fileFormat: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text']], AnyUrl, 'URL', str, 'Text']] = Field(
+    
+    fileFormat: Union[List[str], str] = Field(
         default=None,
         description="Media type, typically MIME format (see [IANA site](http://www.iana.org/assignments/media-types/media-types.xhtml))"
      "of the content, e.g. application/zip of a SoftwareApplication binary. In cases where"
      "a CreativeWork has several media type representations, 'encoding' can be used to indicate"
      "each MediaObject alongside particular fileFormat information. Unregistered or niche"
      "file formats can be indicated instead via the most appropriate URL, e.g. defining Web"
-     "page or a Wikipedia entry.",
+     "page or a Wikipedia entry.",union_mode="smart"
     )
-    pattern: Optional[Union[List[Union[str, 'Text', 'DefinedTerm']], str, 'Text', 'DefinedTerm']] = Field(
+    
+    pattern: Union[List[str], str] = Field(
         default=None,
         description="A pattern that something has, for example 'polka dot', 'striped', 'Canadian flag'."
      "Values are typically expressed as text, although links to controlled value schemes"
-     "are also supported.",
+     "are also supported.",union_mode="smart"
     )
-    audio: Optional[Union[List[Union['MusicRecording', 'AudioObject', 'Clip', str]], 'MusicRecording', 'AudioObject', 'Clip', str]] = Field(
+    
+    audio: Union[List[str], str] = Field(
         default=None,
-        description="An embedded audio object.",
+        description="An embedded audio object.",union_mode="smart"
     )
-    expires: Optional[Union[List[Union[datetime, 'DateTime', date, 'Date', str]], datetime, 'DateTime', date, 'Date', str]] = Field(
+    
+    expires: Union[List[str], str] = Field(
         default=None,
         description="Date the content expires and is no longer useful or available. For example a [[VideoObject]]"
      "or [[NewsArticle]] whose availability or relevance is time-limited, or a [[ClaimReview]]"
      "fact check whose publisher wants to indicate that it may no longer be relevant (or helpful"
-     "to highlight) after some date.",
+     "to highlight) after some date.",union_mode="smart"
     )
-    funding: Optional[Union[List[Union['Grant', str]], 'Grant', str]] = Field(
+    
+    funding: Union[List[str], str] = Field(
         default=None,
         description="A [[Grant]] that directly or indirectly provide funding or sponsorship for this item."
-     "See also [[ownershipFundingInfo]].",
+     "See also [[ownershipFundingInfo]].",union_mode="smart"
     )
-    text: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    text: Union[List[str], str] = Field(
         default=None,
-        description="The textual content of this CreativeWork.",
+        description="The textual content of this CreativeWork.",union_mode="smart"
     )
-    reviews: Optional[Union[List[Union['Review', str]], 'Review', str]] = Field(
+    
+    reviews: Union[List[str], str] = Field(
         default=None,
-        description="Review of the item.",
+        description="Review of the item.",union_mode="smart"
     )
-    isAccessibleForFree: Optional[Union[List[Union[StrictBool, 'Boolean', str]], StrictBool, 'Boolean', str]] = Field(
+    
+    isAccessibleForFree: Union[List[str], str] = Field(
         default=None,
-        description="A flag to signal that the item, event, or place is accessible for free.",
+        description="A flag to signal that the item, event, or place is accessible for free.",union_mode="smart"
     )
-    publication: Optional[Union[List[Union['PublicationEvent', str]], 'PublicationEvent', str]] = Field(
+    
+    publication: Union[List[str], str] = Field(
         default=None,
-        description="A publication event associated with the item.",
+        description="A publication event associated with the item.",union_mode="smart"
     )
-    accessibilitySummary: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    accessibilitySummary: Union[List[str], str] = Field(
         default=None,
         description="A human-readable summary of specific accessibility features or deficiencies, consistent"
      "with the other accessibility metadata but expressing subtleties such as \"short descriptions"
      "are present but long descriptions will be needed for non-visual users\" or \"short descriptions"
-     "are present and no long descriptions are needed\".",
+     "are present and no long descriptions are needed\".",union_mode="smart"
     )
-    teaches: Optional[Union[List[Union[str, 'Text', 'DefinedTerm']], str, 'Text', 'DefinedTerm']] = Field(
+    
+    teaches: Union[List[str], str] = Field(
         default=None,
         description="The item being described is intended to help a person learn the competency or learning"
-     "outcome defined by the referenced term.",
+     "outcome defined by the referenced term.",union_mode="smart"
     )
-    accountablePerson: Optional[Union[List[Union['Person', str]], 'Person', str]] = Field(
+    
+    accountablePerson: Union[List[str], str] = Field(
         default=None,
-        description="Specifies the Person that is legally accountable for the CreativeWork.",
+        description="Specifies the Person that is legally accountable for the CreativeWork.",union_mode="smart"
     )
-    temporal: Optional[Union[List[Union[datetime, 'DateTime', str, 'Text']], datetime, 'DateTime', str, 'Text']] = Field(
+    
+    temporal: Union[List[str], str] = Field(
         default=None,
         description="The \"temporal\" property can be used in cases where more specific properties (e.g."
      "[[temporalCoverage]], [[dateCreated]], [[dateModified]], [[datePublished]])"
-     "are not known to be appropriate.",
+     "are not known to be appropriate.",union_mode="smart"
     )
-    size: Optional[Union[List[Union[str, 'Text', 'SizeSpecification', 'QuantitativeValue', 'DefinedTerm']], str, 'Text', 'SizeSpecification', 'QuantitativeValue', 'DefinedTerm']] = Field(
+    
+    size: Union[List[str], str] = Field(
         default=None,
         description="A standardized size of a product or creative work, specified either through a simple"
      "textual string (for example 'XL', '32Wx34L'), a QuantitativeValue with a unitCode,"
      "or a comprehensive and structured [[SizeSpecification]]; in other cases, the [[width]],"
-     "[[height]], [[depth]] and [[weight]] properties may be more applicable.",
+     "[[height]], [[depth]] and [[weight]] properties may be more applicable.",union_mode="smart"
     )
-    about: Optional[Union[List[Union['Thing', str]], 'Thing', str]] = Field(
+    
+    about: Union[List[str], str] = Field(
         default=None,
-        description="The subject matter of the content.",
+        description="The subject matter of the content.",union_mode="smart"
     )
-    exampleOfWork: Optional[Union[List[Union['CreativeWork', str]], 'CreativeWork', str]] = Field(
+    
+    exampleOfWork: Union[List[str], str] = Field(
         default=None,
-        description="A creative work that this work is an example/instance/realization/derivation of.",
+        description="A creative work that this work is an example/instance/realization/derivation of.",union_mode="smart"
     )
-    translationOfWork: Optional[Union[List[Union['CreativeWork', str]], 'CreativeWork', str]] = Field(
+    
+    translationOfWork: Union[List[str], str] = Field(
         default=None,
         description="The work that this work has been translated from. E.g. 物种起源 is a translationOf “On the"
-     "Origin of Species”.",
+     "Origin of Species”.",union_mode="smart"
     )
-    locationCreated: Optional[Union[List[Union['Place', str]], 'Place', str]] = Field(
+    
+    locationCreated: Union[List[str], str] = Field(
         default=None,
         description="The location where the CreativeWork was created, which may not be the same as the location"
-     "depicted in the CreativeWork.",
+     "depicted in the CreativeWork.",union_mode="smart"
     )
-    sdPublisher: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    
+    sdPublisher: Union[List[str], str] = Field(
         default=None,
         description="Indicates the party responsible for generating and publishing the current structured"
      "data markup, typically in cases where the structured data is derived automatically"
      "from existing published content but published on a different site. For example, student"
      "projects and open data initiatives often re-publish existing content with more explicitly"
      "structured metadata. The [[sdPublisher]] property helps make such practices more"
-     "explicit.",
+     "explicit.",union_mode="smart"
     )
-    sponsor: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    
+    sponsor: Union[List[str], str] = Field(
         default=None,
         description="A person or organization that supports a thing through a pledge, promise, or financial"
-     "contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event.",
+     "contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event.",union_mode="smart"
     )
-    abstract: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    abstract: Union[List[str], str] = Field(
         default=None,
-        description="An abstract is a short description that summarizes a [[CreativeWork]].",
+        description="An abstract is a short description that summarizes a [[CreativeWork]].",union_mode="smart"
     )
-    schemaVersion: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text']], AnyUrl, 'URL', str, 'Text']] = Field(
+    
+    schemaVersion: Union[List[str], str] = Field(
         default=None,
         description="Indicates (by URL or string) a particular version of a schema used in some CreativeWork."
      "This property was created primarily to indicate the use of a specific schema.org release,"
      "e.g. ```10.0``` as a simple string, or more explicitly via URL, ```http://schema.org/docs/releases.html#v10.0```."
      "There may be situations in which other schemas might usefully be referenced this way,"
      "e.g. ```http://dublincore.org/specifications/dublin-core/dces/1999-07-02/```"
-     "but this has not been carefully explored in the community.",
+     "but this has not been carefully explored in the community.",union_mode="smart"
     )
-    workTranslation: Optional[Union[List[Union['CreativeWork', str]], 'CreativeWork', str]] = Field(
+    
+    workTranslation: Union[List[str], str] = Field(
         default=None,
         description="A work that is a translation of the content of this work. E.g. 西遊記 has an English workTranslation"
      "“Journey to the West”, a German workTranslation “Monkeys Pilgerfahrt” and a Vietnamese"
-     "translation Tây du ký bình khảo.",
+     "translation Tây du ký bình khảo.",union_mode="smart"
     )
-    creditText: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    creditText: Union[List[str], str] = Field(
         default=None,
         description="Text that can be used to credit person(s) and/or organization(s) associated with a published"
-     "Creative Work.",
+     "Creative Work.",union_mode="smart"
     )
-    educationalUse: Optional[Union[List[Union[str, 'Text', 'DefinedTerm']], str, 'Text', 'DefinedTerm']] = Field(
+    
+    educationalUse: Union[List[str], str] = Field(
         default=None,
         description="The purpose of a work in the context of education; for example, 'assignment', 'group"
-     "work'.",
+     "work'.",union_mode="smart"
     )
-    assesses: Optional[Union[List[Union[str, 'Text', 'DefinedTerm']], str, 'Text', 'DefinedTerm']] = Field(
+    
+    assesses: Union[List[str], str] = Field(
         default=None,
         description="The item being described is intended to assess the competency or learning outcome defined"
-     "by the referenced term.",
+     "by the referenced term.",union_mode="smart"
     )
-    discussionUrl: Optional[Union[List[Union[AnyUrl, 'URL', str]], AnyUrl, 'URL', str]] = Field(
+    
+    discussionUrl: Union[List[str], str] = Field(
         default=None,
-        description="A link to the page containing the comments of the CreativeWork.",
+        description="A link to the page containing the comments of the CreativeWork.",union_mode="smart"
     )
-    accessibilityHazard: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    accessibilityHazard: Union[List[str], str] = Field(
         default=None,
         description="A characteristic of the described resource that is physiologically dangerous to some"
-     "users. Related to WCAG 2.0 guideline 2.3. Values should be drawn from the [approved vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityHazard-vocabulary).",
+     "users. Related to WCAG 2.0 guideline 2.3. Values should be drawn from the [approved vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityHazard-vocabulary).",union_mode="smart"
     )
-    workExample: Optional[Union[List[Union['CreativeWork', str]], 'CreativeWork', str]] = Field(
+    
+    workExample: Union[List[str], str] = Field(
         default=None,
         description="Example/instance/realization/derivation of the concept of this creative work. E.g."
-     "the paperback edition, first edition, or e-book.",
+     "the paperback edition, first edition, or e-book.",union_mode="smart"
     )
-    usageInfo: Optional[Union[List[Union[AnyUrl, 'URL', 'CreativeWork', str]], AnyUrl, 'URL', 'CreativeWork', str]] = Field(
+    
+    usageInfo: Union[List[str], str] = Field(
         default=None,
         description="The schema.org [[usageInfo]] property indicates further information about a [[CreativeWork]]."
      "This property is applicable both to works that are freely available and to those that"
@@ -192,28 +229,32 @@ class CreativeWork(Thing):
      "alongside the license property which indicates license(s) applicable to some piece"
      "of content. The usageInfo property can provide information about other licensing options,"
      "e.g. acquiring commercial usage rights for an image that is also available under non-commercial"
-     "creative commons licenses.",
+     "creative commons licenses.",union_mode="smart"
     )
-    license: Optional[Union[List[Union[AnyUrl, 'URL', 'CreativeWork', str]], AnyUrl, 'URL', 'CreativeWork', str]] = Field(
+    
+    license: Union[List[str], str] = Field(
         default=None,
-        description="A license document that applies to this content, typically indicated by URL.",
+        description="A license document that applies to this content, typically indicated by URL.",union_mode="smart"
     )
-    inLanguage: Optional[Union[List[Union[str, 'Text', 'Language']], str, 'Text', 'Language']] = Field(
+    
+    inLanguage: Union[List[str], str] = Field(
         default=None,
         description="The language of the content or performance or used in an action. Please use one of the language"
      "codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also"
-     "[[availableLanguage]].",
+     "[[availableLanguage]].",union_mode="smart"
     )
-    offers: Optional[Union[List[Union['Demand', 'Offer', str]], 'Demand', 'Offer', str]] = Field(
+    
+    offers: Union[List[str], str] = Field(
         default=None,
         description="An offer to provide this item&#x2014;for example, an offer to sell a product, rent the"
      "DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]]"
      "to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can"
      "also be used to describe a [[Demand]]. While this property is listed as expected on a number"
      "of common types, it can be used in others. In that case, using a second type, such as Product"
-     "or a subtype of Product, can clarify the nature of the offer.",
+     "or a subtype of Product, can clarify the nature of the offer.",union_mode="smart"
     )
-    countryOfOrigin: Optional[Union[List[Union['Country', str]], 'Country', str]] = Field(
+    
+    countryOfOrigin: Union[List[str], str] = Field(
         default=None,
         description="The country of origin of something, including products as well as creative works such"
      "as movie and TV content. In the case of TV and movie, this would be the country of the principle"
@@ -221,82 +262,98 @@ class CreativeWork(Thing):
      "kinds of [[CreativeWork]] it is difficult to provide fully general guidance, and properties"
      "such as [[contentLocation]] and [[locationCreated]] may be more applicable. In the"
      "case of products, the country of origin of the product. The exact interpretation of this"
-     "may vary by context and product type, and cannot be fully enumerated here.",
+     "may vary by context and product type, and cannot be fully enumerated here.",union_mode="smart"
     )
-    mentions: Optional[Union[List[Union['Thing', str]], 'Thing', str]] = Field(
+    
+    mentions: Union[List[str], str] = Field(
         default=None,
         description="Indicates that the CreativeWork contains a reference to, but is not necessarily about"
-     "a concept.",
+     "a concept.",union_mode="smart"
     )
-    producer: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    
+    producer: Union[List[str], str] = Field(
         default=None,
         description="The person or organization who produced the work (e.g. music album, movie, TV/radio"
-     "series etc.).",
+     "series etc.).",union_mode="smart"
     )
-    publisherImprint: Optional[Union[List[Union['Organization', str]], 'Organization', str]] = Field(
+    
+    publisherImprint: Union[List[str], str] = Field(
         default=None,
-        description="The publishing division which published the comic.",
+        description="The publishing division which published the comic.",union_mode="smart"
     )
-    learningResourceType: Optional[Union[List[Union[str, 'Text', 'DefinedTerm']], str, 'Text', 'DefinedTerm']] = Field(
+    
+    learningResourceType: Union[List[str], str] = Field(
         default=None,
         description="The predominant type or kind characterizing the learning resource. For example, 'presentation',"
-     "'handout'.",
+     "'handout'.",union_mode="smart"
     )
-    author: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    
+    author: Union[List[str], str] = Field(
         default=None,
         description="The author of this content or rating. Please note that author is special in that HTML 5"
      "provides a special mechanism for indicating authorship via the rel tag. That is equivalent"
-     "to this and may be used interchangeably.",
+     "to this and may be used interchangeably.",union_mode="smart"
     )
-    dateCreated: Optional[Union[List[Union[datetime, 'DateTime', date, 'Date', str]], datetime, 'DateTime', date, 'Date', str]] = Field(
+    
+    dateCreated: Union[List[str], str] = Field(
         default=None,
-        description="The date on which the CreativeWork was created or the item was added to a DataFeed.",
+        description="The date on which the CreativeWork was created or the item was added to a DataFeed.",union_mode="smart"
     )
-    isPartOf: Optional[Union[List[Union[AnyUrl, 'URL', 'CreativeWork', str]], AnyUrl, 'URL', 'CreativeWork', str]] = Field(
+    
+    isPartOf: Union[List[str], str] = Field(
         default=None,
         description="Indicates an item or CreativeWork that this item, or CreativeWork (in some sense), is"
-     "part of.",
+     "part of.",union_mode="smart"
     )
-    character: Optional[Union[List[Union['Person', str]], 'Person', str]] = Field(
+    
+    character: Union[List[str], str] = Field(
         default=None,
-        description="Fictional person connected with a creative work.",
+        description="Fictional person connected with a creative work.",union_mode="smart"
     )
-    audience: Optional[Union[List[Union['Audience', str]], 'Audience', str]] = Field(
+    
+    audience: Union[List[str], str] = Field(
         default=None,
-        description="An intended audience, i.e. a group for whom something was created.",
+        description="An intended audience, i.e. a group for whom something was created.",union_mode="smart"
     )
-    educationalLevel: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'DefinedTerm']], AnyUrl, 'URL', str, 'Text', 'DefinedTerm']] = Field(
+    
+    educationalLevel: Union[List[str], str] = Field(
         default=None,
         description="The level in terms of progression through an educational or training context. Examples"
      "of educational levels include 'beginner', 'intermediate' or 'advanced', and formal"
-     "sets of level indicators.",
+     "sets of level indicators.",union_mode="smart"
     )
-    accessibilityControl: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    accessibilityControl: Union[List[str], str] = Field(
         default=None,
         description="Identifies input methods that are sufficient to fully control the described resource."
-     "Values should be drawn from the [approved vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityControl-vocabulary).",
+     "Values should be drawn from the [approved vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityControl-vocabulary).",union_mode="smart"
     )
-    isFamilyFriendly: Optional[Union[List[Union[StrictBool, 'Boolean', str]], StrictBool, 'Boolean', str]] = Field(
+    
+    isFamilyFriendly: Union[List[str], str] = Field(
         default=None,
-        description="Indicates whether this content is family friendly.",
+        description="Indicates whether this content is family friendly.",union_mode="smart"
     )
-    position: Optional[Union[List[Union[int, 'Integer', str, 'Text']], int, 'Integer', str, 'Text']] = Field(
+    
+    position: Union[List[str], str] = Field(
         default=None,
-        description="The position of an item in a series or sequence of items.",
+        description="The position of an item in a series or sequence of items.",union_mode="smart"
     )
-    conditionsOfAccess: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    conditionsOfAccess: Union[List[str], str] = Field(
         default=None,
         description="Conditions that affect the availability of, or method(s) of access to, an item. Typically"
      "used for real world items such as an [[ArchiveComponent]] held by an [[ArchiveOrganization]]."
      "This property is not suitable for use as a general Web access control mechanism. It is"
      "expressed only in natural language. For example \"Available by appointment from the"
-     "Reading Room\" or \"Accessible only from logged-in accounts \".",
+     "Reading Room\" or \"Accessible only from logged-in accounts \".",union_mode="smart"
     )
-    datePublished: Optional[Union[List[Union[datetime, 'DateTime', date, 'Date', str]], datetime, 'DateTime', date, 'Date', str]] = Field(
+    
+    datePublished: Union[List[str], str] = Field(
         default=None,
-        description="Date of first broadcast/publication.",
+        description="Date of first broadcast/publication.",union_mode="smart"
     )
-    temporalCoverage: Optional[Union[List[Union[datetime, 'DateTime', AnyUrl, 'URL', str, 'Text']], datetime, 'DateTime', AnyUrl, 'URL', str, 'Text']] = Field(
+    
+    temporalCoverage: Union[List[str], str] = Field(
         default=None,
         description="The temporalCoverage of a CreativeWork indicates the period that the content applies"
      "to, i.e. that it describes, either as a DateTime or as a textual string indicating a time"
@@ -309,37 +366,43 @@ class CreativeWork(Thing):
      "in 1939 - 1945 can be indicated in ISO 8601 interval format format via \"1939/1945\"."
      "Open-ended date ranges can be written with \"..\" in place of the end date. For example,"
      "\"2015-11/..\" indicates a range beginning in November 2015 and with no specified final"
-     "date. This is tentative and might be updated in future when ISO 8601 is officially updated.",
+     "date. This is tentative and might be updated in future when ISO 8601 is officially updated.",union_mode="smart"
     )
-    contentLocation: Optional[Union[List[Union['Place', str]], 'Place', str]] = Field(
+    
+    contentLocation: Union[List[str], str] = Field(
         default=None,
         description="The location depicted or described in the content. For example, the location in a photograph"
-     "or painting.",
+     "or painting.",union_mode="smart"
     )
-    creativeWorkStatus: Optional[Union[List[Union[str, 'Text', 'DefinedTerm']], str, 'Text', 'DefinedTerm']] = Field(
+    
+    creativeWorkStatus: Union[List[str], str] = Field(
         default=None,
         description="The status of a creative work in terms of its stage in a lifecycle. Example terms include"
      "Incomplete, Draft, Published, Obsolete. Some organizations define a set of terms for"
-     "the stages of their publication lifecycle.",
+     "the stages of their publication lifecycle.",union_mode="smart"
     )
-    contentReferenceTime: Optional[Union[List[Union[datetime, 'DateTime', str]], datetime, 'DateTime', str]] = Field(
+    
+    contentReferenceTime: Union[List[str], str] = Field(
         default=None,
         description="The specific time described by a creative work, for works (e.g. articles, video objects"
-     "etc.) that emphasise a particular moment within an Event.",
+     "etc.) that emphasise a particular moment within an Event.",union_mode="smart"
     )
-    spatialCoverage: Optional[Union[List[Union['Place', str]], 'Place', str]] = Field(
+    
+    spatialCoverage: Union[List[str], str] = Field(
         default=None,
         description="The spatialCoverage of a CreativeWork indicates the place(s) which are the focus of"
      "the content. It is a subproperty of contentLocation intended primarily for more technical"
      "and detailed materials. For example with a Dataset, it indicates areas that the dataset"
      "describes: a dataset of New York weather would have spatialCoverage which was the place:"
-     "the state of New York.",
+     "the state of New York.",union_mode="smart"
     )
-    encoding: Optional[Union[List[Union['MediaObject', str]], 'MediaObject', str]] = Field(
+    
+    encoding: Union[List[str], str] = Field(
         default=None,
-        description="A media object that encodes this CreativeWork. This property is a synonym for associatedMedia.",
+        description="A media object that encodes this CreativeWork. This property is a synonym for associatedMedia.",union_mode="smart"
     )
-    editEIDR: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text']], AnyUrl, 'URL', str, 'Text']] = Field(
+    
+    editEIDR: Union[List[str], str] = Field(
         default=None,
         description="An [EIDR](https://eidr.org/) (Entertainment Identifier Registry) [[identifier]]"
      "representing a specific edit / edition for a work of film or television. For example,"
@@ -347,216 +410,262 @@ class CreativeWork(Thing):
      "has several edits, e.g. \"10.5240/1F2A-E1C5-680A-14C6-E76B-I\" and \"10.5240/8A35-3BEE-6497-5D12-9E4F-3\"."
      "Since schema.org types like [[Movie]] and [[TVEpisode]] can be used for both works and"
      "their multiple expressions, it is possible to use [[titleEIDR]] alone (for a general"
-     "description), or alongside [[editEIDR]] for a more edit-specific description.",
+     "description), or alongside [[editEIDR]] for a more edit-specific description.",union_mode="smart"
     )
-    copyrightHolder: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    
+    copyrightHolder: Union[List[str], str] = Field(
         default=None,
-        description="The party holding the legal copyright to the CreativeWork.",
+        description="The party holding the legal copyright to the CreativeWork.",union_mode="smart"
     )
-    provider: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    
+    provider: Union[List[str], str] = Field(
         default=None,
         description="The service provider, service operator, or service performer; the goods producer."
      "Another party (a seller) may offer those services or goods on behalf of the provider."
-     "A provider may also serve as the seller.",
+     "A provider may also serve as the seller.",union_mode="smart"
     )
-    dateModified: Optional[Union[List[Union[datetime, 'DateTime', date, 'Date', str]], datetime, 'DateTime', date, 'Date', str]] = Field(
+    
+    dateModified: Union[List[str], str] = Field(
         default=None,
         description="The date on which the CreativeWork was most recently modified or when the item's entry"
-     "was modified within a DataFeed.",
+     "was modified within a DataFeed.",union_mode="smart"
     )
-    citation: Optional[Union[List[Union[str, 'Text', 'CreativeWork']], str, 'Text', 'CreativeWork']] = Field(
+    
+    citation: Union[List[str], str] = Field(
         default=None,
         description="A citation or reference to another creative work, such as another publication, web page,"
-     "scholarly article, etc.",
+     "scholarly article, etc.",union_mode="smart"
     )
-    editor: Optional[Union[List[Union['Person', str]], 'Person', str]] = Field(
+    
+    editor: Union[List[str], str] = Field(
         default=None,
-        description="Specifies the Person who edited the CreativeWork.",
+        description="Specifies the Person who edited the CreativeWork.",union_mode="smart"
     )
-    mainEntity: Optional[Union[List[Union['Thing', str]], 'Thing', str]] = Field(
+    
+    mainEntity: Union[List[str], str] = Field(
         default=None,
-        description="Indicates the primary entity described in some page or other CreativeWork.",
+        description="Indicates the primary entity described in some page or other CreativeWork.",union_mode="smart"
     )
-    thumbnail: Optional[Union[List[Union['ImageObject', str]], 'ImageObject', str]] = Field(
+    
+    thumbnail: Union[List[str], str] = Field(
         default=None,
-        description="Thumbnail image for an image or video.",
+        description="Thumbnail image for an image or video.",union_mode="smart"
     )
-    copyrightNotice: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    copyrightNotice: Union[List[str], str] = Field(
         default=None,
         description="Text of a notice appropriate for describing the copyright aspects of this Creative Work,"
-     "ideally indicating the owner of the copyright for the Work.",
+     "ideally indicating the owner of the copyright for the Work.",union_mode="smart"
     )
-    timeRequired: Optional[Union[List[Union['Duration', str]], 'Duration', str]] = Field(
+    
+    timeRequired: Union[List[str], str] = Field(
         default=None,
         description="Approximate or typical time it usually takes to work with or through the content of this"
-     "work for the typical or target audience.",
+     "work for the typical or target audience.",union_mode="smart"
     )
-    typicalAgeRange: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    typicalAgeRange: Union[List[str], str] = Field(
         default=None,
-        description="The typical expected age range, e.g. '7-9', '11-'.",
+        description="The typical expected age range, e.g. '7-9', '11-'.",union_mode="smart"
     )
-    educationalAlignment: Optional[Union[List[Union['AlignmentObject', str]], 'AlignmentObject', str]] = Field(
+    
+    educationalAlignment: Union[List[str], str] = Field(
         default=None,
         description="An alignment to an established educational framework. This property should not be used"
      "where the nature of the alignment can be described using a simple property, for example"
-     "to express that a resource [[teaches]] or [[assesses]] a competency.",
+     "to express that a resource [[teaches]] or [[assesses]] a competency.",union_mode="smart"
     )
-    isBasedOnUrl: Optional[Union[List[Union[AnyUrl, 'URL', 'Product', 'CreativeWork', str]], AnyUrl, 'URL', 'Product', 'CreativeWork', str]] = Field(
+    
+    isBasedOnUrl: Union[List[str], str] = Field(
         default=None,
         description="A resource that was used in the creation of this resource. This term can be repeated for"
-     "multiple sources. For example, http://example.com/great-multiplication-intro.html.",
+     "multiple sources. For example, http://example.com/great-multiplication-intro.html.",union_mode="smart"
     )
-    aggregateRating: Optional[Union[List[Union['AggregateRating', str]], 'AggregateRating', str]] = Field(
+    
+    aggregateRating: Union[List[str], str] = Field(
         default=None,
-        description="The overall rating, based on a collection of reviews or ratings, of the item.",
+        description="The overall rating, based on a collection of reviews or ratings, of the item.",union_mode="smart"
     )
-    headline: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    headline: Union[List[str], str] = Field(
         default=None,
-        description="Headline of the article.",
+        description="Headline of the article.",union_mode="smart"
     )
-    interactionStatistic: Optional[Union[List[Union['InteractionCounter', str]], 'InteractionCounter', str]] = Field(
+    
+    interactionStatistic: Union[List[str], str] = Field(
         default=None,
         description="The number of interactions for the CreativeWork using the WebSite or SoftwareApplication."
-     "The most specific child type of InteractionCounter should be used.",
+     "The most specific child type of InteractionCounter should be used.",union_mode="smart"
     )
-    awards: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    awards: Union[List[str], str] = Field(
         default=None,
-        description="Awards won by or for this item.",
+        description="Awards won by or for this item.",union_mode="smart"
     )
-    funder: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    
+    funder: Union[List[str], str] = Field(
         default=None,
         description="A person or organization that supports (sponsors) something through some kind of financial"
-     "contribution.",
+     "contribution.",union_mode="smart"
     )
-    publisher: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    
+    publisher: Union[List[str], str] = Field(
         default=None,
-        description="The publisher of the creative work.",
+        description="The publisher of the creative work.",union_mode="smart"
     )
-    acquireLicensePage: Optional[Union[List[Union[AnyUrl, 'URL', 'CreativeWork', str]], AnyUrl, 'URL', 'CreativeWork', str]] = Field(
+    
+    acquireLicensePage: Union[List[str], str] = Field(
         default=None,
         description="Indicates a page documenting how licenses can be purchased or otherwise acquired, for"
-     "the current item.",
+     "the current item.",union_mode="smart"
     )
-    commentCount: Optional[Union[List[Union[int, 'Integer', str]], int, 'Integer', str]] = Field(
+    
+    commentCount: Union[List[str], str] = Field(
         default=None,
         description="The number of comments this CreativeWork (e.g. Article, Question or Answer) has received."
      "This is most applicable to works published in Web sites with commenting system; additional"
-     "comments may exist elsewhere.",
+     "comments may exist elsewhere.",union_mode="smart"
     )
-    keywords: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'DefinedTerm']], AnyUrl, 'URL', str, 'Text', 'DefinedTerm']] = Field(
+    
+    keywords: Union[List[str], str] = Field(
         default=None,
         description="Keywords or tags used to describe some item. Multiple textual entries in a keywords list"
-     "are typically delimited by commas, or by repeating the property.",
+     "are typically delimited by commas, or by repeating the property.",union_mode="smart"
     )
-    copyrightYear: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str]], StrictInt, StrictFloat, 'Number', str]] = Field(
+    
+    copyrightYear: Union[List[str], str] = Field(
         default=None,
-        description="The year during which the claimed copyright for the CreativeWork was first asserted.",
+        description="The year during which the claimed copyright for the CreativeWork was first asserted.",union_mode="smart"
     )
-    creator: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    
+    creator: Union[List[str], str] = Field(
         default=None,
         description="The creator/author of this CreativeWork. This is the same as the Author property for"
-     "CreativeWork.",
+     "CreativeWork.",union_mode="smart"
     )
-    associatedMedia: Optional[Union[List[Union['MediaObject', str]], 'MediaObject', str]] = Field(
+    
+    associatedMedia: Union[List[str], str] = Field(
         default=None,
-        description="A media object that encodes this CreativeWork. This property is a synonym for encoding.",
+        description="A media object that encodes this CreativeWork. This property is a synonym for encoding.",union_mode="smart"
     )
-    material: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'Product']], AnyUrl, 'URL', str, 'Text', 'Product']] = Field(
+    
+    material: Union[List[str], str] = Field(
         default=None,
-        description="A material that something is made from, e.g. leather, wool, cotton, paper.",
+        description="A material that something is made from, e.g. leather, wool, cotton, paper.",union_mode="smart"
     )
-    version: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str, 'Text']], StrictInt, StrictFloat, 'Number', str, 'Text']] = Field(
+    
+    version: Union[List[str], str] = Field(
         default=None,
-        description="The version of the CreativeWork embodied by a specified resource.",
+        description="The version of the CreativeWork embodied by a specified resource.",union_mode="smart"
     )
-    review: Optional[Union[List[Union['Review', str]], 'Review', str]] = Field(
+    
+    review: Union[List[str], str] = Field(
         default=None,
-        description="A review of the item.",
+        description="A review of the item.",union_mode="smart"
     )
-    isBasedOn: Optional[Union[List[Union[AnyUrl, 'URL', 'Product', 'CreativeWork', str]], AnyUrl, 'URL', 'Product', 'CreativeWork', str]] = Field(
+    
+    isBasedOn: Union[List[str], str] = Field(
         default=None,
-        description="A resource from which this work is derived or from which it is a modification or adaptation.",
+        description="A resource from which this work is derived or from which it is a modification or adaptation.",union_mode="smart"
     )
-    accessModeSufficient: Optional[Union[List[Union['ItemList', str]], 'ItemList', str]] = Field(
+    
+    accessModeSufficient: Union[List[str], str] = Field(
         default=None,
         description="A list of single or combined accessModes that are sufficient to understand all the intellectual"
-     "content of a resource. Values should be drawn from the [approved vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessModeSufficient-vocabulary).",
+     "content of a resource. Values should be drawn from the [approved vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessModeSufficient-vocabulary).",union_mode="smart"
     )
-    accessMode: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    accessMode: Union[List[str], str] = Field(
         default=None,
         description="The human sensory perceptual system or cognitive faculty through which a person may"
-     "process or perceive information. Values should be drawn from the [approved vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessMode-vocabulary).",
+     "process or perceive information. Values should be drawn from the [approved vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessMode-vocabulary).",union_mode="smart"
     )
-    alternativeHeadline: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    alternativeHeadline: Union[List[str], str] = Field(
         default=None,
-        description="A secondary title of the CreativeWork.",
+        description="A secondary title of the CreativeWork.",union_mode="smart"
     )
-    interactivityType: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    interactivityType: Union[List[str], str] = Field(
         default=None,
         description="The predominant mode of learning supported by the learning resource. Acceptable values"
-     "are 'active', 'expositive', or 'mixed'.",
+     "are 'active', 'expositive', or 'mixed'.",union_mode="smart"
     )
-    translator: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    
+    translator: Union[List[str], str] = Field(
         default=None,
         description="Organization or person who adapts a creative work to different languages, regional"
      "differences and technical requirements of a target market, or that translates during"
-     "some event.",
+     "some event.",union_mode="smart"
     )
-    contributor: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    
+    contributor: Union[List[str], str] = Field(
         default=None,
-        description="A secondary contributor to the CreativeWork or Event.",
+        description="A secondary contributor to the CreativeWork or Event.",union_mode="smart"
     )
-    materialExtent: Optional[Union[List[Union[str, 'Text', 'QuantitativeValue']], str, 'Text', 'QuantitativeValue']] = Field(
+    
+    materialExtent: Union[List[str], str] = Field(
         default=None,
         description="The quantity of the materials being described or an expression of the physical space"
-     "they occupy.",
+     "they occupy.",union_mode="smart"
     )
-    comment: Optional[Union[List[Union['Comment', str]], 'Comment', str]] = Field(
+    
+    comment: Union[List[str], str] = Field(
         default=None,
-        description="Comments, typically from users.",
+        description="Comments, typically from users.",union_mode="smart"
     )
-    encodings: Optional[Union[List[Union['MediaObject', str]], 'MediaObject', str]] = Field(
+    
+    encodings: Union[List[str], str] = Field(
         default=None,
-        description="A media object that encodes this CreativeWork.",
+        description="A media object that encodes this CreativeWork.",union_mode="smart"
     )
-    hasPart: Optional[Union[List[Union['CreativeWork', str]], 'CreativeWork', str]] = Field(
+    
+    hasPart: Union[List[str], str] = Field(
         default=None,
         description="Indicates an item or CreativeWork that is part of this item, or CreativeWork (in some"
-     "sense).",
+     "sense).",union_mode="smart"
     )
-    thumbnailUrl: Optional[Union[List[Union[AnyUrl, 'URL', str]], AnyUrl, 'URL', str]] = Field(
+    
+    thumbnailUrl: Union[List[str], str] = Field(
         default=None,
-        description="A thumbnail image relevant to the Thing.",
+        description="A thumbnail image relevant to the Thing.",union_mode="smart"
     )
-    accessibilityAPI: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    accessibilityAPI: Union[List[str], str] = Field(
         default=None,
         description="Indicates that the resource is compatible with the referenced accessibility API. Values"
-     "should be drawn from the [approved vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityAPI-vocabulary).",
+     "should be drawn from the [approved vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityAPI-vocabulary).",union_mode="smart"
     )
-    sdLicense: Optional[Union[List[Union[AnyUrl, 'URL', 'CreativeWork', str]], AnyUrl, 'URL', 'CreativeWork', str]] = Field(
+    
+    sdLicense: Union[List[str], str] = Field(
         default=None,
-        description="A license document that applies to this structured data, typically indicated by URL.",
+        description="A license document that applies to this structured data, typically indicated by URL.",union_mode="smart"
     )
-    video: Optional[Union[List[Union['VideoObject', 'Clip', str]], 'VideoObject', 'Clip', str]] = Field(
+    
+    video: Union[List[str], str] = Field(
         default=None,
-        description="An embedded video object.",
+        description="An embedded video object.",union_mode="smart"
     )
-    correction: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'CorrectionComment']], AnyUrl, 'URL', str, 'Text', 'CorrectionComment']] = Field(
+    
+    correction: Union[List[str], str] = Field(
         default=None,
         description="Indicates a correction to a [[CreativeWork]], either via a [[CorrectionComment]],"
-     "textually or in another document.",
+     "textually or in another document.",union_mode="smart"
     )
-    interpretedAsClaim: Optional[Union[List[Union['Claim', str]], 'Claim', str]] = Field(
+    
+    interpretedAsClaim: Union[List[str], str] = Field(
         default=None,
         description="Used to indicate a specific claim contained, implied, translated or refined from the"
      "content of a [[MediaObject]] or other [[CreativeWork]]. The interpreting party can"
-     "be indicated using [[claimInterpreter]].",
+     "be indicated using [[claimInterpreter]].",union_mode="smart"
     )
-    releasedEvent: Optional[Union[List[Union['PublicationEvent', str]], 'PublicationEvent', str]] = Field(
+    
+    releasedEvent: Union[List[str], str] = Field(
         default=None,
-        description="The place and time the release was issued, expressed as a PublicationEvent.",
+        description="The place and time the release was issued, expressed as a PublicationEvent.",union_mode="smart"
     )
-    maintainer: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    
+    maintainer: Union[List[str], str] = Field(
         default=None,
         description="A maintainer of a [[Dataset]], software package ([[SoftwareApplication]]), or other"
      "[[Project]]. A maintainer is a [[Person]] or [[Organization]] that manages contributions"
@@ -567,27 +676,32 @@ class CreativeWork(Thing):
      "property can be used to indicate such relationships between datasets to make the different"
      "maintenance roles clear. Similarly in the case of software, a package may have dedicated"
      "maintainers working on integration into software distributions such as Ubuntu, as"
-     "well as upstream maintainers of the underlying work.",
+     "well as upstream maintainers of the underlying work.",union_mode="smart"
     )
-    sdDatePublished: Optional[Union[List[Union[date, 'Date', str]], date, 'Date', str]] = Field(
+    
+    sdDatePublished: Union[List[str], str] = Field(
         default=None,
         description="Indicates the date on which the current structured data was generated / published. Typically"
-     "used alongside [[sdPublisher]].",
+     "used alongside [[sdPublisher]].",union_mode="smart"
     )
-    accessibilityFeature: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    accessibilityFeature: Union[List[str], str] = Field(
         default=None,
         description="Content features of the resource, such as accessible media, alternatives and supported"
-     "enhancements for accessibility. Values should be drawn from the [approved vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityFeature-vocabulary).",
+     "enhancements for accessibility. Values should be drawn from the [approved vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityFeature-vocabulary).",union_mode="smart"
     )
-    contentRating: Optional[Union[List[Union[str, 'Text', 'Rating']], str, 'Text', 'Rating']] = Field(
+    
+    contentRating: Union[List[str], str] = Field(
         default=None,
-        description="Official rating of a piece of content&#x2014;for example, 'MPAA PG-13'.",
+        description="Official rating of a piece of content&#x2014;for example, 'MPAA PG-13'.",union_mode="smart"
     )
-    award: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    award: Union[List[str], str] = Field(
         default=None,
-        description="An award won by or for this item.",
+        description="An award won by or for this item.",union_mode="smart"
     )
-    publishingPrinciples: Optional[Union[List[Union[AnyUrl, 'URL', 'CreativeWork', str]], AnyUrl, 'URL', 'CreativeWork', str]] = Field(
+    
+    publishingPrinciples: Union[List[str], str] = Field(
         default=None,
         description="The publishingPrinciples property indicates (typically via [[URL]]) a document describing"
      "the editorial principles of an [[Organization]] (or individual, e.g. a [[Person]]"
@@ -595,18 +709,21 @@ class CreativeWork(Thing):
      "policies. When applied to a [[CreativeWork]] (e.g. [[NewsArticle]]) the principles"
      "are those of the party primarily responsible for the creation of the [[CreativeWork]]."
      "While such policies are most typically expressed in natural language, sometimes related"
-     "information (e.g. indicating a [[funder]]) can be expressed using schema.org terminology.",
+     "information (e.g. indicating a [[funder]]) can be expressed using schema.org terminology.",union_mode="smart"
     )
-    genre: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text']], AnyUrl, 'URL', str, 'Text']] = Field(
+    
+    genre: Union[List[str], str] = Field(
         default=None,
-        description="Genre of the creative work, broadcast channel or group.",
+        description="Genre of the creative work, broadcast channel or group.",union_mode="smart"
     )
-    spatial: Optional[Union[List[Union['Place', str]], 'Place', str]] = Field(
+    
+    spatial: Union[List[str], str] = Field(
         default=None,
         description="The \"spatial\" property can be used in cases when more specific properties (e.g. [[locationCreated]],"
-     "[[spatialCoverage]], [[contentLocation]]) are not known to be appropriate.",
+     "[[spatialCoverage]], [[contentLocation]]) are not known to be appropriate.",union_mode="smart"
     )
-    encodingFormat: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text']], AnyUrl, 'URL', str, 'Text']] = Field(
+    
+    encodingFormat: Union[List[str], str] = Field(
         default=None,
         description="Media type typically expressed using a MIME format (see [IANA site](http://www.iana.org/assignments/media-types/media-types.xhtml)"
      "and [MDN reference](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types)),"
@@ -614,57 +731,96 @@ class CreativeWork(Thing):
      "cases where a [[CreativeWork]] has several media type representations, [[encoding]]"
      "can be used to indicate each [[MediaObject]] alongside particular [[encodingFormat]]"
      "information. Unregistered or niche encoding and file formats can be indicated instead"
-     "via the most appropriate URL, e.g. defining Web page or a Wikipedia/Wikidata entry.",
+     "via the most appropriate URL, e.g. defining Web page or a Wikipedia/Wikidata entry.",union_mode="smart"
     )
-    sourceOrganization: Optional[Union[List[Union['Organization', str]], 'Organization', str]] = Field(
+    
+    sourceOrganization: Union[List[str], str] = Field(
         default=None,
-        description="The Organization on whose behalf the creator was working.",
+        description="The Organization on whose behalf the creator was working.",union_mode="smart"
     )
-    recordedAt: Optional[Union[List[Union['Event', str]], 'Event', str]] = Field(
+    
+    recordedAt: Union[List[str], str] = Field(
         default=None,
         description="The Event where the CreativeWork was recorded. The CreativeWork may capture all or part"
-     "of the event.",
+     "of the event.",union_mode="smart"
+    )
+    
+    subjectOf: Union[List[str], str] = Field(
+        default=None,
+        description="A CreativeWork or Event about this Thing.",union_mode="smart"
+    )
+    
+    mainEntityOfPage: Union[List[str], str] = Field(
+        default=None,
+        description="Indicates a page (or other CreativeWork) for which this thing is the main entity being"
+     "described. See [background notes](/docs/datamodel.html#mainEntityBackground)"
+     "for details.",union_mode="smart"
+    )
+    
+    identifier: Union[List[str], str] = Field(
+        default=None,
+        description="The identifier property represents any kind of identifier for any kind of [[Thing]],"
+     "such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for"
+     "representing many of these, either as textual strings or as URL (URI) links. See [background"
+     "notes](/docs/datamodel.html#identifierBg) for more details.",union_mode="smart"
+    )
+    
+    image: Union[List[str], str] = Field(
+        default=None,
+        description="An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].",union_mode="smart"
+    )
+    
+    name: Union[List[str], str] = Field(
+        default=None,
+        description="The name of the item.",union_mode="smart"
+    )
+    
+    url: Union[List[str], str] = Field(
+        default=None,
+        description="URL of the item.",union_mode="smart"
+    )
+    
+    sameAs: Union[List[str], str] = Field(
+        default=None,
+        description="URL of a reference Web page that unambiguously indicates the item's identity. E.g. the"
+     "URL of the item's Wikipedia page, Wikidata entry, or official website.",union_mode="smart"
+    )
+    
+    disambiguatingDescription: Union[List[str], str] = Field(
+        default=None,
+        description="A sub property of description. A short description of the item used to disambiguate from"
+     "other, similar items. Information from other properties (in particular, name) may"
+     "be necessary for the description to be useful for disambiguation.",union_mode="smart"
+    )
+    
+    alternateName: Union[List[str], str] = Field(
+        default=None,
+        description="An alias for the item.",union_mode="smart"
+    )
+    
+    description: Union[List[str], str] = Field(
+        default=None,
+        description="A description of the item.",union_mode="smart"
+    )
+    
+    potentialAction: Union[List[str], str] = Field(
+        default=None,
+        description="Indicates a potential Action, which describes an idealized action in which this thing"
+     "would play an 'object' role.",union_mode="smart"
+    )
+    
+    additionalType: Union[List[str], str] = Field(
+        default=None,
+        description="An additional type for the item, typically used for adding more specific types from external"
+     "vocabularies in microdata syntax. This is a relationship between something and a class"
+     "that the thing is in. Typically the value is a URI-identified RDF class, and in this case"
+     "corresponds to the use of rdf:type in RDF. Text values can be used sparingly, for cases"
+     "where useful information can be added without their being an appropriate schema to reference."
+     "In the case of text values, the class label should follow the schema.org <a href=\"http://schema.org/docs/styleguide.html\">style"
+     "guide</a>.",union_mode="smart"
     )
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.URL import URL
-    from pydantic_schemaorg.WebPage import WebPage
-    from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.DefinedTerm import DefinedTerm
-    from pydantic_schemaorg.MusicRecording import MusicRecording
-    from pydantic_schemaorg.AudioObject import AudioObject
-    from pydantic_schemaorg.Clip import Clip
-    from pydantic_schemaorg.DateTime import DateTime
-    from pydantic_schemaorg.Date import Date
-    from pydantic_schemaorg.Grant import Grant
-    from pydantic_schemaorg.Review import Review
-    from pydantic_schemaorg.Boolean import Boolean
-    from pydantic_schemaorg.PublicationEvent import PublicationEvent
-    from pydantic_schemaorg.Person import Person
-    from pydantic_schemaorg.SizeSpecification import SizeSpecification
-    from pydantic_schemaorg.QuantitativeValue import QuantitativeValue
-    from pydantic_schemaorg.Thing import Thing
-    from pydantic_schemaorg.Place import Place
-    from pydantic_schemaorg.Organization import Organization
-    from pydantic_schemaorg.Language import Language
-    from pydantic_schemaorg.Demand import Demand
-    from pydantic_schemaorg.Offer import Offer
-    from pydantic_schemaorg.Country import Country
-    from pydantic_schemaorg.Audience import Audience
-    from pydantic_schemaorg.Integer import Integer
-    from pydantic_schemaorg.MediaObject import MediaObject
-    from pydantic_schemaorg.ImageObject import ImageObject
-    from pydantic_schemaorg.Duration import Duration
-    from pydantic_schemaorg.AlignmentObject import AlignmentObject
-    from pydantic_schemaorg.Product import Product
-    from pydantic_schemaorg.AggregateRating import AggregateRating
-    from pydantic_schemaorg.InteractionCounter import InteractionCounter
-    from pydantic_schemaorg.Number import Number
-    from pydantic_schemaorg.ItemList import ItemList
-    from pydantic_schemaorg.Comment import Comment
-    from pydantic_schemaorg.VideoObject import VideoObject
-    from pydantic_schemaorg.CorrectionComment import CorrectionComment
-    from pydantic_schemaorg.Claim import Claim
-    from pydantic_schemaorg.Rating import Rating
-    from pydantic_schemaorg.Event import Event
+    from pydantic_schemaorg import Grant, datetime, DateTime, CorrectionComment, Claim, Thing, Offer, Person, Clip, Integer, DefinedTerm, StrictInt, StrictFloat, VideoObject, date, SizeSpecification, Boolean, Country, Text, StrictBool, AggregateRating, AlignmentObject, ImageObject, CreativeWork, WebPage, Number, Language, Organization, Audience, Product, Demand, MusicRecording, Date, URL, AudioObject, Place, Duration, InteractionCounter, Event, Review, QuantitativeValue, int, Comment, Rating, MediaObject, PublicationEvent, AnyUrl, ItemList
+    from pydantic_schemaorg import Event, Action, PropertyValue, TextObject, Text, URL, ImageObject, CreativeWork, AnyUrl

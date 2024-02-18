@@ -3,13 +3,22 @@ from typing import TYPE_CHECKING
 
 from typing import List, Optional, Union
 from pydantic import StrictInt, StrictFloat
+from typing import List, Optional, Union
+from datetime import datetime, time
+from pydantic import AnyUrl
+from typing import List, Optional, Union
+from pydantic import AnyUrl
 
 
 from pydantic import Field
-from pydantic_schemaorg.Action import Action
 
 
-class TradeAction(Action):
+
+from pydantic_schemaorg import SchemaOrgBase
+
+
+
+class TradeAction(SchemaOrgBase):
     """The act of participating in an exchange of goods and services for monetary compensation."
      "An agent trades an object, product or service with a participant in exchange for a one"
      "time or periodic payment.
@@ -17,16 +26,18 @@ class TradeAction(Action):
     See: https://schema.org/TradeAction
     Model depth: 3
     """
-    type_: str = Field(default="TradeAction", alias='@type', const=True)
-    priceCurrency: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    type_: str = Field(default="TradeAction", alias='@type')
+    
+    priceCurrency: Union[List[str], str] = Field(
         default=None,
         description="The currency of the price, or a price component when attached to [[PriceSpecification]]"
      "and its subtypes. Use standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217),"
      "e.g. \"USD\"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies)"
      "for cryptocurrencies, e.g. \"BTC\"; well known names for [Local Exchange Trading Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system)"
-     "(LETS) and other currency types, e.g. \"Ithaca HOUR\".",
+     "(LETS) and other currency types, e.g. \"Ithaca HOUR\".",union_mode="smart"
     )
-    price: Optional[Union[List[Union[StrictInt, StrictFloat, 'Number', str, 'Text']], StrictInt, StrictFloat, 'Number', str, 'Text']] = Field(
+    
+    price: Union[List[str], str] = Field(
         default=None,
         description="The offer price of a product, or of a price component when attached to PriceSpecification"
      "and its subtypes. Usage guidelines: * Use the [[priceCurrency]] property (with standard"
@@ -41,16 +52,169 @@ class TradeAction(Action):
      "and Microdata syntax allow the use of a \"content=\" attribute for publishing simple"
      "machine-readable values alongside more human-friendly formatting. * Use values from"
      "0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially"
-     "similar Unicode symbols.",
+     "similar Unicode symbols.",union_mode="smart"
     )
-    priceSpecification: Optional[Union[List[Union['PriceSpecification', str]], 'PriceSpecification', str]] = Field(
+    
+    priceSpecification: Union[List[str], str] = Field(
         default=None,
         description="One or more detailed price specifications, indicating the unit price and delivery or"
-     "payment charges.",
+     "payment charges.",union_mode="smart"
+    )
+    
+    instrument: Union[List[str], str] = Field(
+        default=None,
+        description="The object that helped the agent perform the action. E.g. John wrote a book with *a pen*.",union_mode="smart"
+    )
+    
+    participant: Union[List[str], str] = Field(
+        default=None,
+        description="Other co-agents that participated in the action indirectly. E.g. John wrote a book with"
+     "*Steve*.",union_mode="smart"
+    )
+    
+    provider: Union[List[str], str] = Field(
+        default=None,
+        description="The service provider, service operator, or service performer; the goods producer."
+     "Another party (a seller) may offer those services or goods on behalf of the provider."
+     "A provider may also serve as the seller.",union_mode="smart"
+    )
+    
+    startTime: Union[List[str], str] = Field(
+        default=None,
+        description="The startTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation),"
+     "the time that it is expected to start. For actions that span a period of time, when the action"
+     "was performed. E.g. John wrote a book from *January* to December. For media, including"
+     "audio and video, it's the time offset of the start of a clip within a larger file. Note that"
+     "Event uses startDate/endDate instead of startTime/endTime, even when describing"
+     "dates with times. This situation may be clarified in future revisions.",union_mode="smart"
+    )
+    
+    object: Union[List[str], str] = Field(
+        default=None,
+        description="The object upon which the action is carried out, whose state is kept intact or changed."
+     "Also known as the semantic roles patient, affected or undergoer (which change their"
+     "state) or theme (which doesn't). E.g. John read *a book*.",union_mode="smart"
+    )
+    
+    target: Union[List[str], str] = Field(
+        default=None,
+        description="Indicates a target EntryPoint, or url, for an Action.",union_mode="smart"
+    )
+    
+    result: Union[List[str], str] = Field(
+        default=None,
+        description="The result produced in the action. E.g. John wrote *a book*.",union_mode="smart"
+    )
+    
+    location: Union[List[str], str] = Field(
+        default=None,
+        description="The location of, for example, where an event is happening, where an organization is located,"
+     "or where an action takes place.",union_mode="smart"
+    )
+    
+    actionStatus: Union[List[str], str] = Field(
+        default=None,
+        description="Indicates the current disposition of the Action.",union_mode="smart"
+    )
+    
+    agent: Union[List[str], str] = Field(
+        default=None,
+        description="The direct performer or driver of the action (animate or inanimate). E.g. *John* wrote"
+     "a book.",union_mode="smart"
+    )
+    
+    endTime: Union[List[str], str] = Field(
+        default=None,
+        description="The endTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation),"
+     "the time that it is expected to end. For actions that span a period of time, when the action"
+     "was performed. E.g. John wrote a book from January to *December*. For media, including"
+     "audio and video, it's the time offset of the end of a clip within a larger file. Note that"
+     "Event uses startDate/endDate instead of startTime/endTime, even when describing"
+     "dates with times. This situation may be clarified in future revisions.",union_mode="smart"
+    )
+    
+    error: Union[List[str], str] = Field(
+        default=None,
+        description="For failed actions, more information on the cause of the failure.",union_mode="smart"
+    )
+    
+    subjectOf: Union[List[str], str] = Field(
+        default=None,
+        description="A CreativeWork or Event about this Thing.",union_mode="smart"
+    )
+    
+    mainEntityOfPage: Union[List[str], str] = Field(
+        default=None,
+        description="Indicates a page (or other CreativeWork) for which this thing is the main entity being"
+     "described. See [background notes](/docs/datamodel.html#mainEntityBackground)"
+     "for details.",union_mode="smart"
+    )
+    
+    identifier: Union[List[str], str] = Field(
+        default=None,
+        description="The identifier property represents any kind of identifier for any kind of [[Thing]],"
+     "such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for"
+     "representing many of these, either as textual strings or as URL (URI) links. See [background"
+     "notes](/docs/datamodel.html#identifierBg) for more details.",union_mode="smart"
+    )
+    
+    image: Union[List[str], str] = Field(
+        default=None,
+        description="An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].",union_mode="smart"
+    )
+    
+    name: Union[List[str], str] = Field(
+        default=None,
+        description="The name of the item.",union_mode="smart"
+    )
+    
+    url: Union[List[str], str] = Field(
+        default=None,
+        description="URL of the item.",union_mode="smart"
+    )
+    
+    sameAs: Union[List[str], str] = Field(
+        default=None,
+        description="URL of a reference Web page that unambiguously indicates the item's identity. E.g. the"
+     "URL of the item's Wikipedia page, Wikidata entry, or official website.",union_mode="smart"
+    )
+    
+    disambiguatingDescription: Union[List[str], str] = Field(
+        default=None,
+        description="A sub property of description. A short description of the item used to disambiguate from"
+     "other, similar items. Information from other properties (in particular, name) may"
+     "be necessary for the description to be useful for disambiguation.",union_mode="smart"
+    )
+    
+    alternateName: Union[List[str], str] = Field(
+        default=None,
+        description="An alias for the item.",union_mode="smart"
+    )
+    
+    description: Union[List[str], str] = Field(
+        default=None,
+        description="A description of the item.",union_mode="smart"
+    )
+    
+    potentialAction: Union[List[str], str] = Field(
+        default=None,
+        description="Indicates a potential Action, which describes an idealized action in which this thing"
+     "would play an 'object' role.",union_mode="smart"
+    )
+    
+    additionalType: Union[List[str], str] = Field(
+        default=None,
+        description="An additional type for the item, typically used for adding more specific types from external"
+     "vocabularies in microdata syntax. This is a relationship between something and a class"
+     "that the thing is in. Typically the value is a URI-identified RDF class, and in this case"
+     "corresponds to the use of rdf:type in RDF. Text values can be used sparingly, for cases"
+     "where useful information can be added without their being an appropriate schema to reference."
+     "In the case of text values, the class label should follow the schema.org <a href=\"http://schema.org/docs/styleguide.html\">style"
+     "guide</a>.",union_mode="smart"
     )
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.Number import Number
-    from pydantic_schemaorg.PriceSpecification import PriceSpecification
+    from pydantic_schemaorg import Text, PriceSpecification, Number, StrictInt, StrictFloat
+    from pydantic_schemaorg import Organization, datetime, EntryPoint, DateTime, Thing, Time, Person, ActionStatusType, Text, URL, VirtualLocation, time, Place, AnyUrl, PostalAddress
+    from pydantic_schemaorg import Event, Action, PropertyValue, TextObject, Text, URL, ImageObject, CreativeWork, AnyUrl

@@ -3,49 +3,133 @@ from typing import TYPE_CHECKING
 
 from typing import List, Optional, Union
 from datetime import time
+from typing import List, Optional, Union
+from pydantic import AnyUrl, StrictBool, StrictInt, StrictFloat
 
 
 from pydantic import Field
-from pydantic_schemaorg.StructuredValue import StructuredValue
 
 
-class ShippingDeliveryTime(StructuredValue):
+
+from pydantic_schemaorg import SchemaOrgBase
+
+
+
+class ShippingDeliveryTime(SchemaOrgBase):
     """ShippingDeliveryTime provides various pieces of information about delivery times"
      "for shipping.
 
     See: https://schema.org/ShippingDeliveryTime
     Model depth: 4
     """
-    type_: str = Field(default="ShippingDeliveryTime", alias='@type', const=True)
-    businessDays: Optional[Union[List[Union['OpeningHoursSpecification', str]], 'OpeningHoursSpecification', str]] = Field(
+    type_: str = Field(default="ShippingDeliveryTime", alias='@type')
+    
+    businessDays: Union[List[str], str] = Field(
         default=None,
-        description="Days of the week when the merchant typically operates, indicated via opening hours markup.",
+        description="Days of the week when the merchant typically operates, indicated via opening hours markup.",union_mode="smart"
     )
-    cutoffTime: Optional[Union[List[Union[time, 'Time', str]], time, 'Time', str]] = Field(
+    
+    cutoffTime: Union[List[str], str] = Field(
         default=None,
         description="Order cutoff time allows merchants to describe the time after which they will no longer"
      "process orders received on that day. For orders processed after cutoff time, one day"
      "gets added to the delivery time estimate. This property is expected to be most typically"
      "used via the [[ShippingRateSettings]] publication pattern. The time is indicated"
      "using the ISO-8601 Time format, e.g. \"23:30:00-05:00\" would represent 6:30 pm Eastern"
-     "Standard Time (EST) which is 5 hours behind Coordinated Universal Time (UTC).",
+     "Standard Time (EST) which is 5 hours behind Coordinated Universal Time (UTC).",union_mode="smart"
     )
-    handlingTime: Optional[Union[List[Union['QuantitativeValue', str]], 'QuantitativeValue', str]] = Field(
+    
+    handlingTime: Union[List[str], str] = Field(
         default=None,
         description="The typical delay between the receipt of the order and the goods either leaving the warehouse"
      "or being prepared for pickup, in case the delivery method is on site pickup. Typical properties:"
      "minValue, maxValue, unitCode (d for DAY). This is by common convention assumed to mean"
      "business days (if a unitCode is used, coded as \"d\"), i.e. only counting days when the"
-     "business normally operates.",
+     "business normally operates.",union_mode="smart"
     )
-    transitTime: Optional[Union[List[Union['QuantitativeValue', str]], 'QuantitativeValue', str]] = Field(
+    
+    transitTime: Union[List[str], str] = Field(
         default=None,
         description="The typical delay the order has been sent for delivery and the goods reach the final customer."
-     "Typical properties: minValue, maxValue, unitCode (d for DAY).",
+     "Typical properties: minValue, maxValue, unitCode (d for DAY).",union_mode="smart"
+    )
+    
+    subjectOf: Union[List[str], str] = Field(
+        default=None,
+        description="A CreativeWork or Event about this Thing.",union_mode="smart"
+    )
+    
+    mainEntityOfPage: Union[List[str], str] = Field(
+        default=None,
+        description="Indicates a page (or other CreativeWork) for which this thing is the main entity being"
+     "described. See [background notes](/docs/datamodel.html#mainEntityBackground)"
+     "for details.",union_mode="smart"
+    )
+    
+    identifier: Union[List[str], str] = Field(
+        default=None,
+        description="The identifier property represents any kind of identifier for any kind of [[Thing]],"
+     "such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for"
+     "representing many of these, either as textual strings or as URL (URI) links. See [background"
+     "notes](/docs/datamodel.html#identifierBg) for more details.",union_mode="smart"
+    )
+    
+    image: Union[List[str], str] = Field(
+        default=None,
+        description="An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].",union_mode="smart"
+    )
+    
+    name: Union[List[str], str] = Field(
+        default=None,
+        description="The name of the item.",union_mode="smart"
+    )
+    
+    url: Union[List[str], str] = Field(
+        default=None,
+        description="URL of the item.",union_mode="smart"
+    )
+    
+    sameAs: Union[List[str], str] = Field(
+        default=None,
+        description="URL of a reference Web page that unambiguously indicates the item's identity. E.g. the"
+     "URL of the item's Wikipedia page, Wikidata entry, or official website.",union_mode="smart"
+    )
+    
+    disambiguatingDescription: Union[List[str], str] = Field(
+        default=None,
+        description="A sub property of description. A short description of the item used to disambiguate from"
+     "other, similar items. Information from other properties (in particular, name) may"
+     "be necessary for the description to be useful for disambiguation.",union_mode="smart"
+    )
+    
+    alternateName: Union[List[str], str] = Field(
+        default=None,
+        description="An alias for the item.",union_mode="smart"
+    )
+    
+    description: Union[List[str], str] = Field(
+        default=None,
+        description="A description of the item.",union_mode="smart"
+    )
+    
+    potentialAction: Union[List[str], str] = Field(
+        default=None,
+        description="Indicates a potential Action, which describes an idealized action in which this thing"
+     "would play an 'object' role.",union_mode="smart"
+    )
+    
+    additionalType: Union[List[str], str] = Field(
+        default=None,
+        description="An additional type for the item, typically used for adding more specific types from external"
+     "vocabularies in microdata syntax. This is a relationship between something and a class"
+     "that the thing is in. Typically the value is a URI-identified RDF class, and in this case"
+     "corresponds to the use of rdf:type in RDF. Text values can be used sparingly, for cases"
+     "where useful information can be added without their being an appropriate schema to reference."
+     "In the case of text values, the class label should follow the schema.org <a href=\"http://schema.org/docs/styleguide.html\">style"
+     "guide</a>.",union_mode="smart"
     )
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.OpeningHoursSpecification import OpeningHoursSpecification
-    from pydantic_schemaorg.Time import Time
-    from pydantic_schemaorg.QuantitativeValue import QuantitativeValue
+    from pydantic_schemaorg import time, OpeningHoursSpecification, QuantitativeValue, Time
+    from pydantic_schemaorg import Event, Action, PropertyValue, TextObject, Text, URL, ImageObject, CreativeWork, AnyUrl

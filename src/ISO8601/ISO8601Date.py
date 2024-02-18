@@ -1,10 +1,9 @@
 import re
 from typing import no_type_check, Optional, Dict, cast, Any, Pattern, TYPE_CHECKING, Generator, AnyStr, Union
 
-from pydantic import BaseConfig
-from pydantic.fields import ModelField
-from pydantic.utils import update_not_none
-from pydantic.validators import str_validator, constr_length_validator
+from pydantic import ConfigDict, GetCoreSchemaHandler, GetJsonSchemaHandler, ValidatorFunctionWrapHandler
+from pydantic.v1.validators import str_validator, constr_length_validator
+from pydantic_core import CoreSchema, core_schema
 
 from pydantic_schemaorg.ISO8601 import errors
 
@@ -95,13 +94,81 @@ class ISO8601Date(str):
                                     date += '.' + str(microsecond)
         return date
 
-    @classmethod
-    def __modify_schema__(cls, field_schema: Dict[str, Any]) -> None:
-        update_not_none(field_schema, minLength=cls.min_length, maxLength=cls.max_length, format='ISO8601')
+    # @classmethod
+    # TODO[pydantic]: We couldn't refactor `__modify_schema__`, please create the `__get_pydantic_json_schema__` manually.
+    # Check https://docs.pydantic.dev/latest/migration/#defining-custom-types for more information.
+    # def __modify_schema__(cls, field_schema: Dict[str, Any]) -> None:
+    #     update_not_none(field_schema, minLength=cls.min_length, maxLength=cls.max_length, format='ISO8601')
 
     @classmethod
-    def __get_validators__(cls) -> 'CallableGenerator':
-        yield cls.validate
+    def __get_pydantic_json_schema__(
+        cls, core_schema: CoreSchema, handler: GetJsonSchemaHandler
+    ) -> Dict[str, Any]:
+        json_schema = super().__get_pydantic_json_schema__(core_schema, handler)
+        json_schema = handler.resolve_ref_schema(json_schema)
+        json_schema.update(minLength=cls.min_length, maxLength=cls.max_length, format='ISO8601')
+        return json_schema
+
+    # @classmethod
+    # TODO[pydantic]: We couldn't refactor `__get_validators__`, please create the `__get_pydantic_core_schema__` manually.
+    # Check https://docs.pydantic.dev/latest/migration/#defining-custom-types for more information.
+    # def __get_validators__(cls) -> 'CallableGenerator':
+    #     yield cls.validate
+
+    @classmethod
+    def __get_pydantic_core_schema__(
+        self, source_type: Any, handler: GetCoreSchemaHandler
+    ) -> CoreSchema:
+            
+        # schema = handler.generate_schema(source_type)
+        # field = handler.field_name
+        # config: ConfigDict = self.model_fields
+
+        def validate(value: Any) -> 'ISO8601Date':
+            
+            if isinstance(value, source_type):
+                return value
+            value = str_validator(value)
+            if source_type.strip_whitespace:
+                value = value.strip()
+            # date: str = cast(str, constr_length_validator(value, field, config))
+            date = str(value)
+
+            m = ISO8601Date_regex().match(date)
+            assert m, 'ISO8601Date regex failed unexpectedly'
+
+            parts = m.groupdict()
+            parts = self.validate_parts(parts)
+
+            if m.end() != len(date):
+                raise ValueError()
+
+            return source_type(
+                date,
+                year=parts['year'],
+                month=parts['month'],
+                day=parts['day'],
+                hour=parts['hour'],
+                minute=parts['minute'],
+                second=parts['second'],
+                microsecond=parts['microsecond'],
+                tz=parts['tz'],
+            )
+
+        assert source_type is ISO8601Date
+        return core_schema.no_info_after_validator_function(
+            validate,
+            core_schema.str_schema(),
+            serialization=core_schema.plain_serializer_function_ser_schema(
+                self._serialize,
+                info_arg=False,
+                return_schema=core_schema.str_schema(),
+            ),
+        )
+    
+    @staticmethod
+    def _serialize(value: Any) -> str:
+        return value.build()
 
     def validate_iso_date(self, value: Any):
         value = str_validator(value)
@@ -111,37 +178,7 @@ class ISO8601Date(str):
         assert m, 'ISO8601Date regex failed unexpectedly'
 
         parts = m.groupdict()
-        parts = self.__class__.validate_parts(parts)
-
-    @classmethod
-    def validate(cls, value: Any, field: 'ModelField', config: 'BaseConfig') -> 'ISO8601Date':
-        if value.__class__ == cls:
-            return value
-        value = str_validator(value)
-        if cls.strip_whitespace:
-            value = value.strip()
-        date: str = cast(str, constr_length_validator(value, field, config))
-
-        m = ISO8601Date_regex().match(date)
-        assert m, 'ISO8601Date regex failed unexpectedly'
-
-        parts = m.groupdict()
-        parts = cls.validate_parts(parts)
-
-        if m.end() != len(date):
-            raise ValueError()
-
-        return cls(
-            date,
-            year=parts['year'],
-            month=parts['month'],
-            day=parts['day'],
-            hour=parts['hour'],
-            minute=parts['minute'],
-            second=parts['second'],
-            microsecond=parts['microsecond'],
-            tz=parts['tz'],
-        )
+        parts = self.__class__.validate_parts(parts)    
 
     @classmethod
     def validate_parts(cls, parts: Dict[str, str]) -> Dict[str, Union[str, int]]:

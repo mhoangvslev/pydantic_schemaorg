@@ -4,280 +4,346 @@ from typing import TYPE_CHECKING
 from typing import List, Optional, Union
 from pydantic import AnyUrl
 from datetime import date
+from typing import List, Optional, Union
+from pydantic import AnyUrl, StrictBool, StrictInt, StrictFloat
 
 
 from pydantic import Field
-from pydantic_schemaorg.Thing import Thing
 
 
-class Person(Thing):
+
+from pydantic_schemaorg import SchemaOrgBase
+
+
+
+class Person(SchemaOrgBase):
     """A person (alive, dead, undead, or fictional).
 
     See: https://schema.org/Person
     Model depth: 2
     """
-    type_: str = Field(default="Person", alias='@type', const=True)
-    funding: Optional[Union[List[Union['Grant', str]], 'Grant', str]] = Field(
+    type_: str = Field(default="Person", alias='@type')
+    
+    funding: Union[List[str], str] = Field(
         default=None,
         description="A [[Grant]] that directly or indirectly provide funding or sponsorship for this item."
-     "See also [[ownershipFundingInfo]].",
+     "See also [[ownershipFundingInfo]].",union_mode="smart"
     )
-    memberOf: Optional[Union[List[Union['ProgramMembership', 'Organization', str]], 'ProgramMembership', 'Organization', str]] = Field(
+    
+    memberOf: Union[List[str], str] = Field(
         default=None,
-        description="An Organization (or ProgramMembership) to which this Person or Organization belongs.",
+        description="An Organization (or ProgramMembership) to which this Person or Organization belongs.",union_mode="smart"
     )
-    gender: Optional[Union[List[Union[str, 'Text', 'GenderType']], str, 'Text', 'GenderType']] = Field(
+    
+    gender: Union[List[str], str] = Field(
         default=None,
         description="Gender of something, typically a [[Person]], but possibly also fictional characters,"
      "animals, etc. While http://schema.org/Male and http://schema.org/Female may be"
      "used, text strings are also acceptable for people who do not identify as a binary gender."
      "The [[gender]] property can also be used in an extended sense to cover e.g. the gender"
      "of sports teams. As with the gender of individuals, we do not try to enumerate all possibilities."
-     "A mixed-gender [[SportsTeam]] can be indicated with a text value of \"Mixed\".",
+     "A mixed-gender [[SportsTeam]] can be indicated with a text value of \"Mixed\".",union_mode="smart"
     )
-    height: Optional[Union[List[Union['QuantitativeValue', 'Distance', str]], 'QuantitativeValue', 'Distance', str]] = Field(
+    
+    height: Union[List[str], str] = Field(
         default=None,
-        description="The height of the item.",
+        description="The height of the item.",union_mode="smart"
     )
-    deathPlace: Optional[Union[List[Union['Place', str]], 'Place', str]] = Field(
+    
+    deathPlace: Union[List[str], str] = Field(
         default=None,
-        description="The place where the person died.",
+        description="The place where the person died.",union_mode="smart"
     )
-    makesOffer: Optional[Union[List[Union['Offer', str]], 'Offer', str]] = Field(
+    
+    makesOffer: Union[List[str], str] = Field(
         default=None,
-        description="A pointer to products or services offered by the organization or person.",
+        description="A pointer to products or services offered by the organization or person.",union_mode="smart"
     )
-    telephone: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    telephone: Union[List[str], str] = Field(
         default=None,
-        description="The telephone number.",
+        description="The telephone number.",union_mode="smart"
     )
-    sponsor: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    
+    sponsor: Union[List[str], str] = Field(
         default=None,
         description="A person or organization that supports a thing through a pledge, promise, or financial"
-     "contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event.",
+     "contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event.",union_mode="smart"
     )
-    owns: Optional[Union[List[Union['Product', 'OwnershipInfo', str]], 'Product', 'OwnershipInfo', str]] = Field(
+    
+    owns: Union[List[str], str] = Field(
         default=None,
-        description="Products owned by the organization or person.",
+        description="Products owned by the organization or person.",union_mode="smart"
     )
-    hasOfferCatalog: Optional[Union[List[Union['OfferCatalog', str]], 'OfferCatalog', str]] = Field(
+    
+    hasOfferCatalog: Union[List[str], str] = Field(
         default=None,
-        description="Indicates an OfferCatalog listing for this Organization, Person, or Service.",
+        description="Indicates an OfferCatalog listing for this Organization, Person, or Service.",union_mode="smart"
     )
-    homeLocation: Optional[Union[List[Union['Place', 'ContactPoint', str]], 'Place', 'ContactPoint', str]] = Field(
+    
+    homeLocation: Union[List[str], str] = Field(
         default=None,
-        description="A contact location for a person's residence.",
+        description="A contact location for a person's residence.",union_mode="smart"
     )
-    workLocation: Optional[Union[List[Union['Place', 'ContactPoint', str]], 'Place', 'ContactPoint', str]] = Field(
+    
+    workLocation: Union[List[str], str] = Field(
         default=None,
-        description="A contact location for a person's place of work.",
+        description="A contact location for a person's place of work.",union_mode="smart"
     )
-    globalLocationNumber: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    globalLocationNumber: Union[List[str], str] = Field(
         default=None,
         description="The [Global Location Number](http://www.gs1.org/gln) (GLN, sometimes also referred"
      "to as International Location Number or ILN) of the respective organization, person,"
-     "or place. The GLN is a 13-digit number used to identify parties and physical locations.",
+     "or place. The GLN is a 13-digit number used to identify parties and physical locations.",union_mode="smart"
     )
-    naics: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    naics: Union[List[str], str] = Field(
         default=None,
         description="The North American Industry Classification System (NAICS) code for a particular organization"
-     "or business person.",
+     "or business person.",union_mode="smart"
     )
-    honorificSuffix: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    honorificSuffix: Union[List[str], str] = Field(
         default=None,
-        description="An honorific suffix following a Person's name such as M.D./PhD/MSCSW.",
+        description="An honorific suffix following a Person's name such as M.D./PhD/MSCSW.",union_mode="smart"
     )
-    email: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    email: Union[List[str], str] = Field(
         default=None,
-        description="Email address.",
+        description="Email address.",union_mode="smart"
     )
-    spouse: Optional[Union[List[Union['Person', str]], 'Person', str]] = Field(
+    
+    spouse: Union[List[str], str] = Field(
         default=None,
-        description="The person's spouse.",
+        description="The person's spouse.",union_mode="smart"
     )
-    weight: Optional[Union[List[Union['QuantitativeValue', str]], 'QuantitativeValue', str]] = Field(
+    
+    weight: Union[List[str], str] = Field(
         default=None,
-        description="The weight of the product or person.",
+        description="The weight of the product or person.",union_mode="smart"
     )
-    vatID: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    vatID: Union[List[str], str] = Field(
         default=None,
-        description="The Value-added Tax ID of the organization or person.",
+        description="The Value-added Tax ID of the organization or person.",union_mode="smart"
     )
-    colleague: Optional[Union[List[Union[AnyUrl, 'URL', 'Person', str]], AnyUrl, 'URL', 'Person', str]] = Field(
+    
+    colleague: Union[List[str], str] = Field(
         default=None,
-        description="A colleague of the person.",
+        description="A colleague of the person.",union_mode="smart"
     )
-    taxID: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    taxID: Union[List[str], str] = Field(
         default=None,
         description="The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US or the CIF/NIF in"
-     "Spain.",
+     "Spain.",union_mode="smart"
     )
-    familyName: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    familyName: Union[List[str], str] = Field(
         default=None,
-        description="Family name. In the U.S., the last name of a Person.",
+        description="Family name. In the U.S., the last name of a Person.",union_mode="smart"
     )
-    faxNumber: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    faxNumber: Union[List[str], str] = Field(
         default=None,
-        description="The fax number.",
+        description="The fax number.",union_mode="smart"
     )
-    knowsAbout: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'Thing']], AnyUrl, 'URL', str, 'Text', 'Thing']] = Field(
+    
+    knowsAbout: Union[List[str], str] = Field(
         default=None,
         description="Of a [[Person]], and less typically of an [[Organization]], to indicate a topic that"
      "is known about - suggesting possible expertise but not implying it. We do not distinguish"
      "skill levels here, or relate this to educational content, events, objectives or [[JobPosting]]"
-     "descriptions.",
+     "descriptions.",union_mode="smart"
     )
-    honorificPrefix: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    honorificPrefix: Union[List[str], str] = Field(
         default=None,
-        description="An honorific prefix preceding a Person's name such as Dr/Mrs/Mr.",
+        description="An honorific prefix preceding a Person's name such as Dr/Mrs/Mr.",union_mode="smart"
     )
-    birthDate: Optional[Union[List[Union[date, 'Date', str]], date, 'Date', str]] = Field(
+    
+    birthDate: Union[List[str], str] = Field(
         default=None,
-        description="Date of birth.",
+        description="Date of birth.",union_mode="smart"
     )
-    brand: Optional[Union[List[Union['Brand', 'Organization', str]], 'Brand', 'Organization', str]] = Field(
+    
+    brand: Union[List[str], str] = Field(
         default=None,
         description="The brand(s) associated with a product or service, or the brand(s) maintained by an organization"
-     "or business person.",
+     "or business person.",union_mode="smart"
     )
-    jobTitle: Optional[Union[List[Union[str, 'Text', 'DefinedTerm']], str, 'Text', 'DefinedTerm']] = Field(
+    
+    jobTitle: Union[List[str], str] = Field(
         default=None,
-        description="The job title of the person (for example, Financial Manager).",
+        description="The job title of the person (for example, Financial Manager).",union_mode="smart"
     )
-    follows: Optional[Union[List[Union['Person', str]], 'Person', str]] = Field(
+    
+    follows: Union[List[str], str] = Field(
         default=None,
-        description="The most generic uni-directional social relation.",
+        description="The most generic uni-directional social relation.",union_mode="smart"
     )
-    interactionStatistic: Optional[Union[List[Union['InteractionCounter', str]], 'InteractionCounter', str]] = Field(
+    
+    interactionStatistic: Union[List[str], str] = Field(
         default=None,
         description="The number of interactions for the CreativeWork using the WebSite or SoftwareApplication."
-     "The most specific child type of InteractionCounter should be used.",
+     "The most specific child type of InteractionCounter should be used.",union_mode="smart"
     )
-    contactPoints: Optional[Union[List[Union['ContactPoint', str]], 'ContactPoint', str]] = Field(
+    
+    contactPoints: Union[List[str], str] = Field(
         default=None,
-        description="A contact point for a person or organization.",
+        description="A contact point for a person or organization.",union_mode="smart"
     )
-    birthPlace: Optional[Union[List[Union['Place', str]], 'Place', str]] = Field(
+    
+    birthPlace: Union[List[str], str] = Field(
         default=None,
-        description="The place where the person was born.",
+        description="The place where the person was born.",union_mode="smart"
     )
-    awards: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    awards: Union[List[str], str] = Field(
         default=None,
-        description="Awards won by or for this item.",
+        description="Awards won by or for this item.",union_mode="smart"
     )
-    funder: Optional[Union[List[Union['Person', 'Organization', str]], 'Person', 'Organization', str]] = Field(
+    
+    funder: Union[List[str], str] = Field(
         default=None,
         description="A person or organization that supports (sponsors) something through some kind of financial"
-     "contribution.",
+     "contribution.",union_mode="smart"
     )
-    parents: Optional[Union[List[Union['Person', str]], 'Person', str]] = Field(
+    
+    parents: Union[List[str], str] = Field(
         default=None,
-        description="A parents of the person.",
+        description="A parents of the person.",union_mode="smart"
     )
-    parent: Optional[Union[List[Union['Person', str]], 'Person', str]] = Field(
+    
+    parent: Union[List[str], str] = Field(
         default=None,
-        description="A parent of this person.",
+        description="A parent of this person.",union_mode="smart"
     )
-    performerIn: Optional[Union[List[Union['Event', str]], 'Event', str]] = Field(
+    
+    performerIn: Union[List[str], str] = Field(
         default=None,
-        description="Event that this person is a performer or participant in.",
+        description="Event that this person is a performer or participant in.",union_mode="smart"
     )
-    additionalName: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    additionalName: Union[List[str], str] = Field(
         default=None,
-        description="An additional name for a Person, can be used for a middle name.",
+        description="An additional name for a Person, can be used for a middle name.",union_mode="smart"
     )
-    worksFor: Optional[Union[List[Union['Organization', str]], 'Organization', str]] = Field(
+    
+    worksFor: Union[List[str], str] = Field(
         default=None,
-        description="Organizations that the person works for.",
+        description="Organizations that the person works for.",union_mode="smart"
     )
-    agentInteractionStatistic: Optional[Union[List[Union['InteractionCounter', str]], 'InteractionCounter', str]] = Field(
+    
+    agentInteractionStatistic: Union[List[str], str] = Field(
         default=None,
         description="The number of completed interactions for this entity, in a particular role (the 'agent'),"
      "in a particular action (indicated in the statistic), and in a particular context (i.e."
-     "interactionService).",
+     "interactionService).",union_mode="smart"
     )
-    colleagues: Optional[Union[List[Union['Person', str]], 'Person', str]] = Field(
+    
+    colleagues: Union[List[str], str] = Field(
         default=None,
-        description="A colleague of the person.",
+        description="A colleague of the person.",union_mode="smart"
     )
-    nationality: Optional[Union[List[Union['Country', str]], 'Country', str]] = Field(
+    
+    nationality: Union[List[str], str] = Field(
         default=None,
-        description="Nationality of the person.",
+        description="Nationality of the person.",union_mode="smart"
     )
-    seeks: Optional[Union[List[Union['Demand', str]], 'Demand', str]] = Field(
+    
+    seeks: Union[List[str], str] = Field(
         default=None,
-        description="A pointer to products or services sought by the organization or person (demand).",
+        description="A pointer to products or services sought by the organization or person (demand).",union_mode="smart"
     )
-    hasCredential: Optional[Union[List[Union['EducationalOccupationalCredential', str]], 'EducationalOccupationalCredential', str]] = Field(
+    
+    hasCredential: Union[List[str], str] = Field(
         default=None,
-        description="A credential awarded to the Person or Organization.",
+        description="A credential awarded to the Person or Organization.",union_mode="smart"
     )
-    address: Optional[Union[List[Union[str, 'Text', 'PostalAddress']], str, 'Text', 'PostalAddress']] = Field(
+    
+    address: Union[List[str], str] = Field(
         default=None,
-        description="Physical address of the item.",
+        description="Physical address of the item.",union_mode="smart"
     )
-    contactPoint: Optional[Union[List[Union['ContactPoint', str]], 'ContactPoint', str]] = Field(
+    
+    contactPoint: Union[List[str], str] = Field(
         default=None,
-        description="A contact point for a person or organization.",
+        description="A contact point for a person or organization.",union_mode="smart"
     )
-    knowsLanguage: Optional[Union[List[Union[str, 'Text', 'Language']], str, 'Text', 'Language']] = Field(
+    
+    knowsLanguage: Union[List[str], str] = Field(
         default=None,
         description="Of a [[Person]], and less typically of an [[Organization]], to indicate a known language."
      "We do not distinguish skill levels or reading/writing/speaking/signing here. Use"
-     "language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47).",
+     "language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47).",union_mode="smart"
     )
-    knows: Optional[Union[List[Union['Person', str]], 'Person', str]] = Field(
+    
+    knows: Union[List[str], str] = Field(
         default=None,
-        description="The most generic bi-directional social/work relation.",
+        description="The most generic bi-directional social/work relation.",union_mode="smart"
     )
-    hasPOS: Optional[Union[List[Union['Place', str]], 'Place', str]] = Field(
+    
+    hasPOS: Union[List[str], str] = Field(
         default=None,
-        description="Points-of-Sales operated by the organization or person.",
+        description="Points-of-Sales operated by the organization or person.",union_mode="smart"
     )
-    relatedTo: Optional[Union[List[Union['Person', str]], 'Person', str]] = Field(
+    
+    relatedTo: Union[List[str], str] = Field(
         default=None,
-        description="The most generic familial relation.",
+        description="The most generic familial relation.",union_mode="smart"
     )
-    hasOccupation: Optional[Union[List[Union['Occupation', str]], 'Occupation', str]] = Field(
+    
+    hasOccupation: Union[List[str], str] = Field(
         default=None,
-        description="The Person's occupation. For past professions, use Role for expressing dates.",
+        description="The Person's occupation. For past professions, use Role for expressing dates.",union_mode="smart"
     )
-    alumniOf: Optional[Union[List[Union['EducationalOrganization', 'Organization', str]], 'EducationalOrganization', 'Organization', str]] = Field(
+    
+    alumniOf: Union[List[str], str] = Field(
         default=None,
-        description="An organization that the person is an alumni of.",
+        description="An organization that the person is an alumni of.",union_mode="smart"
     )
-    netWorth: Optional[Union[List[Union['PriceSpecification', 'MonetaryAmount', str]], 'PriceSpecification', 'MonetaryAmount', str]] = Field(
+    
+    netWorth: Union[List[str], str] = Field(
         default=None,
-        description="The total financial value of the person as calculated by subtracting assets from liabilities.",
+        description="The total financial value of the person as calculated by subtracting assets from liabilities.",union_mode="smart"
     )
-    callSign: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    callSign: Union[List[str], str] = Field(
         default=None,
         description="A [callsign](https://en.wikipedia.org/wiki/Call_sign), as used in broadcasting"
-     "and radio communications to identify people, radio and TV stations, or vehicles.",
+     "and radio communications to identify people, radio and TV stations, or vehicles.",union_mode="smart"
     )
-    isicV4: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    isicV4: Union[List[str], str] = Field(
         default=None,
         description="The International Standard of Industrial Classification of All Economic Activities"
-     "(ISIC), Revision 4 code for a particular organization, business person, or place.",
+     "(ISIC), Revision 4 code for a particular organization, business person, or place.",union_mode="smart"
     )
-    affiliation: Optional[Union[List[Union['Organization', str]], 'Organization', str]] = Field(
+    
+    affiliation: Union[List[str], str] = Field(
         default=None,
         description="An organization that this person is affiliated with. For example, a school/university,"
-     "a club, or a team.",
+     "a club, or a team.",union_mode="smart"
     )
-    deathDate: Optional[Union[List[Union[date, 'Date', str]], date, 'Date', str]] = Field(
+    
+    deathDate: Union[List[str], str] = Field(
         default=None,
-        description="Date of death.",
+        description="Date of death.",union_mode="smart"
     )
-    duns: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    duns: Union[List[str], str] = Field(
         default=None,
-        description="The Dun & Bradstreet DUNS number for identifying an organization or business person.",
+        description="The Dun & Bradstreet DUNS number for identifying an organization or business person.",union_mode="smart"
     )
-    award: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    award: Union[List[str], str] = Field(
         default=None,
-        description="An award won by or for this item.",
+        description="An award won by or for this item.",union_mode="smart"
     )
-    publishingPrinciples: Optional[Union[List[Union[AnyUrl, 'URL', 'CreativeWork', str]], AnyUrl, 'URL', 'CreativeWork', str]] = Field(
+    
+    publishingPrinciples: Union[List[str], str] = Field(
         default=None,
         description="The publishingPrinciples property indicates (typically via [[URL]]) a document describing"
      "the editorial principles of an [[Organization]] (or individual, e.g. a [[Person]]"
@@ -285,54 +351,105 @@ class Person(Thing):
      "policies. When applied to a [[CreativeWork]] (e.g. [[NewsArticle]]) the principles"
      "are those of the party primarily responsible for the creation of the [[CreativeWork]]."
      "While such policies are most typically expressed in natural language, sometimes related"
-     "information (e.g. indicating a [[funder]]) can be expressed using schema.org terminology.",
+     "information (e.g. indicating a [[funder]]) can be expressed using schema.org terminology.",union_mode="smart"
     )
-    sibling: Optional[Union[List[Union['Person', str]], 'Person', str]] = Field(
+    
+    sibling: Union[List[str], str] = Field(
         default=None,
-        description="A sibling of the person.",
+        description="A sibling of the person.",union_mode="smart"
     )
-    children: Optional[Union[List[Union['Person', str]], 'Person', str]] = Field(
+    
+    children: Union[List[str], str] = Field(
         default=None,
-        description="A child of the person.",
+        description="A child of the person.",union_mode="smart"
     )
-    givenName: Optional[Union[List[Union[str, 'Text']], str, 'Text']] = Field(
+    
+    givenName: Union[List[str], str] = Field(
         default=None,
-        description="Given name. In the U.S., the first name of a Person.",
+        description="Given name. In the U.S., the first name of a Person.",union_mode="smart"
     )
-    siblings: Optional[Union[List[Union['Person', str]], 'Person', str]] = Field(
+    
+    siblings: Union[List[str], str] = Field(
         default=None,
-        description="A sibling of the person.",
+        description="A sibling of the person.",union_mode="smart"
+    )
+    
+    subjectOf: Union[List[str], str] = Field(
+        default=None,
+        description="A CreativeWork or Event about this Thing.",union_mode="smart"
+    )
+    
+    mainEntityOfPage: Union[List[str], str] = Field(
+        default=None,
+        description="Indicates a page (or other CreativeWork) for which this thing is the main entity being"
+     "described. See [background notes](/docs/datamodel.html#mainEntityBackground)"
+     "for details.",union_mode="smart"
+    )
+    
+    identifier: Union[List[str], str] = Field(
+        default=None,
+        description="The identifier property represents any kind of identifier for any kind of [[Thing]],"
+     "such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for"
+     "representing many of these, either as textual strings or as URL (URI) links. See [background"
+     "notes](/docs/datamodel.html#identifierBg) for more details.",union_mode="smart"
+    )
+    
+    image: Union[List[str], str] = Field(
+        default=None,
+        description="An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].",union_mode="smart"
+    )
+    
+    name: Union[List[str], str] = Field(
+        default=None,
+        description="The name of the item.",union_mode="smart"
+    )
+    
+    url: Union[List[str], str] = Field(
+        default=None,
+        description="URL of the item.",union_mode="smart"
+    )
+    
+    sameAs: Union[List[str], str] = Field(
+        default=None,
+        description="URL of a reference Web page that unambiguously indicates the item's identity. E.g. the"
+     "URL of the item's Wikipedia page, Wikidata entry, or official website.",union_mode="smart"
+    )
+    
+    disambiguatingDescription: Union[List[str], str] = Field(
+        default=None,
+        description="A sub property of description. A short description of the item used to disambiguate from"
+     "other, similar items. Information from other properties (in particular, name) may"
+     "be necessary for the description to be useful for disambiguation.",union_mode="smart"
+    )
+    
+    alternateName: Union[List[str], str] = Field(
+        default=None,
+        description="An alias for the item.",union_mode="smart"
+    )
+    
+    description: Union[List[str], str] = Field(
+        default=None,
+        description="A description of the item.",union_mode="smart"
+    )
+    
+    potentialAction: Union[List[str], str] = Field(
+        default=None,
+        description="Indicates a potential Action, which describes an idealized action in which this thing"
+     "would play an 'object' role.",union_mode="smart"
+    )
+    
+    additionalType: Union[List[str], str] = Field(
+        default=None,
+        description="An additional type for the item, typically used for adding more specific types from external"
+     "vocabularies in microdata syntax. This is a relationship between something and a class"
+     "that the thing is in. Typically the value is a URI-identified RDF class, and in this case"
+     "corresponds to the use of rdf:type in RDF. Text values can be used sparingly, for cases"
+     "where useful information can be added without their being an appropriate schema to reference."
+     "In the case of text values, the class label should follow the schema.org <a href=\"http://schema.org/docs/styleguide.html\">style"
+     "guide</a>.",union_mode="smart"
     )
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Grant import Grant
-    from pydantic_schemaorg.ProgramMembership import ProgramMembership
-    from pydantic_schemaorg.Organization import Organization
-    from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.GenderType import GenderType
-    from pydantic_schemaorg.QuantitativeValue import QuantitativeValue
-    from pydantic_schemaorg.Distance import Distance
-    from pydantic_schemaorg.Place import Place
-    from pydantic_schemaorg.Offer import Offer
-    from pydantic_schemaorg.Product import Product
-    from pydantic_schemaorg.OwnershipInfo import OwnershipInfo
-    from pydantic_schemaorg.OfferCatalog import OfferCatalog
-    from pydantic_schemaorg.ContactPoint import ContactPoint
-    from pydantic_schemaorg.URL import URL
-    from pydantic_schemaorg.Thing import Thing
-    from pydantic_schemaorg.Date import Date
-    from pydantic_schemaorg.Brand import Brand
-    from pydantic_schemaorg.DefinedTerm import DefinedTerm
-    from pydantic_schemaorg.InteractionCounter import InteractionCounter
-    from pydantic_schemaorg.Event import Event
-    from pydantic_schemaorg.Country import Country
-    from pydantic_schemaorg.Demand import Demand
-    from pydantic_schemaorg.EducationalOccupationalCredential import EducationalOccupationalCredential
-    from pydantic_schemaorg.PostalAddress import PostalAddress
-    from pydantic_schemaorg.Language import Language
-    from pydantic_schemaorg.Occupation import Occupation
-    from pydantic_schemaorg.EducationalOrganization import EducationalOrganization
-    from pydantic_schemaorg.PriceSpecification import PriceSpecification
-    from pydantic_schemaorg.MonetaryAmount import MonetaryAmount
-    from pydantic_schemaorg.CreativeWork import CreativeWork
+    from pydantic_schemaorg import Language, ContactPoint, Grant, Organization, Product, Demand, PriceSpecification, Offer, Thing, Date, Person, URL, Brand, Place, ProgramMembership, DefinedTerm, PostalAddress, date, InteractionCounter, Distance, Event, MonetaryAmount, OwnershipInfo, QuantitativeValue, Country, EducationalOrganization, Text, Occupation, OfferCatalog, GenderType, EducationalOccupationalCredential, CreativeWork, AnyUrl
+    from pydantic_schemaorg import Event, Action, PropertyValue, TextObject, Text, URL, ImageObject, CreativeWork, AnyUrl

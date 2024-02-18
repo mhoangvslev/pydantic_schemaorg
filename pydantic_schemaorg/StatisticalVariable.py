@@ -3,13 +3,21 @@ from typing import TYPE_CHECKING
 
 from typing import List, Optional, Union
 from pydantic import AnyUrl
+from typing import List, Optional, Union
+from pydantic import AnyUrl, StrictBool, StrictInt, StrictFloat
+from typing import List, Optional, Union
+from pydantic import AnyUrl, StrictBool, StrictInt, StrictFloat
 
 
 from pydantic import Field
-from pydantic_schemaorg.ConstraintNode import ConstraintNode
 
 
-class StatisticalVariable(ConstraintNode):
+
+from pydantic_schemaorg import SchemaOrgBase
+
+
+
+class StatisticalVariable(SchemaOrgBase):
     """[[StatisticalVariable]] represents any type of statistical metric that can be measured"
      "at a place and time. The usage pattern for [[StatisticalVariable]] is typically expressed"
      "using [[Observation]] with an explicit [[populationType]], which is a type, typically"
@@ -30,25 +38,29 @@ class StatisticalVariable(ConstraintNode):
     See: https://schema.org/StatisticalVariable
     Model depth: 4
     """
-    type_: str = Field(default="StatisticalVariable", alias='@type', const=True)
-    measurementQualifier: Optional[Union[List[Union['Enumeration', str]], 'Enumeration', str]] = Field(
+    type_: str = Field(default="StatisticalVariable", alias='@type')
+    
+    measurementQualifier: Union[List[str], str] = Field(
         default=None,
         description="Provides additional qualification to an observation. For example, a GDP observation"
-     "measures the Nominal value.",
+     "measures the Nominal value.",union_mode="smart"
     )
-    measurementMethod: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'MeasurementMethodEnum', 'DefinedTerm']], AnyUrl, 'URL', str, 'Text', 'MeasurementMethodEnum', 'DefinedTerm']] = Field(
+    
+    measurementMethod: Union[List[str], str] = Field(
         default=None,
         description="A subproperty of [[measurementTechnique]] that can be used for specifying specific"
-     "methods, in particular via [[MeasurementMethodEnum]].",
+     "methods, in particular via [[MeasurementMethodEnum]].",union_mode="smart"
     )
-    statType: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'Property']], AnyUrl, 'URL', str, 'Text', 'Property']] = Field(
+    
+    statType: Union[List[str], str] = Field(
         default=None,
         description="Indicates the kind of statistic represented by a [[StatisticalVariable]], e.g. mean,"
      "count etc. The value of statType is a property, either from within Schema.org (e.g. [[count]],"
      "[[median]], [[marginOfError]], [[maxValue]], [[minValue]]) or from other compatible"
-     "(e.g. RDF) systems such as DataCommons.org or Wikidata.org.",
+     "(e.g. RDF) systems such as DataCommons.org or Wikidata.org.",union_mode="smart"
     )
-    measurementTechnique: Optional[Union[List[Union[AnyUrl, 'URL', str, 'Text', 'DefinedTerm', 'MeasurementMethodEnum']], AnyUrl, 'URL', str, 'Text', 'DefinedTerm', 'MeasurementMethodEnum']] = Field(
+    
+    measurementTechnique: Union[List[str], str] = Field(
         default=None,
         description="A technique, method or technology used in an [[Observation]], [[StatisticalVariable]]"
      "or [[Dataset]] (or [[DataDownload]], [[DataCatalog]]), corresponding to the method"
@@ -68,31 +80,120 @@ class StatisticalVariable(ConstraintNode):
      "Depression Inventory\". If there are several [[variableMeasured]] properties recorded"
      "for some given data object, use a [[PropertyValue]] for each [[variableMeasured]]"
      "and attach the corresponding [[measurementTechnique]]. The value can also be from"
-     "an enumeration, organized as a [[MeasurementMetholdEnumeration]].",
+     "an enumeration, organized as a [[MeasurementMetholdEnumeration]].",union_mode="smart"
     )
-    measuredProperty: Optional[Union[List[Union['Property', str]], 'Property', str]] = Field(
+    
+    measuredProperty: Union[List[str], str] = Field(
         default=None,
         description="The measuredProperty of an [[Observation]], typically via its [[StatisticalVariable]]."
      "There are various kinds of applicable [[Property]]: a schema.org property, a property"
      "from other RDF-compatible systems, e.g. W3C RDF Data Cube, Data Commons, Wikidata,"
-     "or schema.org extensions such as [GS1's](https://www.gs1.org/voc/?show=properties).",
+     "or schema.org extensions such as [GS1's](https://www.gs1.org/voc/?show=properties).",union_mode="smart"
     )
-    measurementDenominator: Optional[Union[List[Union['StatisticalVariable', str]], 'StatisticalVariable', str]] = Field(
+    
+    measurementDenominator: Union[List[str], str] = Field(
         default=None,
-        description="Identifies the denominator variable when an observation represents a ratio or percentage.",
+        description="Identifies the denominator variable when an observation represents a ratio or percentage.",union_mode="smart"
     )
-    populationType: Optional[Union[List[Union['Class', str]], 'Class', str]] = Field(
+    
+    populationType: Union[List[str], str] = Field(
         default=None,
         description="Indicates the populationType common to all members of a [[StatisticalPopulation]]"
-     "or all cases within the scope of a [[StatisticalVariable]].",
+     "or all cases within the scope of a [[StatisticalVariable]].",union_mode="smart"
+    )
+    
+    numConstraints: Union[List[str], str] = Field(
+        default=None,
+        description="Indicates the number of constraints property values defined for a particular [[ConstraintNode]]"
+     "such as [[StatisticalVariable]]. This helps applications understand if they have"
+     "access to a sufficiently complete description of a [[StatisticalVariable]] or other"
+     "construct that is defined using properties on template-style nodes.",union_mode="smart"
+    )
+    
+    constraintProperty: Union[List[str], str] = Field(
+        default=None,
+        description="Indicates a property used as a constraint. For example, in the definition of a [[StatisticalVariable]]."
+     "The value is a property, either from within Schema.org or from other compatible (e.g."
+     "RDF) systems such as DataCommons.org or Wikidata.org.",union_mode="smart"
+    )
+    
+    subjectOf: Union[List[str], str] = Field(
+        default=None,
+        description="A CreativeWork or Event about this Thing.",union_mode="smart"
+    )
+    
+    mainEntityOfPage: Union[List[str], str] = Field(
+        default=None,
+        description="Indicates a page (or other CreativeWork) for which this thing is the main entity being"
+     "described. See [background notes](/docs/datamodel.html#mainEntityBackground)"
+     "for details.",union_mode="smart"
+    )
+    
+    identifier: Union[List[str], str] = Field(
+        default=None,
+        description="The identifier property represents any kind of identifier for any kind of [[Thing]],"
+     "such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for"
+     "representing many of these, either as textual strings or as URL (URI) links. See [background"
+     "notes](/docs/datamodel.html#identifierBg) for more details.",union_mode="smart"
+    )
+    
+    image: Union[List[str], str] = Field(
+        default=None,
+        description="An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].",union_mode="smart"
+    )
+    
+    name: Union[List[str], str] = Field(
+        default=None,
+        description="The name of the item.",union_mode="smart"
+    )
+    
+    url: Union[List[str], str] = Field(
+        default=None,
+        description="URL of the item.",union_mode="smart"
+    )
+    
+    sameAs: Union[List[str], str] = Field(
+        default=None,
+        description="URL of a reference Web page that unambiguously indicates the item's identity. E.g. the"
+     "URL of the item's Wikipedia page, Wikidata entry, or official website.",union_mode="smart"
+    )
+    
+    disambiguatingDescription: Union[List[str], str] = Field(
+        default=None,
+        description="A sub property of description. A short description of the item used to disambiguate from"
+     "other, similar items. Information from other properties (in particular, name) may"
+     "be necessary for the description to be useful for disambiguation.",union_mode="smart"
+    )
+    
+    alternateName: Union[List[str], str] = Field(
+        default=None,
+        description="An alias for the item.",union_mode="smart"
+    )
+    
+    description: Union[List[str], str] = Field(
+        default=None,
+        description="A description of the item.",union_mode="smart"
+    )
+    
+    potentialAction: Union[List[str], str] = Field(
+        default=None,
+        description="Indicates a potential Action, which describes an idealized action in which this thing"
+     "would play an 'object' role.",union_mode="smart"
+    )
+    
+    additionalType: Union[List[str], str] = Field(
+        default=None,
+        description="An additional type for the item, typically used for adding more specific types from external"
+     "vocabularies in microdata syntax. This is a relationship between something and a class"
+     "that the thing is in. Typically the value is a URI-identified RDF class, and in this case"
+     "corresponds to the use of rdf:type in RDF. Text values can be used sparingly, for cases"
+     "where useful information can be added without their being an appropriate schema to reference."
+     "In the case of text values, the class label should follow the schema.org <a href=\"http://schema.org/docs/styleguide.html\">style"
+     "guide</a>.",union_mode="smart"
     )
     
 
 if TYPE_CHECKING:
-    from pydantic_schemaorg.Enumeration import Enumeration
-    from pydantic_schemaorg.URL import URL
-    from pydantic_schemaorg.Text import Text
-    from pydantic_schemaorg.MeasurementMethodEnum import MeasurementMethodEnum
-    from pydantic_schemaorg.DefinedTerm import DefinedTerm
-    from pydantic_schemaorg.Property import Property
-    from pydantic_schemaorg.Class import Class
+    from pydantic_schemaorg import Class, StatisticalVariable, Property, Enumeration, Text, URL, DefinedTerm, MeasurementMethodEnum, AnyUrl
+    from pydantic_schemaorg import URL, Property, Integer, int, AnyUrl
+    from pydantic_schemaorg import Event, Action, PropertyValue, TextObject, Text, URL, ImageObject, CreativeWork, AnyUrl
