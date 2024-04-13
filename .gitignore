@@ -3,3 +3,4 @@ venv
 dist
 src/circ_import
 *.pyc
+.pytest_cache
