@@ -1,12 +1,12 @@
-PACKAGE_NAME = "pydantic_schemaorg"
+PACKAGE_NAME = "pydantic2_schemaorg"
 
 # schema.org data types to pydantic https://schema.org/DataType
 data_type_map = {
     "Boolean": ("StrictBool", "pydantic.v1", "StrictBool"),
     "False": ("Literal[False]", "typing", "Literal"),
     "True": ("Literal[True]", "typing", "Literal"),
-    "Date": ("date", f"datetime", "date"),
-    "DateTime": ("datetime", f"datetime", "datetime"),
+    "Date": ("date", "datetime", "date"),
+    "DateTime": ("datetime", "datetime", "datetime"),
     "Time": ("time", "datetime", "time"),
     "Number": ("StrictInt, StrictFloat", "pydantic.v1", "StrictInt, StrictFloat"),
     "Float": ("float", "", ""),
