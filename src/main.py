@@ -2,10 +2,8 @@ import datetime
 import json
 import os
 import shutil
-from http.client import HTTPResponse
 from pathlib import Path
 import sys
-from urllib import request
 
 from constants import data_type_map, PACKAGE_NAME, data_type_specificity
 from jinja import jinja_env
@@ -16,9 +14,7 @@ THIS_PATH = Path(__file__).parent
 
 def write_base_class():
     with open(f"{PACKAGE_NAME}/SchemaOrgBase.py", "w") as model_file:
-        with open(
-                THIS_PATH / "templates/schema_org_base.py.tpl"
-        ) as template_file:
+        with open(THIS_PATH / "templates/schema_org_base.py.tpl") as template_file:
             template = jinja_env.from_string(template_file.read())
             template_args = dict(
                 schemaorg_version=os.getenv("SCHEMAORG_VERSION"),
@@ -29,10 +25,10 @@ def write_base_class():
 
 
 def copy_utils():
-    os.makedirs(f'{PACKAGE_NAME}/ISO8601', exist_ok=True)
-    for file in os.listdir(f'{THIS_PATH}/ISO8601'):
-        if file.endswith('.py'):
-            shutil.copy(f'{THIS_PATH}/ISO8601/{file}', f'{PACKAGE_NAME}/ISO8601')
+    os.makedirs(f"{PACKAGE_NAME}/ISO8601", exist_ok=True)
+    for file in os.listdir(f"{THIS_PATH}/ISO8601"):
+        if file.endswith(".py"):
+            shutil.copy(f"{THIS_PATH}/ISO8601/{file}", f"{PACKAGE_NAME}/ISO8601")
 
 
 def init_package():
@@ -44,6 +40,8 @@ def init_package():
 if __name__ == "__main__":
     init_package()
     write_base_class()
+    # from urllib import request
+    # from http.client import HTTPResponse
     # schema_org_request: HTTPResponse = request.urlopen(
     #     "https://schema.org/version/latest/schemaorg-current-https.jsonld"
     # )

@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import Optional
 
 from pydantic.v1 import BaseModel, validator
 
@@ -39,13 +39,13 @@ class Import(BaseModel):
 
 
 class PydanticClass(PydanticBase):
-    fields: List[PydanticField]
-    parents: List['PydanticClass']
+    fields: list[PydanticField]
+    parents: list["PydanticClass"]
     depth: int = 1
-    parent_imports: List[Import]
-    field_imports: List[Import]
-    pydantic_imports: List[Import] = []
-    forward_refs: List[Import] = []
+    parent_imports: list[Import]
+    field_imports: list[Import]
+    pydantic_imports: list[Import] = []
+    forward_refs: list[Import] = []
     filename: str = ""
 
     @validator("filename", always=True)
@@ -61,8 +61,8 @@ class PydanticClass(PydanticBase):
             "return",
             "yield",
         }:
-            return f'{filename}_'
-        return values['valid_name']
+            return f"{filename}_"
+        return values["valid_name"]
 
 
 PydanticClass.update_forward_refs()
